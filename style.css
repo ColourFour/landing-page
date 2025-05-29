@@ -1,0 +1,239 @@
+body{
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, arial;
+    flex-basis: 1;
+}
+
+.header{
+    background-color: #1F2937;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+h1{
+    font-size: 24px;
+}
+
+h2{
+    font-size: 48px;
+    color: #f9faf8;
+    font-weight: 900;
+    margin-bottom: 0px;
+}
+ul{
+    list-style-type: none;
+}
+
+li{
+    color: #E5E7EB;
+    font-size: 18px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+
+
+.body-1{
+    background-color: #1F2937;
+    color: white;
+    display: flex;
+    padding: 32px;
+    flex-wrap: wrap;
+    padding-left: 32px;
+    padding-right: 32px;
+    flex-basis: 1;
+    flex-wrap: nowrap;
+}
+
+
+.button-1{
+    display: flex;
+    border-radius: 15px 15px 15px 15px;
+}
+
+.body-1a{
+    padding-right: 32px;
+}
+
+.body-1b img{
+    max-width: 90%;
+    padding: 32px;
+}
+
+.body-2{
+    font-size: 36px;
+    color: #1f2937;
+    font-weight: 900;
+    display: flex;
+   align-items: center;
+   padding: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.body-2i{
+    display:flex;
+    justify-items: center;
+}
+.body-2ii{
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.body-2a {
+    display: flex;
+    flex-direction: column;
+    max-width: 15%;
+    outline-style: solid;
+    outline-color:#3882F6;
+    outline-width: 8px;
+    border-radius: 15px 15px 15px 15px;
+    padding: 16px;
+    margin-left: 32px;
+    margin-bottom: 16px;
+    justify-content: center;
+}
+
+.body-2a img { 
+    max-width: 90%;
+    max-height: auto;
+}
+
+.body-2b {
+    display: flex;
+    flex-direction: column;
+    max-width: 15%;
+    outline-style: solid;
+    outline-color:#3882F6;
+    outline-width: 8px;
+    border-radius: 15px 15px 15px 15px;
+    padding: 16px;
+    margin-left: 32px;
+    margin-bottom: 16px;
+}
+
+.body-2b img { 
+    max-width: 90%;
+    max-height: auto;
+}
+
+.body-2c {
+    display: flex;
+    flex-direction: column;
+    max-width: 15%;
+    outline-style: solid;
+    outline-color:#3882F6;
+    outline-width: 8px;
+    border-radius: 15px 15px 15px 15px;
+    padding: 16px;
+    margin-left: 32px;
+    margin-bottom: 16px;
+}
+
+.body-2c img { 
+    max-width: 90%;
+    max-height: auto;
+}
+
+.body-2d {
+    display: flex;
+    flex-direction: column;
+    max-width: 15%;
+    outline-style: solid;
+    outline-color:#3882F6;
+    outline-width: 8px;
+    border-radius: 15px 15px 15px 15px;
+    padding: 16px;
+    margin-left: 32px;
+    margin-bottom: 16px;
+}
+
+.body-2d img { 
+    max-width: 90%;
+    max-height: auto;
+}
+
+p{
+    color: #E5E7EB;
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+button{
+    background-color: #3882F6;
+    padding: 16px;
+    color: white;
+    text-align: center;
+}
+
+.body-3{
+    background-color: #E5E7EB;
+    display: flex;
+     padding-left: 32px;
+    padding-right: 32px;
+}
+
+h4{
+    font-weight: normal;
+    font-style: italic;
+    font-size: 36px;
+    color: #1f2937;
+}
+
+
+.body-4{
+    background-color: #3882F6;
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 64px;
+    padding-right: 64px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    border-radius: 15px 15px 15px 15px;
+    align-items: center;
+     padding-left: 32px;
+    padding-right: 32px;
+}
+
+.body-4i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-2{
+    display:flex;
+    border-radius: 15px 15px 15px 15px;
+    border-color: white;
+    margin-left: 32px;
+}
+
+h6{
+    color: white;
+    font-size: 18px;
+    margin-bottom: 0px;
+}
+.footer{
+    background-color: #1F2937;
+    display: flex;
+    color: white;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
+img{
+   height: auto;
+   object-fit: contain;
+    padding: 32px;
+}
