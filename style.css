@@ -197,17 +197,26 @@ li{
     display: flex;
      padding-left: 32px;
     padding-right: 32px;
+    flex-direction: column;
+    margin-left: 64px;
+    margin-right: 64px;
+    padding: 64px;
 }
 
 .body-3a{
     display: flex;
-    padding: 64px;
+    margin-bottom: 0px;
+     margin-left: 64px;
+    margin-right: 64px;
 }
 
 .body-3b{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    margin-top: 0px;
+     margin-left: 64px;
+    margin-right: 64px;
 }
 
 h4{
@@ -247,6 +256,8 @@ h5{
     flex-direction: column;
     gap: 0px;
     margin-bottom: 45px;   
+    padding-right: 64px;
+    padding-left: 32px;
 }
 
 .button-2{
@@ -262,6 +273,7 @@ h5{
     display: flex;
     color: white;
     justify-content: center;
+    padding: 32px;
 }
 
 h6{
@@ -288,7 +300,5 @@ button{
     padding: 16px;
     color: white;
     text-align: center;
-    gap: 32px;
+    gap: 16px;
 }
-
-/*commnet for webpage update*/
