@@ -5,7 +5,7 @@ body{
 }
 
 .header{
-    background-color: #1F2937;
+    background-color: plum;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -17,6 +17,7 @@ body{
 
 h1{
     font-size: 24px;
+    color: teal;
 }
 
 h2{
@@ -30,7 +31,7 @@ ul{
 }
 
 li{
-    color: #E5E7EB;
+    color: teal;
     font-size: 18px;
     display: inline-block;
     margin-right: 10px;
@@ -39,7 +40,7 @@ li{
 
 
 .body-1{
-    background-color: #1F2937;
+    background-color: teal;
     color: white;
     display: flex;
     padding: 32px;
@@ -76,6 +77,7 @@ li{
     padding-left: 32px;
     padding-right: 32px;
     justify-content: center;
+    background-color: #fff0f5;
 }
 
 .body-2i{
@@ -84,130 +86,52 @@ li{
     align-items: space-evenly;
 }
 
-.body-2ii{
-    display: flex;
-    flex-direction: row;
-    margin-top: 0px;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-evenly;
+.body-2ii {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 40px;
+    background-color: #fff0f5;
 }
 
-.body-2a {
-    display: flex;
-    flex-direction: column;
-    max-width: 15%;
-    margin-left: 32px;
-    margin-bottom: 64px;
-    justify-content: center;
+.body-2ii div {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
 }
 
-.body-2a img { 
-    max-width: 90%;
-    max-height: auto;
-    outline-style: solid;
-    outline-color:#3882F6;
-    outline-width: 8px;
-    border-radius: 15px 15px 15px 15px;
-    padding: 16px;
+.body-2ii div:hover {
+    transform: scale(1.03);
 }
 
-.body-2a p {
-    color: #1f2937;
-    margin-top: 10px;
+.body-2ii img {
+    height: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
 }
 
-.body-2b {
-    display: flex;
-    flex-direction: column;
-    max-width: 15%;
-    padding: 16px;
-    margin-left: 32px;
-    margin-bottom: 64px;
-}
-
-.body-2b img { 
-    max-width: 90%;
-    max-height: auto;
-    outline-style: solid;
-    outline-color:#3882F6;
-    outline-width: 8px;
-    border-radius: 15px 15px 15px 15px;
-    padding: 16px;
-}
-
-
-.body-2b p {
-    color: #1f2937;
-    margin-top: 10px;
-}
-
-.body-2c {
-    display: flex;
-    flex-direction: column;
-    max-width: 15%;
-    padding: 16px;
-    margin-left: 32px;
-    margin-bottom: 64px;
-}
-
-.body-2c img { 
-    max-width: 90%;
-    max-height: auto;
-    outline-style: solid;
-    outline-color:#3882F6;
-    outline-width: 8px;
-    border-radius: 15px 15px 15px 15px;
-    padding: 16px;
-}
-
-
-.body-2c p {
-    color: #1f2937;
-    margin-top: 10px;
-}
-
-.body-2d {
-    display: flex;
-    flex-direction: column;
-    max-width: 15%;
-    padding: 16px;
-    margin-left: 32px;
-    margin-bottom: 64px;
-}
-
-.body-2d img { 
-    max-width: 90%;
-    max-height: auto;
-    outline-style: solid;
-    outline-color:#3882F6;
-    outline-width: 8px;
-    border-radius: 15px 15px 15px 15px;
-    padding: 16px;
-}
-
-
-.body-2d p {
-    color: #1f2937;
-    margin-top: 10px;
+.body-2ii p {
+    font-size: 16px;
+    padding: 12px;
+    color: #444;
 }
 
 .body-3{
     background-color: #E5E7EB;
     display: flex;
-     padding-left: 32px;
+    padding-left: 32px;
     padding-right: 32px;
     flex-direction: column;
-    margin-left: 64px;
-    margin-right: 64px;
-    padding: 64px;
+    margin: 16px 32px;
+    padding: 32px;
 }
 
 .body-3a{
     display: flex;
-    margin-bottom: 0px;
-     margin-left: 64px;
-    margin-right: 64px;
 }
 
 .body-3b{
@@ -279,7 +203,8 @@ h5{
 h6{
     color: white;
     font-size: 18px;
-    margin-bottom: 0px;
+    margin-bottom: 16px;
+
 }
 
 p{
@@ -301,4 +226,17 @@ button{
     color: white;
     text-align: center;
     gap: 16px;
+}
+
+.cta-button {
+    background-color: #e91e63;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.cta-button:hover {
+    background-color: #d81b60;
 }
