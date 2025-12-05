@@ -288,7 +288,7 @@
     <!-- Lock Card -->
     <div class="lock-card" id="lock-card">
       <div class="lock-title">
-        <span id="lock-title">Lock 1 – Security Camera Angle</span>
+        <span id="lock-title">Lock 1 - Security Camera Angle</span>
         <span class="lock-badge" id="lock-badge">Code: 3 digits</span>
       </div>
       <div class="lock-story" id="lock-story">
@@ -317,7 +317,7 @@
     <!-- Final message (hidden until complete) -->
     <div id="final-message" class="final-message" style="display:none;">
       <h2>Vault Unlocked! 🎉</h2>
-      <p>You’ve cracked all 8 locks and saved the Pure 3 exam papers.</p>
+      <p>You've cracked all 8 locks and saved the Pure 3 exam papers.</p>
       <p>Now the only thing left to escape… is the actual exam.</p>
       <button id="restart-btn" class="btn-secondary">Play again</button>
     </div>
@@ -333,29 +333,15 @@
     const locks = [
       {
         title: "Lock 1 - Security Camera Angle",
-        story: "The first lock controls the exam hall cameras. The system only opens when the camera is pointing at the minimum height of its path.",
+        story: "The first lock is encoded using a complex number. The vault will only respond if you can find the exact square roots of 4 - 5i. Hidden inside the algebra is a quartic equation – crack it, and you’ll get both the roots and the lock code.",
         questionHtml: `
-          <p>The height of the camera (in metres) above the floor is modelled by</p>
-          <p style="text-align:center;"><code>h(x) = x² − 6x + 10</code></p>
-          <p>where <code>x</code> is the horizontal distance (in metres) from the start of the track.</p>
-          <ol>
-            <li>Find the value of <code>x</code> at which the camera is at minimum height.</li>
-            <li>Find this minimum height.</li>
-            <li>Find <code>h(0)</code>.</li>
-          </ol>
-          <p><strong>Code rule:</strong> Let
-            <ul>
-              <li><code>a</code> = value of <code>x</code> at the minimum,</li>
-              <li><code>b</code> = minimum height,</li>
-              <li><code>c</code> = units digit of <code>h(0)</code>.</li>
-            </ul>
-            The 3-digit code is <code>abc</code>.
-          </p>
+          <img src="/Users/sbrooker/repos/landing-page/Picture1.png" style= "max-width:100%;height:auto;" alt="Complex number diagram" />
+        
         `,
-        code: "310"
+        code: "415"
       },
       {
-        title: "Lock 2 – Laser Grid",
+        title: "Lock 2 - Laser Grid",
         story: "To slip through the laser grid, you must enter all angles (in degrees) where the system is safe.",
         questionHtml: `
           <p>Solve, for <code>0° ≤ θ ≤ 360°</code>, the equation</p>
@@ -371,7 +357,7 @@
         code: "353"
       },
       {
-        title: "Lock 3 – Password Encryption",
+        title: "Lock 3 - Password Encryption",
         story: "The system stores passwords as exponents. Decrypt the password to reveal the code.",
         questionHtml: `
           <ol>
@@ -389,7 +375,7 @@
         code: "246"
       },
       {
-        title: "Lock 4 – CCTV Coverage",
+        title: "Lock 4 - CCTV Coverage",
         story: "A circular motion sensor overlaps with a straight laser beam. The intersection point gives the next code.",
         questionHtml: `
           <p>The circle has equation</p>
@@ -410,11 +396,11 @@
         code: "347"
       },
       {
-        title: "Lock 5 – Pressure System",
+        title: "Lock 5 - Pressure System",
         story: "Pressure in the exam vault depends on a function of time. Only at maximum pressure does the system stabilise.",
         questionHtml: `
           <p>The pressure <code>P</code> (in units) at time <code>t</code> minutes is modelled by</p>
-          <p style="text-align:center;"><code>P(t) = 3t³ − 12t² + 9t + 4</code>.</p>
+          <p style="text-align:center;"><code>P(t) = 3t³ - 12t² + 9t + 4</code>.</p>
           <ol>
             <li>Find <code>dP/dt</code>.</li>
             <li>Find the stationary points and determine which is a maximum.</li>
@@ -430,7 +416,7 @@
         code: "172"
       },
       {
-        title: "Lock 6 – Emergency Vent",
+        title: "Lock 6 - Emergency Vent",
         story: "The emergency vent opens when the air-flow (area under a curve) reaches a specified amount.",
         questionHtml: `
           <p>Evaluate the definite integral</p>
@@ -444,13 +430,13 @@
         code: "045"
       },
       {
-        title: "Lock 7 – Time Lock Algorithm",
-        story: "The vault’s internal clock is stuck in an iterative loop. Run the algorithm to find the unlocking time.",
+        title: "Lock 7 - Time Lock Algorithm",
+        story: "The vault's internal clock is stuck in an iterative loop. Run the algorithm to find the unlocking time.",
         questionHtml: `
           <p>A solution of the equation</p>
           <p style="text-align:center;"><code>x³ + x = 2</code></p>
           <p>can be found using the iteration</p>
-          <p style="text-align:center;"><code>xₙ₊₁ = ³√(2 − xₙ)</code>.</p>
+          <p style="text-align:center;"><code>xₙ₊₁ = ³√(2 - xₙ)</code>.</p>
           <ol>
             <li>Using <code>x₁ = 0.5</code>, find <code>x₂</code> and <code>x₃</code> (correct to 3 decimal places).</li>
             <li>Hence give an approximate solution for the equation.</li>
@@ -465,17 +451,17 @@
         code: "195"
       },
       {
-        title: "Lock 8 – Final Vault Door",
+        title: "Lock 8 - Final Vault Door",
         story: "One last check of your mathematical integrity stands between you and freedom.",
         questionHtml: `
           <ol>
-            <li>Simplify <code>((x + 2)(x − 1)) / (x² − 1)</code>.</li>
-            <li>Prove the identity <code>cos²θ − sin²θ = 1 − 2sin²θ</code>.</li>
+            <li>Simplify <code>((x + 2)(x - 1)) / (x² - 1)</code>.</li>
+            <li>Prove the identity <code>cos²θ - sin²θ = 1 - 2sin²θ</code>.</li>
           </ol>
           <p><strong>Code rule:</strong></p>
           <ul>
             <li>After simplifying part (1), the expression can be written as <code>(x + a) / (x + b)</code>. Record the integers <code>a</code> and <code>b</code>.</li>
-            <li>In the final form <code>1 − 2sin²θ</code>, count the number of distinct trig functions used (this is just <code>sin</code>).</li>
+            <li>In the final form <code>1 - 2sin²θ</code>, count the number of distinct trig functions used (this is just <code>sin</code>).</li>
             <li>Call this number <code>c</code>. The code is <code>(a)(b)(c)</code>.</li>
           </ul>
         `,
