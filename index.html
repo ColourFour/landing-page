@@ -1,144 +1,600 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project-Landing</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Pure 3 Escape Room – Exam Vault Heist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2933, #020617);
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 1.75rem 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      padding-bottom: 0.75rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    header p {
+      margin: 0.4rem 0 0;
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    .status-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .pill {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pill span.icon {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+    }
+
+    .progress-bar {
+      flex: 1;
+      min-width: 150px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      height: 10px;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      position: absolute;
+      inset: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #38bdf8);
+      transition: width 0.3s ease;
+    }
+
+    .lock-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 1.25rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 1.25rem 1.5rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .lock-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .lock-badge {
+      font-size: 0.8rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    .lock-story {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .lock-question {
+      font-size: 0.97rem;
+      line-height: 1.6;
+    }
+
+    .lock-question p {
+      margin: 0.4rem 0;
+    }
+
+    .lock-question ol,
+    .lock-question ul {
+      margin: 0.4rem 0 0.4rem 1.2rem;
+    }
+
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.2rem;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    input[type="text"] {
+      padding: 0.5rem 0.8rem;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      font-size: 1rem;
+      width: 120px;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 0.7rem;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.4);
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(22, 163, 74, 0.5);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(22, 163, 74, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
+    }
+
+    .feedback {
+      min-height: 1.25rem;
+      font-size: 0.92rem;
+      margin-top: 0.2rem;
+    }
+
+    .feedback.error {
+      color: #f97373;
+    }
+
+    .feedback.success {
+      color: #22c55e;
+    }
+
+    .footer {
+      font-size: 0.8rem;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+    }
+
+    .final-message {
+      text-align: center;
+      padding: 1.3rem 0.5rem 0.5rem;
+    }
+
+    .final-message h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1.3rem;
+    }
+
+    .final-message p {
+      margin: 0.2rem 0;
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.25rem 1rem 1.5rem;
+      }
+
+      header h1 {
+        font-size: 1.3rem;
+      }
+
+      .lock-card {
+        padding: 1rem 0.9rem 1.1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="header">
-        <h1>Katie's Salon</h1>
-        <ul>
-            <li>wechat: RookerLJ</li>
-        </ul>
+  <div class="container">
+    <header>
+      <h1>Pure 3 Exam Vault Heist</h1>
+      <p>Crack each lock by solving the maths and entering the correct 3-digit code. Unlock all 8 to save the exam.</p>
+    </header>
+
+    <div class="status-bar">
+      <div class="pill">
+        <span class="icon"></span>
+        <span id="progress-text">Lock 1 of 8</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+      <div class="pill">
+        Mode: <strong>Linear</strong>
+      </div>
     </div>
 
-    <div class="body-1">
-        <div class="body-1a">
-        <h2>Beautiful Nails, Relaxing Vibes</h2>
-        <p>Katie's Salon is a personal, boutique nail care experience run by 
-            Katie, a skilled and experienced nail artist with a warm, friendly 
-            touch. Whether you prefer the comfort of your own home or want to 
-            visit her cozy in-home studio, Katie brings professional-level care, 
-            attention to detail, and a relaxing atmosphere to every appointment. 
-            From simple manicures to custom designs, her goal is to help you look 
-            and feel your best—beautiful nails, stress-free service, and a smile 
-            every time.</p>
+    <!-- Lock Card -->
+    <div class="lock-card" id="lock-card">
+      <div class="lock-title">
+        <span id="lock-title">Lock 1 – Security Camera Angle</span>
+        <span class="lock-badge" id="lock-badge">Code: 3 digits</span>
+      </div>
+      <div class="lock-story" id="lock-story">
+        <!-- Story goes here -->
+      </div>
+      <div class="lock-question" id="lock-question">
+        <!-- Question HTML goes here -->
+      </div>
+
+      <div class="input-row">
+        <div>
+          <label for="code-input">Enter 3-digit code:</label><br>
+          <input type="text" id="code-input" maxlength="3" autocomplete="off" />
         </div>
-    <div class="body-1b">
-        <img src="https://cdn.pixabay.com/photo/2025/06/01/20/38/leaves-9635940_1280.jpg" alt="nail salon image">
-    </div>
+        <button id="submit-btn">
+          Submit code
+          <span>⤴</span>
+        </button>
+        <button class="btn-secondary" id="reset-btn">
+          Reset progress
+        </button>
+      </div>
+      <div id="feedback" class="feedback"></div>
     </div>
 
-    <div class="body-2">
-    <div class="body-2i"> 
-        <h3>What we offer:</h3>
-    </div>
-    </div>   
-   <div class="body-2ii">
-    <div class="body-2a">  
-        <img src="https://images.unsplash.com/photo-1675453574976-fd2baeab95f3?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="this is a placeholder for image 1">
-        <p style="text-align: center;">Solid Color: 228rmb</p>
-    </div> 
-    <div class="body-2b">    
-        <img src="https://images.unsplash.com/photo-1667769462514-1fd738b38498?q=80&w=2476&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="this is a placeholder for image 2">
-        <p style="text-align: center;">Premium Solid Color: 258rmb</p>
-    </div> 
-    <div class="body-2c"> 
-        <img src="https://images.unsplash.com/photo-1612887390768-fb02affea7a6?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="this is a placeholder for image 3">
-        <p style="text-align: center;">Accent Color: 30rmb (per finger)</p>
-    </div> 
-    <div class="body-2d"> 
-        <img src="https://images.unsplash.com/photo-1668237150532-945907c2450d?q=80&w=3550&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="this is a placeholder for image 4">
-        <p style="text-align: center;">Foot solid gel nails (basic): 298rmb</p>
-    </div>
-    <div class="body-2e"> 
-        <img src="https://images.unsplash.com/photo-1476571000482-3f8d96222bb9?q=80&w=2449&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 5">
-        <p style="text-align: center;">Foot solid gel nails (premium): 358rmb</p>
-    </div>
-    <div class="body-2f"> 
-        <img src="https://plus.unsplash.com/premium_photo-1670590820788-5d8efa24bc81?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 6">
-        <p style="text-align: center;">Gel Nail Extensions: 40rmb (per finger)</p>
-    </div>
-    <div class="body-2g"> 
-        <img src="https://images.unsplash.com/photo-1680540503443-2625f497a2f9?q=80&w=3040&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 7">
-        <p style="text-align: center;">Full Nail Tips: 200rmb</p>
-    </div>
-    <div class="body-2h"> 
-        <img src="https://images.unsplash.com/photo-1652990336352-f59a02fe0067?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 8">
-        <p style="text-align: center;">Half Nail Tips: 258rmb</p>
-    </div>
-    <div class="body-2I"> 
-        <img src="https://cdn.pixabay.com/photo/2017/03/02/20/54/nail-varnish-2112358_1280.jpg" alt="image 9">
-        <p style="text-align: center;">Gradient Color: +100rmb</p>
-    </div>
-    <div class="body-2j"> 
-        <img src="https://cdn.pixabay.com/photo/2020/10/14/07/03/nail-art-5653458_1280.jpg" alt="image 10">
-        <p style="text-align: center;">Nail art: 50rmb(per finger)</p>
-    </div>
-    <div class="body-2k"> 
-        <img src="https://plus.unsplash.com/premium_photo-1675367606971-363cda30578c?q=80&w=3500&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 11">
-        <p style="text-align: center;">French Tips: +100rmb</p>
-    </div>
-    <div class="body-2n"> 
-        <img src="https://images.unsplash.com/photo-1616591607257-edf003a433f6?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 14">
-        <p style="text-align: center;">Gel Removal: 158rmb</p>
-    </div>
-    <div class="body-2o"> 
-        <img src="https://plus.unsplash.com/premium_photo-1661290231745-15f1ed6fea88?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 15">
-        <p style="text-align: center;">Hand Care: 198rmb</p>
-    </div>
-    <div class="body-2p"> 
-        <img src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 16">
-        <p style="text-align: center;">Foot Care: 298rmb</p>
-    </div>
-    <div class="body-2q"> 
-        <img src="https://images.unsplash.com/photo-1689190057180-7f3642ce322e?q=80&w=3383&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 17">
-        <p style="text-align: center;">Baby Curl/Faily Style Eyelash Extensions: 428rmb</p>
-    </div>
-    <div class="body-2r"> 
-        <img src="https://plus.unsplash.com/premium_photo-1670006626755-41cb27400b05?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 18">
-        <p style="text-align: center;">Manga/Fox/Bunny Style Eyelash Extensions: 468rmb</p>
-    </div>
-    <div class="body-2s"> 
-        <img src="https://images.unsplash.com/photo-1747823490854-7b3b833b5b06?q=80&w=3544&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 19">
-        <p style="text-align: center;">Thai Dense Style Eyelash Extensions: 558rmb</p>
-    </div>
-    <div class="body-2t"> 
-        <img src="https://images.unsplash.com/photo-1674049406467-824ea37c7184?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image 20">
-        <p style="text-align: center;">DD+ Super Volume Extensions: 698rmb</p>
-    </div>
-</div>
-
-   <!--  <div class="body-3">
-        <div class="body-3a">
-        <h4>"Life isn't perfect, but your nails can be."</h4>
-        </div>
-        <div class="body-3b">
-        <h5 style="text-align: right;">-Every happy client ever</h5>
-        </div>
-    </div> -->
-    
-    <div class="body-4i">
-    <div class="body-4">
-        <div class="body-4a">
-        <h6><a href="https://weixin.qq.com/" class="cta-button">📩 Book via WeChat</a></h6>
-        <p>If you're in the Beijing area, send a message and 
-            we'll set up a time that fits your schedule.</p>
-    </div>
-        <div class="body-4b">
-        <img src="WechatIMG27730.jpg" alt="Katie Nail Art" style="width: 200px; height: auto;">
-        </div>
-    </div>
+    <!-- Final message (hidden until complete) -->
+    <div id="final-message" class="final-message" style="display:none;">
+      <h2>Vault Unlocked! 🎉</h2>
+      <p>You’ve cracked all 8 locks and saved the Pure 3 exam papers.</p>
+      <p>Now the only thing left to escape… is the actual exam.</p>
+      <button id="restart-btn" class="btn-secondary">Play again</button>
     </div>
 
     <div class="footer">
-        <h7>Copyright © The Best Husband Ever 2025</h7>
+      <span>Tip: Codes do not have spaces. Example: <code>310</code>.</span>
+      <span>Teacher: You can edit questions and codes in the script section.</span>
     </div>
+  </div>
 
-    
+  <script>
+    // --- DATA: Locks / Questions / Codes ---
+    const locks = [
+      {
+        title: "Lock 1 – Security Camera Angle",
+        story: "The first lock controls the exam hall cameras. The system only opens when the camera is pointing at the minimum height of its path.",
+        questionHtml: `
+          <p>The height of the camera (in metres) above the floor is modelled by</p>
+          <p style="text-align:center;"><code>h(x) = x² − 6x + 10</code></p>
+          <p>where <code>x</code> is the horizontal distance (in metres) from the start of the track.</p>
+          <ol>
+            <li>Find the value of <code>x</code> at which the camera is at minimum height.</li>
+            <li>Find this minimum height.</li>
+            <li>Find <code>h(0)</code>.</li>
+          </ol>
+          <p><strong>Code rule:</strong> Let
+            <ul>
+              <li><code>a</code> = value of <code>x</code> at the minimum,</li>
+              <li><code>b</code> = minimum height,</li>
+              <li><code>c</code> = units digit of <code>h(0)</code>.</li>
+            </ul>
+            The 3-digit code is <code>abc</code>.
+          </p>
+        `,
+        code: "310"
+      },
+      {
+        title: "Lock 2 – Laser Grid",
+        story: "To slip through the laser grid, you must enter all angles (in degrees) where the system is safe.",
+        questionHtml: `
+          <p>Solve, for <code>0° ≤ θ ≤ 360°</code>, the equation</p>
+          <p style="text-align:center;"><code>sin θ = 1/2</code>.</p>
+          <p>List all solutions in this interval.</p>
+          <p><strong>Code rule:</strong></p>
+          <ul>
+            <li>Let <code>p = 30°</code> (the first solution), <code>q = 150°</code> (the second), and <code>r = 330°</code> (the fourth).</li>
+            <li>Take the <em>tens digit</em> of each angle.</li>
+            <li>The code is (tens digit of <code>p</code>)(tens digit of <code>q</code>)(tens digit of <code>r</code>).</li>
+          </ul>
+        `,
+        code: "353"
+      },
+      {
+        title: "Lock 3 – Password Encryption",
+        story: "The system stores passwords as exponents. Decrypt the password to reveal the code.",
+        questionHtml: `
+          <ol>
+            <li>Solve for <code>x</code> in <code>3^(x + 1) = 27</code>.</li>
+            <li>Evaluate <code>y = log₃ 81</code>.</li>
+          </ol>
+          <p><strong>Code rule:</strong> Let
+            <ul>
+              <li><code>x</code> = solution from part (1),</li>
+              <li><code>y</code> = value from part (2).</li>
+            </ul>
+            The code is <code>(x)(y)(x + y)</code> as a 3-digit number.
+          </p>
+        `,
+        code: "246"
+      },
+      {
+        title: "Lock 4 – CCTV Coverage",
+        story: "A circular motion sensor overlaps with a straight laser beam. The intersection point gives the next code.",
+        questionHtml: `
+          <p>The circle has equation</p>
+          <p style="text-align:center;"><code>x² + y² = 25</code>.</p>
+          <p>A laser beam follows the line</p>
+          <p style="text-align:center;"><code>y = 3x − 4</code>.</p>
+          <ol>
+            <li>Find the points of intersection between the line and the circle.</li>
+            <li>Take the point with <strong>positive</strong> <code>x</code>-coordinate and call it <code>P(a, b)</code>.</li>
+          </ol>
+          <p><strong>Code rule:</strong></p>
+          <ul>
+            <li>Use your calculator to find <code>a</code> and <code>b</code> correct to 1 d.p.</li>
+            <li>Round <code>a</code> and <code>b</code> to the nearest integers.</li>
+            <li>The code is <code>(a)(b)(a + b)</code>.</li>
+          </ul>
+        `,
+        code: "347"
+      },
+      {
+        title: "Lock 5 – Pressure System",
+        story: "Pressure in the exam vault depends on a function of time. Only at maximum pressure does the system stabilise.",
+        questionHtml: `
+          <p>The pressure <code>P</code> (in units) at time <code>t</code> minutes is modelled by</p>
+          <p style="text-align:center;"><code>P(t) = 3t³ − 12t² + 9t + 4</code>.</p>
+          <ol>
+            <li>Find <code>dP/dt</code>.</li>
+            <li>Find the stationary points and determine which is a maximum.</li>
+            <li>Find the maximum value of the pressure, <code>P<sub>max</sub></code> (use a calculator if needed).</li>
+          </ol>
+          <p><strong>Code rule:</strong></p>
+          <ul>
+            <li>Let <code>t<sub>max</sub></code> be the time (in minutes) when the maximum occurs, rounded to the nearest whole minute.</li>
+            <li>Let <code>P<sub>max</sub></code> be the maximum pressure; take its <em>units digit</em>.</li>
+            <li>The code is <code>(t<sub>max</sub>)(units digit of P<sub>max</sub>)(t<sub>max</sub> + 1)</code>.</li>
+          </ul>
+        `,
+        code: "172"
+      },
+      {
+        title: "Lock 6 – Emergency Vent",
+        story: "The emergency vent opens when the air-flow (area under a curve) reaches a specified amount.",
+        questionHtml: `
+          <p>Evaluate the definite integral</p>
+          <p style="text-align:center;"><code>I = ∫₀¹ (6x² + 2x + 1) dx</code>.</p>
+          <p><strong>Code rule:</strong></p>
+          <ul>
+            <li>Let <code>I = k</code>.</li>
+            <li>The code is <code>0(k)(k + 1)</code>.</li>
+          </ul>
+        `,
+        code: "045"
+      },
+      {
+        title: "Lock 7 – Time Lock Algorithm",
+        story: "The vault’s internal clock is stuck in an iterative loop. Run the algorithm to find the unlocking time.",
+        questionHtml: `
+          <p>A solution of the equation</p>
+          <p style="text-align:center;"><code>x³ + x = 2</code></p>
+          <p>can be found using the iteration</p>
+          <p style="text-align:center;"><code>xₙ₊₁ = ³√(2 − xₙ)</code>.</p>
+          <ol>
+            <li>Using <code>x₁ = 0.5</code>, find <code>x₂</code> and <code>x₃</code> (correct to 3 decimal places).</li>
+            <li>Hence give an approximate solution for the equation.</li>
+          </ol>
+          <p><strong>Code rule:</strong></p>
+          <ul>
+            <li>Write your approximate solution as <code>x ≈ 0.ab…</code>.</li>
+            <li>Use the first two decimal digits <code>a</code> and <code>b</code>.</li>
+            <li>The code is <code>(1)(a)(b)</code>.</li>
+          </ul>
+        `,
+        code: "195"
+      },
+      {
+        title: "Lock 8 – Final Vault Door",
+        story: "One last check of your mathematical integrity stands between you and freedom.",
+        questionHtml: `
+          <ol>
+            <li>Simplify <code>((x + 2)(x − 1)) / (x² − 1)</code>.</li>
+            <li>Prove the identity <code>cos²θ − sin²θ = 1 − 2sin²θ</code>.</li>
+          </ol>
+          <p><strong>Code rule:</strong></p>
+          <ul>
+            <li>After simplifying part (1), the expression can be written as <code>(x + a) / (x + b)</code>. Record the integers <code>a</code> and <code>b</code>.</li>
+            <li>In the final form <code>1 − 2sin²θ</code>, count the number of distinct trig functions used (this is just <code>sin</code>).</li>
+            <li>Call this number <code>c</code>. The code is <code>(a)(b)(c)</code>.</li>
+          </ul>
+        `,
+        code: "211"
+      }
+    ];
+
+    // --- State ---
+    let currentIndex = 0;
+
+    // --- DOM Elements ---
+    const lockTitleEl = document.getElementById("lock-title");
+    const lockBadgeEl = document.getElementById("lock-badge");
+    const lockStoryEl = document.getElementById("lock-story");
+    const lockQuestionEl = document.getElementById("lock-question");
+    const codeInputEl = document.getElementById("code-input");
+    const submitBtn = document.getElementById("submit-btn");
+    const resetBtn = document.getElementById("reset-btn");
+    const feedbackEl = document.getElementById("feedback");
+    const progressTextEl = document.getElementById("progress-text");
+    const progressBarFill = document.getElementById("progress-bar-fill");
+    const lockCardEl = document.getElementById("lock-card");
+    const finalMessageEl = document.getElementById("final-message");
+    const restartBtn = document.getElementById("restart-btn");
+
+    function updateProgress() {
+      const total = locks.length;
+      const currentDisplay = Math.min(currentIndex + 1, total);
+      progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
+      const percent = (currentIndex / total) * 100;
+      progressBarFill.style.width = percent + "%";
+    }
+
+    function showLock(index) {
+      const lock = locks[index];
+      lockTitleEl.textContent = lock.title;
+      lockStoryEl.textContent = lock.story;
+      lockQuestionEl.innerHTML = lock.questionHtml;
+      lockBadgeEl.textContent = "Code: 3 digits";
+      codeInputEl.value = "";
+      codeInputEl.disabled = false;
+      feedbackEl.textContent = "";
+      feedbackEl.className = "feedback";
+      submitBtn.disabled = false;
+      updateProgress();
+      lockCardEl.style.display = "block";
+      finalMessageEl.style.display = "none";
+      codeInputEl.focus();
+    }
+
+    function showFinal() {
+      lockCardEl.style.display = "none";
+      finalMessageEl.style.display = "block";
+      progressTextEl.textContent = "All locks cracked";
+      progressBarFill.style.width = "100%";
+    }
+
+    function normaliseCodeInput(value) {
+      return value.replace(/\s+/g, "").toUpperCase();
+    }
+
+    function checkCode() {
+      const inputRaw = codeInputEl.value;
+      const input = normaliseCodeInput(inputRaw);
+      const lock = locks[currentIndex];
+
+      if (!input) {
+        feedbackEl.textContent = "Enter a 3-digit code before submitting.";
+        feedbackEl.className = "feedback error";
+        return;
+      }
+
+      if (input.length !== 3 || !/^\d{3}$/.test(input)) {
+        feedbackEl.textContent = "Codes are exactly 3 digits (0–9 only).";
+        feedbackEl.className = "feedback error";
+        return;
+      }
+
+      if (input === lock.code) {
+        feedbackEl.textContent = "Correct code! Lock opened.";
+        feedbackEl.className = "feedback success";
+        codeInputEl.disabled = true;
+        submitBtn.disabled = true;
+
+        // Small delay then move to next lock
+        setTimeout(() => {
+          currentIndex++;
+          if (currentIndex >= locks.length) {
+            showFinal();
+          } else {
+            showLock(currentIndex);
+          }
+        }, 700);
+      } else {
+        feedbackEl.textContent = "Incorrect code. Check your working and try again.";
+        feedbackEl.className = "feedback error";
+        codeInputEl.select();
+      }
+    }
+
+    function resetProgress() {
+      if (!confirm("Reset all progress and go back to Lock 1?")) return;
+      currentIndex = 0;
+      showLock(currentIndex);
+    }
+
+    // --- Event listeners ---
+    submitBtn.addEventListener("click", checkCode);
+    resetBtn.addEventListener("click", resetProgress);
+    restartBtn.addEventListener("click", resetProgress);
+
+    codeInputEl.addEventListener("keyup", (event) => {
+      if (event.key === "Enter") {
+        checkCode();
+      }
+    });
+
+    // --- Initialise ---
+    showLock(currentIndex);
+  </script>
 </body>
-
 </html>
