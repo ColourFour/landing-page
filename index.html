@@ -315,12 +315,40 @@
     </div>
 
     <!-- Final message (hidden until complete) -->
-    <div id="final-message" class="final-message" style="display:none;">
-      <h2>Vault Unlocked! 🎉</h2>
-      <p>You've cracked all 8 locks and saved the Pure 3 exam papers.</p>
-      <p>Now the only thing left to escape… is the actual exam.</p>
-      <button id="restart-btn" class="btn-secondary">Play again</button>
-    </div>
+     <div id="final-message" class="final-message" style="display:none;">
+  <h2>Vault Unlocked! 🎉</h2>
+  <p>You've cracked every lock and completed the Pure 3 escape room.</p>
+  <p>Your reward: confidence, maths skills, and absolutely no shortcut on the real exam.</p>
+
+  <!-- Fun “vault” graphic -->
+  <div style="margin:1rem auto; text-align:center;">
+    <svg width="140" height="140" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="vaultGrad" cx="50%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#e5e7eb"/>
+          <stop offset="40%" stop-color="#cbd5f5"/>
+          <stop offset="100%" stop-color="#4b5563"/>
+        </radialGradient>
+      </defs>
+      <circle cx="70" cy="70" r="55" fill="url(#vaultGrad)" stroke="#111827" stroke-width="4"/>
+      <circle cx="70" cy="70" r="8" fill="#111827"/>
+      <!-- Lock bars -->
+      <line x1="70" y1="20" x2="70" y2="40" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
+      <line x1="70" y1="100" x2="70" y2="120" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
+      <line x1="20" y1="70" x2="40" y2="70" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
+      <line x1="100" y1="70" x2="120" y2="70" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
+      <!-- Tick mark -->
+      <polyline points="50,75 63,88 92,54"
+                fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <p style="text-align:center; margin-top:0.5rem;">
+    <em>Escape complete. You may now breathe… and then revise.</em>
+  </p>
+
+  <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
+</div>
 
     <div class="footer">
       <span>Tip: Codes do not have spaces. Example: <code>038</code>.</span>
@@ -895,6 +923,123 @@
     <!-- Teacher hint: override code is 911 -->
   `,
   code: "911"
+},
+{
+  title: "Lock 8 (for real)– Transcendental Vault Lock",
+  story: "The final lock of the vault is controlled by a nonlinear equation that cannot be solved exactly in closed form. You must use iteration to approximate its solution.",
+  questionHtml: `
+    <p>Consider the equation</p>
+    <p style="text-align:center;">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <msup>
+          <mi>e</mi>
+          <mrow>
+            <mn>2</mn><mi>x</mi>
+          </mrow>
+        </msup>
+        <mo>=</mo>
+        <mn>4</mn><mi>x</mi>
+        <mo>+</mo>
+        <mn>3</mn>
+      </math>
+    </p>
+
+    <ol>
+      <li>
+        Show that the equation
+        <math>
+          <msup>
+            <mi>e</mi>
+            <mrow>
+              <mn>2</mn><mi>x</mi>
+            </mrow>
+          </msup>
+          <mo>=</mo>
+          <mn>4</mn><mi>x</mi>
+          <mo>+</mo>
+          <mn>3</mn>
+        </math>
+        has a root <math><mi>&#945;</mi></math> in the interval
+        <math>
+          <mn>0</mn><mo>&le;</mo><mi>x</mi><mo>&le;</mo><mn>1</mn>
+        </math>.
+      </li>
+
+      <li>
+        Rearrange the equation into the form
+        <p style="text-align:center;">
+          <math>
+            <mi>x</mi>
+            <mo>=</mo>
+            <mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+          </math>
+        </p>
+        where
+        <p style="text-align:center;">
+          <math>
+            <mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+            <mo>=</mo>
+            <mfrac>
+              <mrow>
+                <mi>ln</mi><mo>(</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo>)</mo>
+              </mrow>
+              <mn>2</mn>
+            </mfrac>
+          </math>
+        </p>
+      </li>
+
+      <li>
+        Use the iteration
+        <p style="text-align:center;">
+          <math>
+            <msub>
+              <mi>x</mi>
+              <mrow>
+                <mi>n</mi><mo>+</mo><mn>1</mn>
+              </mrow>
+            </msub>
+            <mo>=</mo>
+            <mfrac>
+              <mrow>
+                <mi>ln</mi><mo>(</mo><mn>4</mn>
+                <msub><mi>x</mi><mi>n</mi></msub>
+                <mo>+</mo><mn>3</mn><mo>)</mo>
+              </mrow>
+              <mn>2</mn>
+            </mfrac>
+          </math>
+        </p>
+        with a suitable starting value
+        <math>
+          <msub><mi>x</mi><mn>1</mn></msub>
+        </math>
+        in the interval
+        <math>
+          <mn>0</mn><mo>&le;</mo><mi>x</mi><mo>&le;</mo><mn>1</mn>
+        </math>
+        to find the root
+        <math><mi>&#945;</mi></math>,
+        correct to 4 decimal places.
+      </li>
+    </ol>
+
+    <p><strong>Code rule:</strong></p>
+    <p>
+      Write your final answer as
+      <math>
+        <mi>&#945;</mi><mo>&#8776;</mo><mn>0</mn><mo>.</mo><mi>A</mi><mi>B</mi><mi>C</mi>
+      </math>,
+      where A, B and C are digits.
+    </p>
+    <ul>
+      <li>a is the first decimal digit A,</li>
+      <li>b is the second decimal digit B,</li>
+      <li>c is the third decimal digit C.</li>
+    </ul>
+    <p>The 3-digit code for this lock is <code>abc</code>.</p>
+  `,
+  code: "962"
 }
     ];
 
@@ -917,7 +1062,7 @@
     const restartBtn = document.getElementById("restart-btn");
 
     function updateProgress() {
-      const total = locks.length;
+      const total = locks.length - 1;
       const currentDisplay = Math.min(currentIndex + 1, total);
       progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
       const percent = (currentIndex / total) * 100;
@@ -942,11 +1087,24 @@
     }
 
     function showFinal() {
-      lockCardEl.style.display = "none";
-      finalMessageEl.style.display = "block";
-      progressTextEl.textContent = "All locks cracked";
-      progressBarFill.style.width = "100%";
-    }
+  // Hide the lock card and show the finale block
+  lockCardEl.style.display = "none";
+  finalMessageEl.style.display = "block";
+
+  // Progress bar text + fill
+  progressTextEl.textContent = "Finale";
+  progressBarFill.style.width = "100%";
+
+  // Change background to a red theme
+  document.body.style.background =
+    "radial-gradient(circle at top, #7f1d1d, #450a0a)";
+
+  // Change the main header title
+  const headerTitle = document.querySelector("header h1");
+  if (headerTitle) {
+    headerTitle.textContent = "Finale – Real Vault Question";
+  }
+}
 
     function normaliseCodeInput(value) {
       return value.replace(/\s+/g, "").toUpperCase();
