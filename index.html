@@ -1043,8 +1043,40 @@
 }
     ];
 
+    // ----- PROGRESS PERSISTENCE -----
+const PROGRESS_KEY = "pure3EscapeProgress";
+
+function saveProgress(index) {
+  try {
+    localStorage.setItem(PROGRESS_KEY, String(index));
+  } catch (e) {
+    // If localStorage fails (private mode, etc.), just ignore
+  }
+}
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(PROGRESS_KEY);
+    if (raw === null) return 0;
+    const idx = parseInt(raw, 10);
+    if (!Number.isFinite(idx) || idx < 0) return 0;
+    if (idx > locks.length) return locks.length;
+    return idx;
+  } catch (e) {
+    return 0;
+  }
+}
+
+function clearProgress() {
+  try {
+    localStorage.removeItem(PROGRESS_KEY);
+  } catch (e) {
+    // ignore
+  }
+}
     // --- State ---
-    let currentIndex = 0;
+let currentIndex = loadProgress();    
+    
 
     // --- DOM Elements ---
     const lockTitleEl = document.getElementById("lock-title");
@@ -1134,14 +1166,16 @@
         submitBtn.disabled = true;
 
         // Small delay then move to next lock
-        setTimeout(() => {
-          currentIndex++;
-          if (currentIndex >= locks.length) {
-            showFinal();
-          } else {
-            showLock(currentIndex);
-          }
-        }, 700);
+       setTimeout(() => {
+  currentIndex++;
+  saveProgress(currentIndex);
+
+  if (currentIndex >= locks.length) {
+    showFinal();
+  } else {
+    showLock(currentIndex);
+  }
+}, 700);
       } else {
         feedbackEl.textContent = "Incorrect code. Check your working and try again.";
         feedbackEl.className = "feedback error";
@@ -1149,11 +1183,12 @@
       }
     }
 
-    function resetProgress() {
-      if (!confirm("Reset all progress and go back to Lock 1?")) return;
-      currentIndex = 0;
-      showLock(currentIndex);
-    }
+   function resetProgress() {
+  if (!confirm("Reset all progress and go back to Lock 1?")) return;
+  currentIndex = 0;
+  clearProgress();
+  showLock(currentIndex);
+}
 
     // --- Event listeners ---
     submitBtn.addEventListener("click", checkCode);
@@ -1167,7 +1202,10 @@
     });
 
     // --- Initialise ---
-    showLock(currentIndex);
-  </script>
+if (currentIndex >= locks.length) {
+  showFinal();
+} else {
+  showLock(currentIndex);
+}  </script>
 </body>
 </html>
