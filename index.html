@@ -355,8 +355,11 @@
       <span>Hints may be requested.</span>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
+  
+  
     // --- DATA: Locks / Questions / Codes ---
     const locks = [
       {
@@ -1165,6 +1168,13 @@ let currentIndex = loadProgress();
         codeInputEl.disabled = true;
         submitBtn.disabled = true;
 
+        if (typeof confetti === "function") {
+    confetti({
+      particleCount: 120,
+      spread: 70,
+      origin: { y: 0.7 }
+    });
+  }
         // Small delay then move to next lock
        setTimeout(() => {
   currentIndex++;
