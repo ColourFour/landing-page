@@ -1,0 +1,157 @@
+<!-- index.html (Homepage) -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pure 3 Escape Rooms</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1f2933, #020617);
+      color: #e5e7eb;
+      min-height: 100vh;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .wrap { width: 100%; max-width: 980px; }
+    header {
+      padding: 18px 18px 10px;
+      border: 1px solid rgba(148,163,184,0.25);
+      background: rgba(15,23,42,0.85);
+      border-radius: 18px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .sub {
+      margin: 10px 0 0;
+      color: #9ca3af;
+      line-height: 1.5;
+      font-size: 0.98rem;
+    }
+    .grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border: 1px solid rgba(148,163,184,0.25);
+      background: rgba(15,23,42,0.85);
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 160px;
+    }
+    .tag {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.35);
+      color: #cbd5e1;
+      font-size: 0.82rem;
+    }
+    .title {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 650;
+    }
+    .desc {
+      margin: 0;
+      color: #9ca3af;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    a.btn {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid rgba(148,163,184,0.35);
+      color: #0b1220;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      box-shadow: 0 12px 22px rgba(22,163,74,0.25);
+    }
+    a.btn.secondary {
+      color: #e5e7eb;
+      background: transparent;
+      box-shadow: none;
+    }
+    .footer {
+      margin-top: 14px;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      padding: 0 6px;
+    }
+    code {
+      background: rgba(148,163,184,0.12);
+      border: 1px solid rgba(148,163,184,0.18);
+      padding: 2px 6px;
+      border-radius: 8px;
+      color: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Pure 3 Escape Rooms</h1>
+      <p class="sub">
+        Choose an escape room. Each one is a self-contained page.
+      </p>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <span class="tag">Live</span>
+        <h2 class="title">Escape Room 1 – Vault Heist</h2>
+        <p class="desc">
+        </p>
+        <div class="row">
+          <!-- Change filename below to match your actual escape room file -->
+          <a class="btn" href="escape-room-1.html.html">Start Escape Room 1</a>
+          <a class="btn secondary" href="./escape-room-1.html#teacher">Teacher view</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Live 12/26</span>
+        <h2 class="title">Escape Room 2 - AS Math</h2>
+        <p class="desc">
+        </p>
+        <div class="row">
+          <a class="btn" href="./escape-room-2.html">Open Escape Room 2</a>
+        </div>
+      </article>
+    </section>
+
+    <div class="footer">
+      <code>index.html</code>,
+      <code>escape-room-1.html</code>,
+      <code>escape-room-2.html</code>.
+    </div>
+  </div>
+</body>
+</html>
