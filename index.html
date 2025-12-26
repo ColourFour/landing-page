@@ -1,1221 +1,157 @@
-<!DOCTYPE html>
+<!-- index.html (Homepage) -->
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Pure 3 Escape Room – Exam Vault Heist</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pure 3 Escape Rooms</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: radial-gradient(circle at top, #1f2933, #020617);
       color: #e5e7eb;
       min-height: 100vh;
+      padding: 24px;
       display: flex;
-      align-items: stretch;
       justify-content: center;
-      padding: 1.5rem;
     }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 1.5rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      padding: 1.75rem 1.75rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
+    .wrap { width: 100%; max-width: 980px; }
     header {
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-      padding-bottom: 0.75rem;
+      padding: 18px 18px 10px;
+      border: 1px solid rgba(148,163,184,0.25);
+      background: rgba(15,23,42,0.85);
+      border-radius: 18px;
     }
-
-    header h1 {
+    h1 {
       margin: 0;
       font-size: 1.6rem;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
     }
-
-    header p {
-      margin: 0.4rem 0 0;
-      font-size: 0.95rem;
-      color: #9ca3af;
-    }
-
-    .status-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.9rem;
-      color: #9ca3af;
-    }
-
-    .pill {
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .pill span.icon {
-      width: 0.6rem;
-      height: 0.6rem;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
-    }
-
-    .progress-bar {
-      flex: 1;
-      min-width: 150px;
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      height: 10px;
-      position: relative;
-    }
-
-    .progress-bar-fill {
-      position: absolute;
-      inset: 0;
-      width: 0%;
-      background: linear-gradient(90deg, #22c55e, #38bdf8);
-      transition: width 0.3s ease;
-    }
-
-    .lock-card {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 1.25rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 1.25rem 1.5rem 1.3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .lock-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-
-    .lock-badge {
-      font-size: 0.8rem;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #e5e7eb;
-    }
-
-    .lock-story {
-      font-size: 0.95rem;
+    .sub {
+      margin: 10px 0 0;
       color: #9ca3af;
       line-height: 1.5;
+      font-size: 0.98rem;
     }
-
-    .lock-question {
-      font-size: 0.97rem;
-      line-height: 1.6;
+    .grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
     }
-
-    .lock-question p {
-      margin: 0.4rem 0;
-    }
-
-    .lock-question ol,
-    .lock-question ul {
-      margin: 0.4rem 0 0.4rem 1.2rem;
-    }
-
-    .input-row {
+    .card {
+      border: 1px solid rgba(148,163,184,0.25);
+      background: rgba(15,23,42,0.85);
+      border-radius: 18px;
+      padding: 16px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      margin-top: 0.2rem;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 160px;
     }
-
-    label {
-      font-size: 0.9rem;
+    .tag {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.35);
+      color: #cbd5e1;
+      font-size: 0.82rem;
+    }
+    .title {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 650;
+    }
+    .desc {
+      margin: 0;
       color: #9ca3af;
-    }
-
-    input[type="text"] {
-      padding: 0.5rem 0.8rem;
-      border-radius: 0.6rem;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
-      font-size: 1rem;
-      width: 120px;
-    }
-
-    input[type="text"]:focus {
-      outline: none;
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
-    }
-
-    button {
-      cursor: pointer;
-      border: none;
-      border-radius: 0.7rem;
-      padding: 0.5rem 1.1rem;
+      line-height: 1.5;
       font-size: 0.95rem;
-      font-weight: 500;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #f9fafb;
+      flex: 1;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    a.btn {
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.4);
-      transition: transform 0.08s ease, box-shadow 0.08s ease;
+      justify-content: center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid rgba(148,163,184,0.35);
+      color: #0b1220;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      box-shadow: 0 12px 22px rgba(22,163,74,0.25);
     }
-
-    button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(22, 163, 74, 0.5);
-    }
-
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 8px 16px rgba(22, 163, 74, 0.4);
-    }
-
-    .btn-secondary {
+    a.btn.secondary {
+      color: #e5e7eb;
       background: transparent;
-      border: 1px solid rgba(148, 163, 184, 0.6);
       box-shadow: none;
     }
-
-    .btn-secondary:hover {
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
-    }
-
-    .feedback {
-      min-height: 1.25rem;
-      font-size: 0.92rem;
-      margin-top: 0.2rem;
-    }
-
-    .feedback.error {
-      color: #f97373;
-    }
-
-    .feedback.success {
-      color: #22c55e;
-    }
-
     .footer {
-      font-size: 0.8rem;
-      color: #6b7280;
-      display: flex;
-      justify-content: space-between;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      margin-top: 0.4rem;
+      margin-top: 14px;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      padding: 0 6px;
     }
-
-    .final-message {
-      text-align: center;
-      padding: 1.3rem 0.5rem 0.5rem;
-    }
-
-    .final-message h2 {
-      margin: 0 0 0.4rem;
-      font-size: 1.3rem;
-    }
-
-    .final-message p {
-      margin: 0.2rem 0;
-      font-size: 0.95rem;
-      color: #9ca3af;
-    }
-
-    @media (max-width: 640px) {
-      .container {
-        padding: 1.25rem 1rem 1.5rem;
-      }
-
-      header h1 {
-        font-size: 1.3rem;
-      }
-
-      .lock-card {
-        padding: 1rem 0.9rem 1.1rem;
-      }
+    code {
+      background: rgba(148,163,184,0.12);
+      border: 1px solid rgba(148,163,184,0.18);
+      padding: 2px 6px;
+      border-radius: 8px;
+      color: #e5e7eb;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrap">
     <header>
-      <h1>Pure 3 Exam Vault Heist</h1>
-      <p>Crack each lock by solving the maths and entering the correct 3-digit code. Unlock all 8 to save the exam.</p>
+      <h1>Pure 3 Escape Rooms</h1>
+      <p class="sub">
+        Choose an escape room. Each one is a self-contained page.
+      </p>
     </header>
 
-    <div class="status-bar">
-      <div class="pill">
-        <span class="icon"></span>
-        <span id="progress-text">Lock 1 of 8</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-bar-fill" id="progress-bar-fill"></div>
-      </div>
-      <div class="pill">
-        Mode: <strong>Linear</strong>
-      </div>
-    </div>
-
-    <!-- Lock Card -->
-    <div class="lock-card" id="lock-card">
-      <div class="lock-title">
-        <span id="lock-title">Lock 1 - Security Camera Angle</span>
-        <span class="lock-badge" id="lock-badge">Code: 3 digits</span>
-      </div>
-      <div class="lock-story" id="lock-story">
-        <!-- Story goes here -->
-      </div>
-      <div class="lock-question" id="lock-question">
-        <!-- Question HTML goes here -->
-      </div>
-
-      <div class="input-row">
-        <div>
-          <label for="code-input">Enter 3-digit code:</label><br>
-          <input type="text" id="code-input" maxlength="3" autocomplete="off" />
+    <section class="grid">
+      <article class="card">
+        <span class="tag">Live</span>
+        <h2 class="title">Escape Room 1 – Vault Heist</h2>
+        <p class="desc">
+        </p>
+        <div class="row">
+          <!-- Change filename below to match your actual escape room file -->
+          <a class="btn" href="escape-room-1.html.html">Start Escape Room 1</a>
+          <a class="btn secondary" href="./escape-room-1.html#teacher">Teacher view</a>
         </div>
-        <button id="submit-btn">
-          Submit code
-          <span>⤴</span>
-        </button>
-        <button class="btn-secondary" id="reset-btn">
-          Reset progress
-        </button>
-      </div>
-      <div id="feedback" class="feedback"></div>
-    </div>
+      </article>
 
-    <!-- Final message (hidden until complete) -->
-     <div id="final-message" class="final-message" style="display:none;">
-  <h2>Vault Unlocked! 🎉</h2>
-  <p>You've cracked every lock and completed the Pure 3 escape room.</p>
-  <p>Your reward: confidence, maths skills, and absolutely no shortcut on the real exam.</p>
-
-  <!-- Fun “vault” graphic -->
-  <div style="margin:1rem auto; text-align:center;">
-    <svg width="140" height="140" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="vaultGrad" cx="50%" cy="35%" r="60%">
-          <stop offset="0%" stop-color="#e5e7eb"/>
-          <stop offset="40%" stop-color="#cbd5f5"/>
-          <stop offset="100%" stop-color="#4b5563"/>
-        </radialGradient>
-      </defs>
-      <circle cx="70" cy="70" r="55" fill="url(#vaultGrad)" stroke="#111827" stroke-width="4"/>
-      <circle cx="70" cy="70" r="8" fill="#111827"/>
-      <!-- Lock bars -->
-      <line x1="70" y1="20" x2="70" y2="40" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
-      <line x1="70" y1="100" x2="70" y2="120" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
-      <line x1="20" y1="70" x2="40" y2="70" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
-      <line x1="100" y1="70" x2="120" y2="70" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
-      <!-- Tick mark -->
-      <polyline points="50,75 63,88 92,54"
-                fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <p style="text-align:center; margin-top:0.5rem;">
-    <em>Escape complete. You may now breathe… and then revise.</em>
-  </p>
-
-  <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
-</div>
+      <article class="card">
+        <span class="tag">Live 12/26</span>
+        <h2 class="title">Escape Room 2 - AS Math</h2>
+        <p class="desc">
+        </p>
+        <div class="row">
+          <a class="btn" href="./escape-room-2.html">Open Escape Room 2</a>
+        </div>
+      </article>
+    </section>
 
     <div class="footer">
-      <span>Tip: Codes do not have spaces. Example: <code>038</code>.</span>
-      <span>Hints may be requested.</span>
+      <code>index.html</code>,
+      <code>escape-room-1.html</code>,
+      <code>escape-room-2.html</code>.
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-  <script>
-  
-  
-    // --- DATA: Locks / Questions / Codes ---
-    const locks = [
-      {
-  title: "Lock 1 – Complex Vault Key",
-  story: "The first lock is encoded using a complex number. The vault will only respond if you can find the exact square roots of 4 − 5i.",
-  questionHtml: `
-    <p>You are given that</p>
-    <p style="text-align:center;">
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <msup>
-          <mi>z</mi>
-          <mn>2</mn>
-        </msup>
-        <mo>=</mo>
-        <mn>4</mn>
-        <mo>-</mo>
-        <mn>5</mn>
-        <mi>i</mi>
-      </math>
-    </p>
-    <p>where <code>z</code> is a complex number.</p>
-
-    <p>Let</p>
-    <p style="text-align:center;">
-      <math>
-        <mi>z</mi>
-        <mo>=</mo>
-        <mi>x</mi>
-        <mo>+</mo>
-        <mi>i</mi><mi>y</mi>
-      </math>
-    </p>
-    <p>where <code>x</code> and <code>y</code> are real numbers.</p>
-
-    <ol>
-      <li>
-        By expanding 
-        <math>
-          <msup><mi>z</mi><mn>2</mn></msup>
-        </math>
-        and equating real and imaginary parts with
-        <math>
-          <mn>4</mn>
-          <mo>-</mo>
-          <mn>5</mn><mi>i</mi>
-        </math>,
-        obtain two equations involving <code>x</code> and <code>y</code>.
-      </li>
-
-      <li>
-        Hence eliminate <code>y</code> (or <code>x</code>) to form a quartic equation in <code>x</code> (or in <code>y</code>).
-      </li>
-
-      <li>
-        Solve this quartic equation to find the possible values of <code>x</code> and <code>y</code>, and hence find the two square roots of
-        <math>
-          <mn>4</mn>
-          <mo>-</mo>
-          <mn>5</mn><mi>i</mi>
-        </math>
-        in exact Cartesian form.
-      </li>
-    </ol>
-
-    <p><strong>Code rule:</strong></p>
-    <p>
-      Suppose the quartic equation you obtain in part (2) can be written in the form
-    </p>
-    <p style="text-align:center;">
-      <math>
-        <mi>a</mi><msup><mi>x</mi><mn>4</mn></msup>
-        <mo>+</mo>
-        <mi>b</mi><msup><mi>x</mi><mn>2</mn></msup>
-        <mo>+</mo>
-        <mi>c</mi>
-        <mo>=</mo>
-        <mn>0</mn>
-      </math>
-    </p>
-    <p>
-      where <code>a</code>, <code>b</code> and <code>c</code> are integers.
-      Let <code>a</code> be the leading coefficient,
-      let <code>b'</code> be the tens digit of the absolute value of <code>b</code>,
-      and let <code>c'</code> be the units digit of the absolute value of <code>c</code>.
-      The 3-digit code for this lock is <code>a b' c'</code>.
-    </p>
-  `,
-  code: "415"
-},
-     {
-  title: "Lock 2 – Trig Firewall",
-  story: "The vault’s firewall is encoded with a trigonometric identity. To break through, you must turn the equation into a quadratic in tan x, then solve it.",
-  questionHtml: `
-    <p>Solve the equation</p>
-    <p style="text-align:center;">
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <mi>tan</mi>
-        <mo>(</mo>
-        <mi>x</mi>
-        <mo>-</mo>
-        <mn>60</mn>
-        <mo>&#176;</mo>
-        <mo>)</mo>
-        <mo>=</mo>
-        <mn>2</mn>
-        <mi>cot</mi>
-        <mi>x</mi>
-      </math>
-    </p>
-    <p>for 0&deg; &le; x &le; 180&deg;.</p>
-
-    <ol>
-      <li>
-        Let 
-        <math>
-          <mi>t</mi>
-          <mo>=</mo>
-          <mi>tan</mi><mi>x</mi>
-        </math>.
-        By first expressing the given equation as a quadratic equation in <code>t</code>,
-        obtain an equation of the form
-        <p style="text-align:center;">
-          <math>
-            <msup><mi>t</mi><mn>2</mn></msup>
-            <mo>+</mo>
-            <mi>p</mi><mi>t</mi>
-            <mo>+</mo>
-            <mi>q</mi>
-            <mo>=</mo>
-            <mn>0</mn>
-          </math>
-        </p>
-        where <code>p</code> and <code>q</code> are constants.
-      </li>
-
-      <li>
-        Solve this quadratic equation to find the possible values of <code>t</code>.
-      </li>
-
-      <li>
-        Hence find the corresponding values of <code>x</code> in the interval 
-        0&deg; &le; x &le; 180&deg;, giving your answers correct to 1 decimal place.
-      </li>
-    </ol>
-
-    <p><strong>Code rule:</strong></p>
-    <p>
-      Let the smaller solution for <code>x</code> (in degrees, rounded to the nearest degree) be <code>p</code>,
-      and the larger solution be <code>q</code>.
-    </p>
-    <ul>
-      <li><code>a</code> is the tens digit of <code>p</code>.</li>
-      <li><code>b</code> is the tens digit of <code>q</code>.</li>
-      <li><code>c</code> is the units digit of <code>q</code>.</li>
-    </ul>
-    <p>The 3-digit code is <code>abc</code>.</p>
-  `,
-  code: "860"
-}
-      ,
-      {
-  title: "Lock 3 – Thermal Sensor Lock",
-  story: "The vault’s thermal sensor is controlled by an exponential model. Solving the equation will generate the next part of the security code.",
-  questionHtml: `
-    <p>Solve the equation</p>
-    <p style="text-align:center;">
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <msup>
-          <mn>2</mn>
-          <mrow>
-            <mn>3</mn><mi>x</mi><mo>-</mo><mn>4</mn>
-          </mrow>
-        </msup>
-        <mo>=</mo>
-        <mn>7</mn>
-        <mo>&#183;</mo>
-        <msup>
-          <mn>5</mn>
-          <mrow>
-            <mi>x</mi><mo>-</mo><mn>1</mn>
-          </mrow>
-        </msup>
-      </math>
-    </p>
-    <p>for real values of <code>x</code>, giving your answer correct to 3 significant figures.</p>
-
-    <p><strong>Code rule:</strong></p>
-    <p>
-      Write your answer in the form <code>x ≈ A.BC</code>, where <code>A</code> is the integer part
-      and <code>B</code> and <code>C</code> are the first two digits after the decimal point.
-    </p>
-    <ul>
-      <li><code>a</code> is the integer part <code>A</code>,</li>
-      <li><code>b</code> is the first decimal digit <code>B</code>,</li>
-      <li><code>c</code> is the second decimal digit <code>C</code>.</li>
-    </ul>
-    <p>The 3-digit code for this lock is <code>abc</code>.</p>
-  `,
-  code: "661"
-},
-      {
-  title: "Lock 4 – Parametric Beam Lock",
-  story: "The vault uses a rotating security beam whose path is described parametrically. To recalibrate the beam and unlock the next stage, you must find the equation of the normal at a specific time.",
-  questionHtml: `
-    <p>The path of the beam is given by the parametric equations</p>
-    <p style="text-align:center;">
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <mtable>
-          <mtr>
-            <mtd>
-              <mi>x</mi>
-              <mo>=</mo>
-              <mi>sin</mi>
-              <mo>(</mo><mi>t</mi><mo>)</mo>
-              <mi>cos</mi>
-              <mo>(</mo><mi>t</mi><mo>)</mo>
-            </mtd>
-          </mtr>
-          <mtr>
-            <mtd>
-              <mi>y</mi>
-              <mo>=</mo>
-              <mi>tan</mi>
-              <mo>(</mo>
-                <mi>sin</mi>
-                <mo>(</mo><mi>t</mi><mo>)</mo>
-              <mo>)</mo>
-              <mo>+</mo>
-              <mn>10</mn>
-            </mtd>
-          </mtr>
-        </mtable>
-      </math>
-    </p>
-    <p>where <code>t</code> is a real parameter.</p>
-
-    <ol>
-      <li>
-        Find 
-        <math>
-          <mfrac>
-            <mrow><mi>dx</mi></mrow>
-            <mrow><mi>dt</mi></mrow>
-          </mfrac>
-        </math>
-        and
-        <math>
-          <mfrac>
-            <mrow><mi>dy</mi></mrow>
-            <mrow><mi>dt</mi></mrow>
-          </mfrac>
-        </math>
-        in terms of <code>t</code>.
-      </li>
-
-      <li>
-        Hence show  the equation of the normal to the curve at the point corresponding to <code>t = 0</code>, giving your answer in the form
-        <p style="text-align:center;">
-          <math>
-            <mi>y</mi>
-            <mo>=</mo>
-            <mi>m</mi><mi>x</mi>
-            <mo>+</mo>
-            <mi>k</mi>
-          </math>
-        </p>
-        where <code>m</code> and <code>k</code> are integers.
-      </li>
-    </ol>
-
-    <p><strong>Code rule:</strong></p>
-    <p>
-      Let <code>m</code> be the gradient of the normal, and <code>k</code> be the constant term in its equation
-      <code>y = mx + k</code>.
-    </p>
-    <p>
-      Write <code>k</code> as a two-digit number <code>BC</code>, where <code>B</code> is the tens digit and <code>C</code> is the units digit.
-    </p>
-    <ul>
-      <li><code>a</code> is the value of <code>|m|</code>,</li>
-      <li><code>b</code> is the tens digit <code>B</code>,</li>
-      <li><code>c</code> is the units digit <code>C</code>.</li>
-    </ul>
-    <p>The 3-digit code for this lock is <code>abc</code>.</p>
-  `,
-  code: "110"
-},
-      {
-  title: "Lock 5 – Reaction Chamber Lock",
-  story: "A chemical reaction in the vault’s sealed chamber is changing the amount of a protective substance. Solving the differential equation governing this reaction will unlock the next stage.",
-  questionHtml: `
-    <p>Let <code>x</code> grams be the amount of a substance present in the chamber after <code>t</code> seconds. The variables <code>x</code> and <code>t</code> satisfy the differential equation</p>
-    <p style="text-align:center;">
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <mfrac>
-          <mrow><mi>dx</mi></mrow>
-          <mrow><mi>dt</mi></mrow>
-        </mfrac>
-        <mo>=</mo>
-        <mi>k</mi>
-        <mi>x</mi>
-        <msup>
-          <mi>e</mi>
-          <mrow>
-            <mo>-</mo><mn>0.2</mn><mi>t</mi>
-          </mrow>
-        </msup>
-      </math>
-    </p>
-    <p>where <code>k</code> is a positive constant. At the start of the reaction, the amount is <code>x = 15</code> grams.</p>
-
-    <ol>
-      <li>
-        Solve the differential equation, obtaining a relation between <code>x</code>, <code>t</code> and <code>k</code>.
-      </li>
-
-      <li>
-        It is given that <code>x = 30</code> when <code>t = 8</code>. Use this information to find the value of <code>k</code>.
-      </li>
-
-      <li>
-        Hence find the value approached by <code>x</code> as <code>t</code> becomes large.
-      </li>
-    </ol>
-
-    <p><strong>Code rule:</strong></p>
-    <p>
-      After finding the value of <code>k</code>, round it to 3 significant figures and write it in the form
-      <code>k ≈ 0.abc</code>, where <code>a</code>, <code>b</code> and <code>c</code> are digits.
-    </p>
-    <ul>
-      <li><code>a</code> is the first decimal digit of <code>k</code>,</li>
-      <li><code>b</code> is the second decimal digit of <code>k</code>,</li>
-      <li><code>c</code> is the third decimal digit of <code>k</code>.</li>
-    </ul>
-    <p>The 3-digit code for this lock is <code>abc</code>.</p>
-  `,
-  code: "174"
-},
-      {
-  title: "Lock 6 – Series Expansion Lock",
-  story: "A calibration function in the vault’s control system is stored as a power series. To decode it, you must expand a given expression in ascending powers of x.",
-  questionHtml: `
-    <p>Consider the expression</p>
-    <p style="text-align:center;">
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <msqrt>
-          <mfrac>
-            <mrow>
-              <mn>1</mn>
-              <mo>+</mo>
-              <mn>2</mn><mi>x</mi>
-            </mrow>
-            <mrow>
-              <mn>1</mn>
-              <mo>-</mo>
-              <mn>2</mn><mi>x</mi>
-            </mrow>
-          </mfrac>
-        </msqrt>
-      </math>
-    </p>
-
-    <ol>
-      <li>
-        Use binomial expansions to expand
-        <br />
-        <math>
-          <msqrt>
-            <mfrac>
-              <mrow>
-                <mn>1</mn>
-                <mo>+</mo>
-                <mn>2</mn><mi>x</mi>
-              </mrow>
-              <mrow>
-                <mn>1</mn>
-                <mo>-</mo>
-                <mn>2</mn><mi>x</mi>
-              </mrow>
-            </mfrac>
-          </msqrt>
-        </math>
-        in ascending powers of <code>x</code>, up to and including the term in <code>x²</code>.
-      </li>
-
-      <li>
-        Simplify fully the coefficients in your expansion.
-      </li>
-    </ol>
-
-    <p><strong>Code rule:</strong></p>
-    <p>
-      Suppose your simplified expansion is of the form
-    </p>
-    <p style="text-align:center;">
-      <math>
-        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo>
-        <mo>=</mo>
-        <mi>A</mi>
-        <mo>+</mo>
-        <mi>B</mi><mi>x</mi>
-        <mo>+</mo>
-        <mi>C</mi><msup><mi>x</mi><mn>2</mn></msup>
-        <mo>+</mo>
-        <mo>&ctdot;</mo>
-      </math>
-    </p>
-    <p>
-      where <code>A</code>, <code>B</code> and <code>C</code> are integers.
-      Let <code>a = A</code>, <code>b = B</code> and <code>c = C</code>.
-    </p>
-    <p>
-      The 3-digit code for this lock is formed by writing <code>a</code>, <code>b</code>, <code>c</code> as digits in order:
-      <code>abc</code>.
-    </p>
-  `,
-  code: "122"
-},
-      {
-  title: "Lock 7 – Integration Lock",
-  story: "A pressure valve in the vault’s coolant line is controlled by an integral sensor. To override the system, you must evaluate a definite integral exactly.",
-  questionHtml: `
-    <p>Consider the integral</p>
-    <p style="text-align:center;">
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <msubsup>
-          <mo>&#8747;</mo>
-          <mn>0</mn>
-          <mn>6</mn>
-        </msubsup>
-        <mfrac>
-          <mrow>
-            <mi>x</mi>
-            <mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo>
-          </mrow>
-          <mrow>
-            <msup><mi>x</mi><mn>2</mn></msup>
-            <mo>+</mo>
-            <mn>4</mn>
-          </mrow>
-        </mfrac>
-        <mo>&#8289;</mo><mi>d</mi><mi>x</mi>
-      </math>
-    </p>
-
-    <ol>
-      <li>
-        Find the exact value of
-        <math>
-          <msubsup>
-            <mo>&#8747;</mo>
-            <mn>0</mn>
-            <mn>6</mn>
-          </msubsup>
-          <mfrac>
-            <mrow>
-              <mi>x</mi>
-              <mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo>
-            </mrow>
-            <mrow>
-              <msup><mi>x</mi><mn>2</mn></msup>
-              <mo>+</mo>
-              <mn>4</mn>
-            </mrow>
-          </mfrac>
-          <mo>&#8289;</mo><mi>d</mi><mi>x</mi>
-        </math>,
-        giving your answer in exact form.
-      </li>
-
-      <li>
-        Hence find the numerical value of this integral, correct to 3 significant figures.
-      </li>
-    </ol>
-
-    <p><strong>Code rule:</strong></p>
-    <p>
-      Write your numerical answer in the form <code>I ≈ A.BC</code>, where <code>A</code> is the integer part
-      and <code>B</code>, <code>C</code> are the first two digits after the decimal point.
-    </p>
-    <ul>
-      <li><code>a</code> is the integer part <code>A</code>,</li>
-      <li><code>b</code> is the first decimal digit <code>B</code>,</li>
-      <li><code>c</code> is the second decimal digit <code>C</code>.</li>
-    </ul>
-    <p>The 3-digit code for this lock is <code>abc</code>.</p>
-  `,
-  code: "465"
-},
-      {
-  title: "Lock 8 – Final Vault Door",
-  story: "The final vault door is guarded by an absurdly complicated security challenge. Only the bravest (or most suspicious) mathematicians will attempt it without help.",
-  questionHtml: `
-    <p>The final lock challenges you to evaluate the following definite integral:</p>
-
-    <p style="text-align:center;">
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <mi>I</mi>
-        <mo>=</mo>
-        <msubsup>
-          <mo>&#8747;</mo>
-          <mn>0</mn>
-          <mrow>
-            <mi>&#960;</mi><mo>/</mo><mn>2</mn>
-          </mrow>
-        </msubsup>
-        <mfrac>
-          <mrow>
-            <mi>ln</mi>
-            <mo>(</mo>
-              <mi>tan</mi>
-              <mo>(</mo><mi>&#952;</mi><mo>)</mo>
-            <mo>)</mo>
-          </mrow>
-          <mrow>
-            <msup>
-              <mrow>
-                <mi>sin</mi>
-                <mo>(</mo>
-                  <mi>&#952;</mi>
-                  <mo>-</mo>
-                  <mrow>
-                    <mi>&#960;</mi><mo>/</mo><mn>4</mn>
-                  </mrow>
-                <mo>)</mo>
-              </mrow>
-              <mn>5</mn>
-            </msup>
-            <mo>&#8290;</mo>
-            <msup>
-              <mrow>
-                <mi>cos</mi>
-                <mo>(</mo><mi>&#952;</mi><mo>)</mo>
-              </mrow>
-              <mn>3</mn>
-            </msup>
-          </mrow>
-        </mfrac>
-        <mo>&#8290;</mo><mi>d</mi><mi>&#952;</mi>
-      </math>
-    </p>
-
-    <ol>
-      <li>
-        Find the exact value of the integral
-        <math>
-          <mi>I</mi>
-        </math>
-        defined above.
-      </li>
-    </ol>
-
-    <p>
-      This question is intentionally extreme. If you need help unlocking the final door,
-      you may ask your teacher for assistance.
-    </p>
-
-    <p><strong>Code rule:</strong></p>
-    <p>
-      To open this final lock in the escape activity, your teacher may choose to give you
-      a special 3-digit override code instead of requiring a full solution of the integral.
-    </p>
-    <!-- Teacher hint: override code is 911 -->
-  `,
-  code: "911"
-},
-{
-  title: "Lock 8 (for real)– Transcendental Vault Lock",
-  story: "The final lock of the vault is controlled by a nonlinear equation that cannot be solved exactly in closed form. You must use iteration to approximate its solution.",
-  questionHtml: `
-    <p>Consider the equation</p>
-    <p style="text-align:center;">
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <msup>
-          <mi>e</mi>
-          <mrow>
-            <mn>2</mn><mi>x</mi>
-          </mrow>
-        </msup>
-        <mo>=</mo>
-        <mn>4</mn><mi>x</mi>
-        <mo>+</mo>
-        <mn>3</mn>
-      </math>
-    </p>
-
-    <ol>
-      <li>
-        Show that the equation
-        <math>
-          <msup>
-            <mi>e</mi>
-            <mrow>
-              <mn>2</mn><mi>x</mi>
-            </mrow>
-          </msup>
-          <mo>=</mo>
-          <mn>4</mn><mi>x</mi>
-          <mo>+</mo>
-          <mn>3</mn>
-        </math>
-        has a root <math><mi>&#945;</mi></math> in the interval
-        <math>
-          <mn>0</mn><mo>&le;</mo><mi>x</mi><mo>&le;</mo><mn>1</mn>
-        </math>.
-      </li>
-
-      <li>
-        Rearrange the equation into the form
-        <p style="text-align:center;">
-          <math>
-            <mi>x</mi>
-            <mo>=</mo>
-            <mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo>
-          </math>
-        </p>
-        where
-        <p style="text-align:center;">
-          <math>
-            <mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo>
-            <mo>=</mo>
-            <mfrac>
-              <mrow>
-                <mi>ln</mi><mo>(</mo><mn>4</mn><mi>x</mi><mo>+</mo><mn>3</mn><mo>)</mo>
-              </mrow>
-              <mn>2</mn>
-            </mfrac>
-          </math>
-        </p>
-      </li>
-
-      <li>
-        Use the iteration
-        <p style="text-align:center;">
-          <math>
-            <msub>
-              <mi>x</mi>
-              <mrow>
-                <mi>n</mi><mo>+</mo><mn>1</mn>
-              </mrow>
-            </msub>
-            <mo>=</mo>
-            <mfrac>
-              <mrow>
-                <mi>ln</mi><mo>(</mo><mn>4</mn>
-                <msub><mi>x</mi><mi>n</mi></msub>
-                <mo>+</mo><mn>3</mn><mo>)</mo>
-              </mrow>
-              <mn>2</mn>
-            </mfrac>
-          </math>
-        </p>
-        with a suitable starting value
-        <math>
-          <msub><mi>x</mi><mn>1</mn></msub>
-        </math>
-        in the interval
-        <math>
-          <mn>0</mn><mo>&le;</mo><mi>x</mi><mo>&le;</mo><mn>1</mn>
-        </math>
-        to find the root
-        <math><mi>&#945;</mi></math>,
-        correct to 4 decimal places.
-      </li>
-    </ol>
-
-    <p><strong>Code rule:</strong></p>
-    <p>
-      Write your final answer as
-      <math>
-        <mi>&#945;</mi><mo>&#8776;</mo><mn>0</mn><mo>.</mo><mi>A</mi><mi>B</mi><mi>C</mi>
-      </math>,
-      where A, B and C are digits.
-    </p>
-    <ul>
-      <li>a is the first decimal digit A,</li>
-      <li>b is the second decimal digit B,</li>
-      <li>c is the third decimal digit C.</li>
-    </ul>
-    <p>The 3-digit code for this lock is <code>abc</code>.</p>
-  `,
-  code: "962"
-}
-    ];
-
-    // ----- PROGRESS PERSISTENCE -----
-const PROGRESS_KEY = "pure3EscapeProgress";
-
-function saveProgress(index) {
-  try {
-    localStorage.setItem(PROGRESS_KEY, String(index));
-  } catch (e) {
-    // If localStorage fails (private mode, etc.), just ignore
-  }
-}
-
-function loadProgress() {
-  try {
-    const raw = localStorage.getItem(PROGRESS_KEY);
-    if (raw === null) return 0;
-    const idx = parseInt(raw, 10);
-    if (!Number.isFinite(idx) || idx < 0) return 0;
-    if (idx > locks.length) return locks.length;
-    return idx;
-  } catch (e) {
-    return 0;
-  }
-}
-
-function clearProgress() {
-  try {
-    localStorage.removeItem(PROGRESS_KEY);
-  } catch (e) {
-    // ignore
-  }
-}
-    // --- State ---
-let currentIndex = loadProgress();    
-    
-
-    // --- DOM Elements ---
-    const lockTitleEl = document.getElementById("lock-title");
-    const lockBadgeEl = document.getElementById("lock-badge");
-    const lockStoryEl = document.getElementById("lock-story");
-    const lockQuestionEl = document.getElementById("lock-question");
-    const codeInputEl = document.getElementById("code-input");
-    const submitBtn = document.getElementById("submit-btn");
-    const resetBtn = document.getElementById("reset-btn");
-    const feedbackEl = document.getElementById("feedback");
-    const progressTextEl = document.getElementById("progress-text");
-    const progressBarFill = document.getElementById("progress-bar-fill");
-    const lockCardEl = document.getElementById("lock-card");
-    const finalMessageEl = document.getElementById("final-message");
-    const restartBtn = document.getElementById("restart-btn");
-
-    function updateProgress() {
-      const total = locks.length - 1;
-      const currentDisplay = Math.min(currentIndex + 1, total);
-      progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
-      const percent = (currentIndex / total) * 100;
-      progressBarFill.style.width = percent + "%";
-    }
-
-    function showLock(index) {
-      const lock = locks[index];
-      lockTitleEl.textContent = lock.title;
-      lockStoryEl.textContent = lock.story;
-      lockQuestionEl.innerHTML = lock.questionHtml;
-      lockBadgeEl.textContent = "Code: 3 digits";
-      codeInputEl.value = "";
-      codeInputEl.disabled = false;
-      feedbackEl.textContent = "";
-      feedbackEl.className = "feedback";
-      submitBtn.disabled = false;
-      updateProgress();
-      lockCardEl.style.display = "block";
-      finalMessageEl.style.display = "none";
-      codeInputEl.focus();
-    }
-
-    function showFinal() {
-  // Hide the lock card and show the finale block
-  lockCardEl.style.display = "none";
-  finalMessageEl.style.display = "block";
-
-  // Progress bar text + fill
-  progressTextEl.textContent = "Finale";
-  progressBarFill.style.width = "100%";
-
-  // Change background to a red theme
-  document.body.style.background =
-    "radial-gradient(circle at top, #7f1d1d, #450a0a)";
-
-  // Change the main header title
-  const headerTitle = document.querySelector("header h1");
-  if (headerTitle) {
-    headerTitle.textContent = "Finale – Real Vault Question";
-  }
-}
-
-    function normaliseCodeInput(value) {
-      return value.replace(/\s+/g, "").toUpperCase();
-    }
-
-    function checkCode() {
-      const inputRaw = codeInputEl.value;
-      const input = normaliseCodeInput(inputRaw);
-      const lock = locks[currentIndex];
-
-      if (!input) {
-        feedbackEl.textContent = "Enter a 3-digit code before submitting.";
-        feedbackEl.className = "feedback error";
-        return;
-      }
-
-      if (input.length !== 3 || !/^\d{3}$/.test(input)) {
-        feedbackEl.textContent = "Codes are exactly 3 digits (0–9 only).";
-        feedbackEl.className = "feedback error";
-        return;
-      }
-
-      if (input === lock.code) {
-        feedbackEl.textContent = "Correct code! Lock opened.";
-        feedbackEl.className = "feedback success";
-        codeInputEl.disabled = true;
-        submitBtn.disabled = true;
-
-        if (typeof confetti === "function") {
-    confetti({
-      particleCount: 120,
-      spread: 70,
-      origin: { y: 0.7 }
-    });
-  }
-        // Small delay then move to next lock
-       setTimeout(() => {
-  currentIndex++;
-  saveProgress(currentIndex);
-
-  if (currentIndex >= locks.length) {
-    showFinal();
-  } else {
-    showLock(currentIndex);
-  }
-}, 700);
-      } else {
-        feedbackEl.textContent = "Incorrect code. Check your working and try again.";
-        feedbackEl.className = "feedback error";
-        codeInputEl.select();
-      }
-    }
-
-   function resetProgress() {
-  if (!confirm("Reset all progress and go back to Lock 1?")) return;
-  currentIndex = 0;
-  clearProgress();
-  showLock(currentIndex);
-}
-
-    // --- Event listeners ---
-    submitBtn.addEventListener("click", checkCode);
-    resetBtn.addEventListener("click", resetProgress);
-    restartBtn.addEventListener("click", resetProgress);
-
-    codeInputEl.addEventListener("keyup", (event) => {
-      if (event.key === "Enter") {
-        checkCode();
-      }
-    });
-
-    // --- Initialise ---
-if (currentIndex >= locks.length) {
-  showFinal();
-} else {
-  showLock(currentIndex);
-}  </script>
 </body>
 </html>
