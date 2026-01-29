@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Math Week – Time-Gated Challenge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#1f2933,#020617);
+      color:#e5e7eb;
+      min-height:100vh;
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      padding:1.5rem;
+    }
+    .container{
+      max-width:980px;
+      width:100%;
+      background:rgba(15,23,42,.9);
+      border-radius:1.5rem;
+      box-shadow:0 20px 40px rgba(0,0,0,.6);
+      border:1px solid rgba(148,163,184,.25);
+      padding:1.5rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+    header{
+      border-bottom:1px solid rgba(148,163,184,.25);
+      padding-bottom:.75rem;
+    }
+    header h1{margin:0;font-size:1.5rem;letter-spacing:.04em;text-transform:uppercase}
+    header p{margin:.4rem 0 0;font-size:.95rem;color:#9ca3af;line-height:1.5}
+
+    .topbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.75rem;
+      justify-content:space-between;
+      align-items:center;
+      font-size:.9rem;
+      color:#9ca3af;
+    }
+    .pill{
+      padding:.25rem .7rem;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.4);
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      background:rgba(2,6,23,.25);
+    }
+    .dot{
+      width:.55rem;height:.55rem;border-radius:999px;
+      background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.7);
+    }
+    .dot.locked{
+      background:#f97373;box-shadow:0 0 8px rgba(249,115,115,.6);
+    }
+    .progress{
+      flex:1;
+      min-width:180px;
+      background:rgba(15,23,42,.9);
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.4);
+      height:10px;
+      position:relative;
+    }
+    .progress > div{
+      position:absolute;inset:0;width:0%;
+      background:linear-gradient(90deg,#22c55e,#38bdf8);
+      transition:width .25s ease;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      gap:1rem;
+      align-items:start;
+    }
+
+    .panel{
+      background:rgba(15,23,42,.95);
+      border-radius:1.25rem;
+      border:1px solid rgba(148,163,184,.4);
+      padding:1rem;
+    }
+
+    .days{
+      display:flex;flex-direction:column;gap:.6rem;
+    }
+    .day-btn{
+      width:100%;
+      text-align:left;
+      border:1px solid rgba(148,163,184,.35);
+      background:rgba(2,6,23,.25);
+      color:#e5e7eb;
+      border-radius:.9rem;
+      padding:.75rem .8rem;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.75rem;
+      transition:transform .08s ease, box-shadow .08s ease, border-color .08s ease;
+    }
+    .day-btn:hover{transform:translateY(-1px);box-shadow:0 10px 18px rgba(0,0,0,.35)}
+    .day-btn:active{transform:translateY(0)}
+    .day-btn[disabled]{
+      cursor:not-allowed;
+      opacity:.55;
+      transform:none;
+      box-shadow:none;
+    }
+    .day-left{display:flex;flex-direction:column;gap:.15rem}
+    .day-title{font-weight:600}
+    .day-sub{font-size:.85rem;color:#9ca3af}
+    .badge{
+      font-size:.8rem;
+      padding:.15rem .55rem;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.6);
+      color:#e5e7eb;
+      white-space:nowrap;
+    }
+    .badge.locked{border-color:rgba(249,115,115,.65);color:#fecaca}
+    .badge.open{border-color:rgba(34,197,94,.6);color:#bbf7d0}
+
+    .question-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:.75rem;
+      margin-bottom:.6rem;
+    }
+    .question-head h2{margin:0;font-size:1.15rem}
+    .question-story{margin:.25rem 0 0;color:#9ca3af;line-height:1.5}
+
+    .q-body{
+      color:#e5e7eb;
+      line-height:1.6;
+      font-size:.97rem;
+    }
+    .q-body p{margin:.5rem 0}
+    .input-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.75rem;
+      align-items:center;
+      margin-top:.8rem;
+    }
+    label{font-size:.9rem;color:#9ca3af}
+    input[type="text"]{
+      padding:.55rem .8rem;
+      border-radius:.7rem;
+      border:1px solid rgba(148,163,184,.6);
+      background:rgba(15,23,42,.9);
+      color:#e5e7eb;
+      font-size:1rem;
+      width:min(240px, 100%);
+    }
+    input[type="text"]:focus{
+      outline:none;border-color:#38bdf8;
+      box-shadow:0 0 0 1px rgba(56,189,248,.4);
+    }
+    button.primary{
+      cursor:pointer;
+      border:none;
+      border-radius:.8rem;
+      padding:.55rem 1.05rem;
+      font-size:.95rem;
+      font-weight:600;
+      background:linear-gradient(135deg,#22c55e,#16a34a);
+      color:#f9fafb;
+      box-shadow:0 10px 20px rgba(22,163,74,.4);
+      transition:transform .08s ease, box-shadow .08s ease;
+    }
+    button.primary:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(22,163,74,.5)}
+    button.primary:active{transform:translateY(0);box-shadow:0 8px 16px rgba(22,163,74,.4)}
+    button.secondary{
+      cursor:pointer;
+      border-radius:.8rem;
+      padding:.55rem 1.05rem;
+      font-size:.95rem;
+      font-weight:600;
+      background:transparent;
+      border:1px solid rgba(148,163,184,.6);
+      color:#e5e7eb;
+      box-shadow:none;
+    }
+    button.secondary:hover{box-shadow:0 8px 16px rgba(0,0,0,.35)}
+    button[disabled]{opacity:.55;cursor:not-allowed}
+
+    .note{
+      margin-top:.6rem;
+      font-size:.9rem;
+      color:#9ca3af;
+      min-height:1.2rem;
+    }
+    .note.ok{color:#22c55e}
+    .note.warn{color:#fbbf24}
+    .note.err{color:#f97373}
+
+    .results{
+      margin-top:1rem;
+      padding:1rem;
+      border-radius:1.1rem;
+      border:1px solid rgba(148,163,184,.35);
+      background:rgba(2,6,23,.25);
+      display:none;
+    }
+    .results h3{margin:.1rem 0 .6rem;font-size:1.1rem}
+    .result-item{
+      display:flex;
+      justify-content:space-between;
+      gap:.75rem;
+      padding:.45rem 0;
+      border-top:1px solid rgba(148,163,184,.15);
+      color:#9ca3af;
+    }
+    .result-item strong{color:#e5e7eb}
+    .result-flag.ok{color:#22c55e}
+    .result-flag.no{color:#f97373}
+
+    .footer{
+      font-size:.82rem;
+      color:#6b7280;
+      display:flex;
+      justify-content:space-between;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.25rem;
+    }
+
+    @media (max-width: 820px){
+      .layout{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Math Week – Daily Vault</h1>
+      <p>
+        Five questions unlock across the week. You can work on any unlocked day.
+        Your answers are saved, but correctness is hidden until you submit all five.
+      </p>
+    </header>
+
+    <div class="topbar">
+      <div class="pill" id="today-pill">
+        <span class="dot" id="today-dot"></span>
+        <span id="today-text"></span>
+      </div>
+
+      <div class="progress" aria-label="completion progress">
+        <div id="progress-fill"></div>
+      </div>
+
+      <div class="pill">
+        Status: <strong id="status-text">In progress</strong>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="panel">
+        <div style="font-weight:700;margin-bottom:.6rem;">Days</div>
+        <div class="days" id="days-list"></div>
+
+        <div style="margin-top:.9rem;display:flex;gap:.6rem;flex-wrap:wrap;">
+          <button class="secondary" id="reset-btn">Reset</button>
+          <button class="secondary" id="reveal-btn">Submit all 5</button>
+        </div>
+        <div class="note" id="side-note"></div>
+      </div>
+
+      <div class="panel">
+        <div class="question-head">
+          <div>
+            <h2 id="q-title">Select a day</h2>
+            <div class="question-story" id="q-story"></div>
+          </div>
+          <div class="badge" id="q-badge">—</div>
+        </div>
+
+        <div class="q-body" id="q-body">
+          <p>Choose an unlocked day on the left to view the question.</p>
+        </div>
+
+        <div class="input-row" id="answer-row" style="display:none;">
+          <div>
+            <label for="answer-input">Your answer:</label><br />
+            <input id="answer-input" type="text" autocomplete="off" />
+          </div>
+          <button class="primary" id="save-btn">Save answer</button>
+        </div>
+
+        <div class="note" id="main-note"></div>
+
+        <div class="results" id="results">
+          <h3>Results</h3>
+          <div id="results-summary" style="color:#9ca3af;margin-bottom:.3rem;"></div>
+          <div id="results-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Answers are saved locally on this device/browser.</span>
+      <span>Teacher can add real questions + answer keys later.</span>
+    </div>
+  </div>
+
+  <script>
+    /************************************************************
+     * CONFIG
+     * - Timezone set to Beijing time.
+     * - Dates moved to start Jan 1, 2026 so everything is unlocked now.
+     ************************************************************/
+    const TIME_ZONE = "Asia/Shanghai"; // Beijing time
+
+    const WEEK = [
+      {
+        id: "day1",
+        dayLabel: "Day 1",
+        unlockDate: "2026-01-01",
+        title: "Day 1 – Warm-up Lock",
+        story: "A keypad accepts one short numeric entry. Start simple.",
+        questionHtml: `
+          <p><strong>Mock question:</strong> Evaluate <code>17 + 25</code>.</p>
+          <p><em>(Replace later with your real math-week question.)</em></p>
+        `,
+        answerKey: "42"
+      },
+      {
+        id: "day2",
+        dayLabel: "Day 2",
+        unlockDate: "2026-01-02",
+        title: "Day 2 – Algebra Gate",
+        story: "A sensor checks a single value.",
+        questionHtml: `
+          <p><strong>Mock question:</strong> Solve <code>3x - 7 = 11</code> for <code>x</code>.</p>
+        `,
+        answerKey: "6"
+      },
+      {
+        id: "day3",
+        dayLabel: "Day 3",
+        unlockDate: "2026-01-03",
+        title: "Day 3 – Calculus Panel",
+        story: "The system wants one exact derivative.",
+        questionHtml: `
+          <p><strong>Mock question:</strong> Differentiate <code>x^3</code> with respect to <code>x</code>.</p>
+          <p>Enter your answer in simplest form.</p>
+        `,
+        answerKey: "3x^2"
+      },
+      {
+        id: "day4",
+        dayLabel: "Day 4",
+        unlockDate: "2026-01-04",
+        title: "Day 4 – Trig Switch",
+        story: "A dial aligns when you give one exact value.",
+        questionHtml: `
+          <p><strong>Mock question:</strong> Evaluate <code>sin(30°)</code>.</p>
+          <p>Enter an exact value (e.g. <code>1/2</code>).</p>
+        `,
+        answerKey: "1/2"
+      },
+      {
+        id: "day5",
+        dayLabel: "Day 5",
+        unlockDate: "2026-01-05",
+        title: "Day 5 – Final Door",
+        story: "Only one number opens the final latch.",
+        questionHtml: `
+          <p><strong>Mock question:</strong> Compute <code>2^5</code>.</p>
+        `,
+        answerKey: "32"
+      }
+    ];
+
+    /************************************************************
+     * STORAGE
+     ************************************************************/
+    const KEY = "mathWeekDailyVault_v1";
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(!raw) return { answers: {}, revealed: false, selectedId: null };
+        const parsed = JSON.parse(raw);
+        return {
+          answers: parsed.answers || {},
+          revealed: !!parsed.revealed,
+          selectedId: parsed.selectedId || null
+        };
+      }catch(e){
+        return { answers: {}, revealed: false, selectedId: null };
+      }
+    }
+    function saveState(){
+      try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+    }
+    function clearState(){
+      try{ localStorage.removeItem(KEY); }catch(e){}
+    }
+
+    /************************************************************
+     * DATE GATING (Beijing date string YYYY-MM-DD)
+     ************************************************************/
+    function todayISO(timeZone){
+      const fmt = new Intl.DateTimeFormat("en-CA", {
+        timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      });
+      return fmt.format(new Date()); // "YYYY-MM-DD"
+    }
+    function isUnlocked(item, today){
+      return today >= item.unlockDate;
+    }
+
+    /************************************************************
+     * DOM
+     ************************************************************/
+    const daysList = document.getElementById("days-list");
+    const qTitle = document.getElementById("q-title");
+    const qStory = document.getElementById("q-story");
+    const qBadge = document.getElementById("q-badge");
+    const qBody = document.getElementById("q-body");
+    const answerRow = document.getElementById("answer-row");
+    const answerInput = document.getElementById("answer-input");
+    const saveBtn = document.getElementById("save-btn");
+    const resetBtn = document.getElementById("reset-btn");
+    const revealBtn = document.getElementById("reveal-btn");
+    const mainNote = document.getElementById("main-note");
+    const sideNote = document.getElementById("side-note");
+    const resultsBox = document.getElementById("results");
+    const resultsList = document.getElementById("results-list");
+    const resultsSummary = document.getElementById("results-summary");
+    const progressFill = document.getElementById("progress-fill");
+    const statusText = document.getElementById("status-text");
+    const todayText = document.getElementById("today-text");
+    const todayDot = document.getElementById("today-dot");
+
+    let state = loadState();
+
+    /************************************************************
+     * RENDER
+     ************************************************************/
+    function completionCount(){
+      let count = 0;
+      for(const item of WEEK){
+        const v = (state.answers[item.id] || "").trim();
+        if(v) count++;
+      }
+      return count;
+    }
+
+    function updateTopBar(today){
+      todayText.textContent = `Today (${TIME_ZONE}): ${today}`;
+
+      // dot indicates whether any new content unlocked today
+      const unlockedToday = WEEK.some(x => x.unlockDate === today);
+      todayDot.className = unlockedToday ? "dot" : "dot locked";
+
+      const done = completionCount();
+      const pct = Math.round((done / WEEK.length) * 100);
+      progressFill.style.width = pct + "%";
+
+      if(state.revealed){
+        statusText.textContent = "Submitted";
+      }else if(done === WEEK.length){
+        statusText.textContent = "Ready to submit";
+      }else{
+        statusText.textContent = "In progress";
+      }
+    }
+
+    function renderDays(today){
+      daysList.innerHTML = "";
+      for(const item of WEEK){
+        const unlocked = isUnlocked(item, today);
+        const answered = ((state.answers[item.id] || "").trim().length > 0);
+
+        const btn = document.createElement("button");
+        btn.className = "day-btn";
+        btn.disabled = !unlocked;
+        btn.dataset.id = item.id;
+
+        const left = document.createElement("div");
+        left.className = "day-left";
+
+        const t = document.createElement("div");
+        t.className = "day-title";
+        t.textContent = `${item.dayLabel} — ${item.unlockDate}`;
+
+        const s = document.createElement("div");
+        s.className = "day-sub";
+        s.textContent = unlocked
+          ? (answered ? "Answer saved" : "Unlocked (not answered)")
+          : `Locked until ${item.unlockDate}`;
+
+        left.appendChild(t);
+        left.appendChild(s);
+
+        const badge = document.createElement("span");
+        badge.className = "badge " + (unlocked ? "open" : "locked");
+        badge.textContent = unlocked ? (answered ? "Saved" : "Open") : "Locked";
+
+        btn.appendChild(left);
+        btn.appendChild(badge);
+
+        btn.addEventListener("click", () => selectDay(item.id, today));
+        daysList.appendChild(btn);
+      }
+    }
+
+    function selectDay(id, today){
+      const item = WEEK.find(x => x.id === id);
+      if(!item) return;
+
+      const unlocked = isUnlocked(item, today);
+      if(!unlocked) return;
+
+      state.selectedId = id;
+      saveState();
+
+      qTitle.textContent = item.title;
+      qStory.textContent = item.story;
+      qBody.innerHTML = item.questionHtml;
+
+      qBadge.className = "badge " + (unlocked ? "open" : "locked");
+      qBadge.textContent = unlocked ? "Unlocked" : "Locked";
+
+      answerRow.style.display = "flex";
+      answerInput.value = state.answers[id] || "";
+      answerInput.disabled = state.revealed;
+      saveBtn.disabled = state.revealed;
+
+      resultsBox.style.display = state.revealed ? "block" : "none";
+      mainNote.textContent = state.revealed
+        ? "Submission is complete. Results are visible below."
+        : "Your work is saved, but correctness is hidden until you submit all five.";
+      mainNote.className = "note";
+
+      sideNote.textContent = "";
+      sideNote.className = "note";
+      answerInput.focus();
+    }
+
+    function updateRevealButton(today){
+      const unlockedCount = WEEK.filter(x => isUnlocked(x, today)).length;
+      const done = completionCount();
+
+      if(state.revealed){
+        revealBtn.textContent = "Submitted";
+        revealBtn.disabled = true;
+        sideNote.textContent = "You have already submitted on this device/browser.";
+        sideNote.className = "note ok";
+        return;
+      }
+
+      const canSubmit = (unlockedCount === WEEK.length) && (done === WEEK.length);
+      revealBtn.textContent = "Submit all 5";
+      revealBtn.disabled = !canSubmit;
+
+      if(done < WEEK.length){
+        sideNote.textContent = `You still need to answer ${WEEK.length - done} question(s).`;
+        sideNote.className = "note warn";
+      }else{
+        sideNote.textContent = "All answers saved. You can submit to reveal results.";
+        sideNote.className = "note ok";
+      }
+    }
+
+    function showResults(){
+      let correct = 0;
+      const rows = [];
+
+      const norm = (s) => s.replace(/\s+/g,"").toLowerCase();
+
+      for(const item of WEEK){
+        const user = (state.answers[item.id] || "").trim();
+        const key = (item.answerKey || "").trim();
+        const ok = norm(user) === norm(key);
+        if(ok) correct++;
+        rows.push({ title: item.title, ok });
+      }
+
+      resultsSummary.textContent = `Score: ${correct} / ${WEEK.length}`;
+      resultsList.innerHTML = "";
+
+      for(const r of rows){
+        const div = document.createElement("div");
+        div.className = "result-item";
+
+        const left = document.createElement("div");
+        left.innerHTML = `<strong>${escapeHtml(r.title)}</strong>`;
+
+        const right = document.createElement("div");
+        right.className = "result-flag " + (r.ok ? "ok" : "no");
+        right.textContent = r.ok ? "Correct" : "Incorrect";
+
+        div.appendChild(left);
+        div.appendChild(right);
+        resultsList.appendChild(div);
+      }
+
+      resultsBox.style.display = "block";
+    }
+
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g, (c) => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
+
+    /************************************************************
+     * EVENTS
+     ************************************************************/
+    saveBtn.addEventListener("click", () => {
+      if(!state.selectedId) return;
+      state.answers[state.selectedId] = answerInput.value;
+      saveState();
+      mainNote.textContent = "Answer saved (correctness hidden until submission).";
+      mainNote.className = "note ok";
+      init();
+    });
+
+    answerInput.addEventListener("keyup", (e) => {
+      if(e.key === "Enter") saveBtn.click();
+    });
+
+    revealBtn.addEventListener("click", () => {
+      const today = todayISO(TIME_ZONE);
+      const unlockedCount = WEEK.filter(x => isUnlocked(x, today)).length;
+      const done = completionCount();
+      if(unlockedCount !== WEEK.length || done !== WEEK.length) return;
+
+      state.revealed = true;
+      saveState();
+
+      mainNote.textContent = "Submitted. Results are now visible.";
+      mainNote.className = "note ok";
+
+      answerInput.disabled = true;
+      saveBtn.disabled = true;
+
+      showResults();
+      init();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      if(!confirm("Reset all saved answers and submission state on this device?")) return;
+      state = { answers: {}, revealed: false, selectedId: null };
+      clearState();
+      qTitle.textContent = "Select a day";
+      qStory.textContent = "";
+      qBody.innerHTML = "<p>Choose an unlocked day on the left to view the question.</p>";
+      qBadge.textContent = "—";
+      answerRow.style.display = "none";
+      resultsBox.style.display = "none";
+      mainNote.textContent = "";
+      sideNote.textContent = "";
+      init();
+    });
+
+    /************************************************************
+     * INIT
+     ************************************************************/
+    function init(){
+      const today = todayISO(TIME_ZONE);
+      updateTopBar(today);
+      renderDays(today);
+      updateRevealButton(today);
+
+      if(!state.selectedId){
+        // pick Day 1 by default (all unlocked now)
+        selectDay(WEEK[0].id, today);
+      }else{
+        const selected = WEEK.find(x => x.id === state.selectedId);
+        if(selected) selectDay(selected.id, today);
+      }
+
+      if(state.revealed) showResults();
+    }
+
+    init();
+  </script>
+</body>
+</html>
