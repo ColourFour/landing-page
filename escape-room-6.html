@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pure Mathematics 1 Escape Room – Exam Vault Heist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(59, 130, 246, 0.22), transparent 38%),
+        linear-gradient(180deg, #0b1220 0%, #020617 100%);
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.92);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 1.75rem 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      padding-bottom: 0.75rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    header p {
+      margin: 0.4rem 0 0;
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    .status-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .pill {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pill span.icon {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 999px;
+      background: #3b82f6;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+    }
+
+    .progress-bar {
+      flex: 1;
+      min-width: 150px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      height: 10px;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      position: absolute;
+      inset: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #93c5fd);
+      transition: width 0.3s ease;
+    }
+
+    .lock-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 1.25rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 1.25rem 1.5rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .lock-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .lock-badge {
+      font-size: 0.8rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    .lock-story {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .lock-question {
+      font-size: 0.97rem;
+      line-height: 1.6;
+    }
+
+    .lock-question p { margin: 0.4rem 0; }
+    .lock-question ol,
+    .lock-question ul { margin: 0.4rem 0 0.4rem 1.2rem; }
+
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.2rem;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    input[type="text"] {
+      padding: 0.5rem 0.8rem;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      font-size: 1rem;
+      width: 160px;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.35);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 0.7rem;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.45);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: none;
+      color: #e5e7eb;
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
+    }
+
+    .feedback {
+      min-height: 1.25rem;
+      font-size: 0.92rem;
+      margin-top: 0.2rem;
+    }
+
+    .feedback.error { color: #f97373; }
+    .feedback.success { color: #22c55e; }
+
+    .footer {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .footer-quote {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-note {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    .final-message {
+      text-align: center;
+      padding: 1.3rem 0.5rem 0.5rem;
+    }
+
+    .final-message h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1.3rem;
+    }
+
+    .final-message p {
+      margin: 0.2rem 0;
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 1.25rem 1rem 1.5rem; }
+      header h1 { font-size: 1.3rem; }
+      .lock-card { padding: 1rem 0.9rem 1.1rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Pure Mathematics Exam Vault Heist</h1>
+      <p>Crack each lock by solving the pure mathematics question and entering the correct 3-digit code. Unlock all 11 to complete the review.</p>
+    </header>
+
+    <div class="status-bar">
+      <div class="pill">
+        <span class="icon"></span>
+        <span id="progress-text">Lock 1 of 11</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+      <div class="pill">Mode: <strong>Linear</strong></div>
+    </div>
+
+    <div class="lock-card" id="lock-card">
+      <div class="lock-title">
+        <span id="lock-title">Lock 1</span>
+        <span class="lock-badge" id="lock-badge">Code: 3 digits</span>
+      </div>
+      <div class="lock-story" id="lock-story"></div>
+      <div class="lock-question" id="lock-question"></div>
+
+      <div class="input-row">
+        <div>
+          <label for="code-input">Enter 3-digit code:</label><br />
+          <input type="text" id="code-input" maxlength="3" autocomplete="off" />
+        </div>
+        <button id="submit-btn">Submit code <span>⤴</span></button>
+        <button class="btn-secondary" id="reset-btn">Reset progress</button>
+      </div>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <div id="final-message" class="final-message" style="display:none;">
+      <h2>Vault Unlocked!</h2>
+      <p>You’ve cracked every lock and completed the Pure Mathematics escape room.</p>
+      <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
+    </div>
+
+    <div class="footer">
+  <div class="footer-quote" id="footer-quote"></div>
+  <div class="footer-note" id="footer-note"></div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    "use strict";
+
+    const lockTitleEl = document.getElementById("lock-title");
+    const lockBadgeEl = document.getElementById("lock-badge");
+    const lockStoryEl = document.getElementById("lock-story");
+    const lockQuestionEl = document.getElementById("lock-question");
+    const codeInputEl = document.getElementById("code-input");
+    const submitBtn = document.getElementById("submit-btn");
+    const resetBtn = document.getElementById("reset-btn");
+    const feedbackEl = document.getElementById("feedback");
+    const progressTextEl = document.getElementById("progress-text");
+    const progressBarFill = document.getElementById("progress-bar-fill");
+    const lockCardEl = document.getElementById("lock-card");
+    const finalMessageEl = document.getElementById("final-message");
+    const restartBtn = document.getElementById("restart-btn");
+
+    const PROGRESS_KEY = "pureMathEscapeProgress_v1";
+
+    function saveProgress(index) {
+      try { localStorage.setItem(PROGRESS_KEY, String(index)); } catch (_) {}
+    }
+
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(PROGRESS_KEY);
+        if (raw === null) return 0;
+        const idx = parseInt(raw, 10);
+        return Number.isFinite(idx) && idx >= 0 ? idx : 0;
+      } catch (_) {
+        return 0;
+      }
+    }
+
+    function clearProgress() {
+      try { localStorage.removeItem(PROGRESS_KEY); } catch (_) {}
+    }
+
+    function format3(n) {
+      return String(n).padStart(3, "0");
+    }
+
+    const locks = [
+  {
+    title: "Lock 1 – Curve Recovery",
+    story: "The vault has lost the original curve. Rebuild it from its gradient field and the one surviving checkpoint.",
+    questionHtml: `
+      <p>A curve has gradient</p>
+      <p style="text-align:center;">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac>
+          <mo>=</mo>
+          <mi>x</mi>
+          <mo>-</mo>
+          <mn>3</mn><msup><mi>x</mi><mrow><mo>-</mo><mn>1</mn><mo>/</mo><mn>2</mn></mrow></msup>
+        </math>
+      </p>
+      <p>and passes through the point <code>(4, 1)</code>.</p>
+      <p>Find the equation of the curve.</p>
+      <p><strong>Code rule:</strong> write your answer in the form <code>y = ax² + b√x + c</code>. If <code>a = 1/p</code>, the code is <code>p|b|c</code>.</p>
+    `,
+    baseCode: "265"
+  },
+  {
+    title: "Lock 2 – Axis Intercept Chamber",
+    story: "A circle cuts the y-axis twice. A second circle is built using that chord as a diameter.",
+    questionHtml: `
+      <p>The circle</p>
+      <p style="text-align:center;">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <msup><mrow><mo>(</mo><mi>x</mi><mo>-</mo><mn>3</mn><mo>)</mo></mrow><mn>2</mn></msup>
+          <mo>+</mo>
+          <msup><mrow><mo>(</mo><mi>y</mi><mo>-</mo><mn>5</mn><mo>)</mo></mrow><mn>2</mn></msup>
+          <mo>=</mo>
+          <mn>40</mn>
+        </math>
+      </p>
+      <p>meets the y-axis at points <code>A</code> and <code>B</code>.</p>
+      <p>Find the equation of the circle with <code>AB</code> as its diameter.</p>
+      <p><strong>Code rule:</strong> write your answer in the form <code>x² + (y - p)² = q</code>. The 3-digit code is <code>p</code> followed by the two digits of <code>q</code>.</p>
+    `,
+    baseCode: "531"
+  },
+  {
+    title: "Lock 3 – Trig Door",
+    story: "The vault’s trig seal only breaks when every valid angle is found.",
+    questionHtml: `
+      <p>Solve the equation</p>
+      <p style="text-align:center;">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mn>5</mn><mi>cos</mi><mi>&#952;</mi>
+          <mo>-</mo>
+          <mi>sin</mi><mi>&#952;</mi><mi>tan</mi><mi>&#952;</mi>
+          <mo>+</mo>
+          <mn>1</mn>
+          <mo>=</mo>
+          <mn>0</mn>
+        </math>
+      </p>
+      <p>for <code>0 &lt; θ &lt; 2π</code>.</p>
+      <p><strong>Code rule:</strong> round the four solutions in radians to the nearest whole number. If they are <code>a &lt; b &lt; c &lt; d</code>, the code is <code>acd</code>.</p>
+    `,
+    baseCode: "145"
+  },
+  {
+    title: "Lock 4 – Binomial Fuse",
+    story: "A damaged expansion has one wrong coefficient. Find the constant that makes the x² term match the vault setting.",
+    questionHtml: `
+      <p>In the expansion of</p>
+      <p style="text-align:center;">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <msup><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi>x</mi><mo>)</mo></mrow><mn>5</mn></msup>
+          <msup><mrow><mo>(</mo><mn>1</mn><mo>-</mo><mi>a</mi><mi>x</mi><mo>)</mo></mrow><mn>6</mn></msup>
+        </math>
+      </p>
+      <p>the coefficient of <code>x²</code> is <code>-5</code>.</p>
+      <p>Find the possible values of <code>a</code>.</p>
+      <p><strong>Code rule:</strong> list the values of <code>a</code> in ascending order, then append <code>0</code>.</p>
+    `,
+    baseCode: "130"
+  },
+  {
+    title: "Lock 5 – Infinite GP Reactor",
+    story: "A geometric progression powers the reactor. Use the negative fractional setting to compute the infinite total.",
+    questionHtml: `
+      <p>The first three terms of a geometric progression are</p>
+      <p><code>2p + 6</code>, <code>5p</code>, <code>8p + 2</code>.</p>
+      <p>Use the negative fractional value of <code>p</code> and find the sum to infinity.</p>
+      <p><strong>Code rule:</strong> convert your answer to 3 significant figures and scale to a 3-digit integer.</p>
+    `,
+    baseCode: "463"
+  },
+  {
+    title: "Lock 6 – Tangency Scanner",
+    story: "A line just kisses a curve. The scanner only accepts the positive-tangency data.",
+    questionHtml: `
+      <p>A line has equation <code>y = 6x - c</code> and a curve has equation</p>
+      <p style="text-align:center;">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mi>y</mi>
+          <mo>=</mo>
+          <mi>c</mi><msup><mi>x</mi><mn>2</mn></msup>
+          <mo>+</mo>
+          <mn>2</mn><mi>x</mi>
+          <mo>-</mo>
+          <mn>3</mn>
+        </math>
+      </p>
+      <p>The line is tangent to the curve at point <code>P</code>.</p>
+      <p>Find the possible values of <code>c</code> and the corresponding coordinates of <code>P</code>.</p>
+      <p><strong>Code rule:</strong> use the solution with <strong>positive</strong> <code>c</code>. If <code>P = (u/v, w)</code> in simplest form, the code is <code>c v |w|</code>.</p>
+    `,
+    baseCode: "421"
+  },
+  {
+    title: "Lock 7 – Composite Function Relay",
+    story: "Two functions are chained together. Simplify the output before the relay resets.",
+    questionHtml: `
+      <p>The functions are</p>
+      <p><code>f(x) = 1 + 3/(x - 2)</code>, for <code>x &gt; 2</code>,</p>
+      <p>and <code>g(x) = 2x - 2</code>, for <code>x &gt; 0</code>.</p>
+      <p>Find a simplified expression for <code>gf(x)</code>.</p>
+      <p><strong>Code rule:</strong> write your answer in the form <code>p/(x - q)</code>. The code is <code>pq0</code>.</p>
+    `,
+    baseCode: "620"
+  },
+  {
+    title: "Lock 8 – Transformation Core",
+    story: "A stationary point survives a transformation, but not where you expect.",
+    questionHtml: `
+      <p>A curve with equation <code>y = f(x)</code> has a single stationary point at <code>(p, q)</code>.</p>
+      <p>It is transformed to the curve</p>
+      <p style="text-align:center;">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mi>y</mi>
+          <mo>=</mo>
+          <mo>-</mo><mn>3</mn><mi>f</mi>
+          <mrow><mo>(</mo><mfrac><mrow><mi>x</mi><mo>+</mo><mn>8</mn></mrow><mn>4</mn></mfrac><mo>)</mo></mrow>
+        </math>
+      </p>
+      <p>Find the coordinates of the stationary point on the transformed curve in terms of <code>p</code> and <code>q</code>.</p>
+      <p><strong>Code rule:</strong> if your answer is <code>(ap + b, cq)</code>, use the magnitudes of the three constants <code>a</code>, <code>|b|</code> and <code>|c|</code> in that order.</p>
+    `,
+    baseCode: "483"
+  },
+  {
+    title: "Lock 9 – Normal Descent Shaft",
+    story: "A moving point drops down the normal line with a fixed vertical speed. Track its horizontal motion.",
+    questionHtml: `
+      <p>A point moves on the curve</p>
+      <p style="text-align:center;">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mi>y</mi>
+          <mo>=</mo>
+          <mn>2</mn><msup><mi>x</mi><mrow><mn>1</mn><mo>/</mo><mn>2</mn></mrow></msup>
+          <mo>-</mo>
+          <mn>1</mn>
+        </math>
+      </p>
+      <p>At the point <code>A(4, 3)</code>, it then moves down the normal so that the rate of decrease of the y-coordinate is constant at <code>5 cm s^-1</code>.</p>
+      <p>Find the rate of change of its x-coordinate.</p>
+      <p><strong>Code rule:</strong> convert your answer to 3 significant figures and scale to a 3-digit integer.</p>
+    `,
+    baseCode: "250"
+  },
+  {
+    title: "Lock 10 – Crescent Vault",
+    story: "Two arcs trap a hidden crescent-shaped region. Only its area will open the chamber.",
+    questionHtml: `
+      <p>Points <code>A</code> and <code>B</code> lie on a circle with centre <code>O</code> and radius <code>r</code>, and angle <code>AOB = 2.8</code> radians.</p>
+      <p>A second arc from <code>A</code> to <code>B</code> is part of a circle with centre <code>C</code>. It is known that</p>
+      <p><code>∠ACO = 0.7</code> radians and the radius of the second circle is <code>1.53r</code> (to 3 s.f.).</p>
+      <p>Find the area of the region enclosed between the two arcs, in terms of <code>r</code>.</p>
+      <p><strong>Code rule:</strong> if your answer is <code>kr²</code>, use <code>k</code> correct to 3 significant figures and scale to a 3-digit integer.</p>
+    `,
+    baseCode: "747"
+  },
+  {
+    title: "Lock 11 – Chord Trap",
+    story: "The final chamber is sealed between a curve and a straight chord. Find the exact trapped area.",
+    questionHtml: `
+      <p>The curve is</p>
+      <p style="text-align:center;">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mi>y</mi>
+          <mo>=</mo>
+          <mi>x</mi>
+          <mo>+</mo>
+          <mfrac><mn>2</mn><msup><mrow><mo>(</mo><mn>2</mn><mi>x</mi><mo>-</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></msup>
+        </math>
+      </p>
+      <p>Points <code>P</code> and <code>Q</code> are the points on the curve where <code>x = 1</code> and <code>x = 2</code> respectively.</p>
+      <p>Find the exact area enclosed between the curve and the straight line segment <code>PQ</code>.</p>
+      <p><strong>Code rule:</strong> convert your exact answer to 3 significant figures and scale to a 3-digit integer.</p>
+    `,
+    baseCode: "217"
+  }
+];
+
+    let currentIndex = loadProgress();
+    if (currentIndex > locks.length) currentIndex = 0;
+
+    function updateProgress() {
+      const total = locks.length;
+      const currentDisplay = Math.min(currentIndex + 1, total);
+      progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
+      progressBarFill.style.width = ((currentIndex / total) * 100) + "%";
+    }
+
+    function showLock(index) {
+      const lock = locks[index];
+
+      lockTitleEl.textContent = lock.title;
+      lockStoryEl.textContent = lock.story;
+      lockQuestionEl.innerHTML = lock.questionHtml;
+
+      lockBadgeEl.textContent = "Code: 3 digits";
+      codeInputEl.value = "";
+      codeInputEl.disabled = false;
+      submitBtn.disabled = false;
+
+      feedbackEl.textContent = "";
+      feedbackEl.className = "feedback";
+
+      lockCardEl.style.display = "block";
+      finalMessageEl.style.display = "none";
+
+      updateProgress();
+      codeInputEl.focus();
+    }
+
+    function showFinal() {
+      lockCardEl.style.display = "none";
+      finalMessageEl.style.display = "block";
+      progressTextEl.textContent = "Complete";
+      progressBarFill.style.width = "100%";
+    }
+
+    function normaliseCodeInput(value) {
+      return (value || "").replace(/\s+/g, "");
+    }
+
+    function checkCode() {
+      const input = normaliseCodeInput(codeInputEl.value);
+
+      if (!/^\d{3}$/.test(input)) {
+        feedbackEl.textContent = "Codes are exactly 3 digits.";
+        feedbackEl.className = "feedback error";
+        return;
+      }
+
+      const lock = locks[currentIndex];
+      const expected = format3(lock.baseCode);
+
+      if (input !== expected) {
+        feedbackEl.textContent = "Incorrect code. Check your working and try again.";
+        feedbackEl.className = "feedback error";
+        codeInputEl.select();
+        return;
+      }
+
+      feedbackEl.textContent = "Correct code! Lock opened.";
+      feedbackEl.className = "feedback success";
+      codeInputEl.disabled = true;
+      submitBtn.disabled = true;
+
+      if (typeof confetti === "function") {
+        confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 } });
+      }
+
+      setTimeout(() => {
+        currentIndex++;
+        saveProgress(currentIndex);
+
+        if (currentIndex >= locks.length) showFinal();
+        else showLock(currentIndex);
+      }, 650);
+    }
+
+    function resetProgress() {
+      if (!confirm("Reset all progress and go back to Lock 1?")) return;
+      currentIndex = 0;
+      clearProgress();
+      showLock(currentIndex);
+    }
+
+    submitBtn.addEventListener("click", checkCode);
+    resetBtn.addEventListener("click", resetProgress);
+    restartBtn.addEventListener("click", resetProgress);
+    codeInputEl.addEventListener("keyup", (e) => {
+      if (e.key === "Enter") checkCode();
+    });
+
+    if (currentIndex >= locks.length) showFinal();
+    else showLock(currentIndex);
+
+    const coachQuotes = [
+  "Discipline is choosing what you want most over what you want now.",
+  "Pressure is a privilege.",
+  "One more rep. One more mark. One more win.",
+  "You do not rise to the occasion. You fall to your level of preparation.",
+  "Lock in and trust your training.",
+  "Winners do the boring things better.",
+  "Focus on the next move, not the whole mountain.",
+  "Stay calm. Be sharp. Finish strong.",
+  "Confidence comes from preparation.",
+  "Get comfortable being uncomfortable.",
+  "Small steps, repeated, become domination.",
+  "The standard is the standard.",
+  "Effort is a choice.",
+  "You are closer than you think.",
+  "Train your mind to stay when it gets hard.",
+  "Sharp minds finish papers well.",
+  "Every solved question is proof you’re improving.",
+  "Composure creates marks.",
+  "Make the hard parts your advantage.",
+  "Keep going. That’s where the edge is."
+];
+
+const footerNotes = [
+  "One lock at a time.",
+  "Accuracy first. Speed second.",
+  "Stay calm and trust your method.",
+  "Clean working wins marks.",
+  "Focus on the next step."
+];
+
+document.getElementById("footer-quote").textContent =
+  coachQuotes[Math.floor(Math.random() * coachQuotes.length)];
+
+document.getElementById("footer-note").textContent =
+  footerNotes[Math.floor(Math.random() * footerNotes.length)];
+  </script>
+</body>
+</html>

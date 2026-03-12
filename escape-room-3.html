@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Statistics Escape Room – Exam Vault Heist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(34, 197, 94, 0.22), transparent 38%),
+        linear-gradient(180deg, #0b1220 0%, #020617 100%);
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.92);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 1.75rem 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      padding-bottom: 0.75rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    header p {
+      margin: 0.4rem 0 0;
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    .status-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .pill {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pill span.icon {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+    }
+
+    .progress-bar {
+      flex: 1;
+      min-width: 150px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      height: 10px;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      position: absolute;
+      inset: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #86efac);
+      transition: width 0.3s ease;
+    }
+
+    .lock-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 1.25rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 1.25rem 1.5rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .lock-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .lock-badge {
+      font-size: 0.8rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    .lock-story {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .lock-question {
+      font-size: 0.97rem;
+      line-height: 1.6;
+    }
+
+    .lock-question p { margin: 0.4rem 0; }
+    .lock-question ol,
+    .lock-question ul { margin: 0.4rem 0 0.4rem 1.2rem; }
+
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.2rem;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    input[type="text"] {
+      padding: 0.5rem 0.8rem;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      font-size: 1rem;
+      width: 160px;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.35);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 0.7rem;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.35);
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(22, 163, 74, 0.45);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(22, 163, 74, 0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: none;
+      color: #e5e7eb;
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
+    }
+
+    .feedback {
+      min-height: 1.25rem;
+      font-size: 0.92rem;
+      margin-top: 0.2rem;
+    }
+
+    .feedback.error { color: #f97373; }
+    .feedback.success { color: #22c55e; }
+
+    .footer {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .footer-quote {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-note {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    .final-message {
+      text-align: center;
+      padding: 1.3rem 0.5rem 0.5rem;
+    }
+
+    .final-message h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1.3rem;
+    }
+
+    .final-message p {
+      margin: 0.2rem 0;
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 1.25rem 1rem 1.5rem; }
+      header h1 { font-size: 1.3rem; }
+      .lock-card { padding: 1rem 0.9rem 1.1rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Statistics Exam Vault Heist</h1>
+      <p>Crack each lock by solving the stats question and entering the correct 3-digit code. Unlock all 7 to complete the review.</p>
+    </header>
+
+    <div class="status-bar">
+      <div class="pill">
+        <span class="icon"></span>
+        <span id="progress-text">Lock 1 of 7</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+      <div class="pill">Mode: <strong>Linear</strong></div>
+    </div>
+
+    <div class="lock-card" id="lock-card">
+      <div class="lock-title">
+        <span id="lock-title">Lock 1</span>
+        <span class="lock-badge" id="lock-badge">Code: 3 digits</span>
+      </div>
+      <div class="lock-story" id="lock-story"></div>
+      <div class="lock-question" id="lock-question"></div>
+
+      <div class="input-row">
+        <div>
+          <label for="code-input">Enter 3-digit code:</label><br />
+          <input type="text" id="code-input" maxlength="3" autocomplete="off" />
+        </div>
+        <button id="submit-btn">Submit code <span>⤴</span></button>
+        <button class="btn-secondary" id="reset-btn">Reset progress</button>
+      </div>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <div id="final-message" class="final-message" style="display:none;">
+      <h2>Vault Unlocked!</h2>
+      <p>You’ve cracked every lock and completed the Statistics escape room.</p>
+      <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
+    </div>
+
+    <div class="footer">
+  <div class="footer-quote" id="footer-quote"></div>
+  <div class="footer-note" id="footer-note"></div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    "use strict";
+
+    const lockTitleEl = document.getElementById("lock-title");
+    const lockBadgeEl = document.getElementById("lock-badge");
+    const lockStoryEl = document.getElementById("lock-story");
+    const lockQuestionEl = document.getElementById("lock-question");
+    const codeInputEl = document.getElementById("code-input");
+    const submitBtn = document.getElementById("submit-btn");
+    const resetBtn = document.getElementById("reset-btn");
+    const feedbackEl = document.getElementById("feedback");
+    const progressTextEl = document.getElementById("progress-text");
+    const progressBarFill = document.getElementById("progress-bar-fill");
+    const lockCardEl = document.getElementById("lock-card");
+    const finalMessageEl = document.getElementById("final-message");
+    const restartBtn = document.getElementById("restart-btn");
+
+    const PROGRESS_KEY = "statsEscapeProgress_v1";
+
+    function saveProgress(index) {
+      try { localStorage.setItem(PROGRESS_KEY, String(index)); } catch (_) {}
+    }
+
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(PROGRESS_KEY);
+        if (raw === null) return 0;
+        const idx = parseInt(raw, 10);
+        return Number.isFinite(idx) && idx >= 0 ? idx : 0;
+      } catch (_) {
+        return 0;
+      }
+    }
+
+    function clearProgress() {
+      try { localStorage.removeItem(PROGRESS_KEY); } catch (_) {}
+    }
+
+    function format3(n) {
+      return String(n).padStart(3, "0");
+    }
+
+   const locks = [
+  {
+    title: "Lock 1 – The Missing Data Vault",
+    story: "A damaged statistics console gives you two totals. Recover how many data values were recorded to open the first lock.",
+    questionHtml: `
+      <p>A broken archive screen shows:</p>
+      <p><code>Σ(x - 100) = 216</code> and <code>Σx = 2416</code>.</p>
+      <p>Work out how many values were in the dataset.</p>
+    `,
+    baseCode: "220"
+  },
+  {
+    title: "Lock 2 – Committee Blackout",
+    story: "A security team of 6 is chosen at random from 7 men and 9 women. You will only have success if no men are present.",
+    questionHtml: `
+      <p>Find the probability that the committee contains <strong>no men</strong>. Your code is the solution multiplied by 1000</p>
+    `,
+    baseCode: "105"
+  },
+  {
+    title: "Lock 3 – Robot Colour Raid",
+    story: "Amos tears open four biscuit packets in a row. The vault opens only if all four robots are different colours.",
+    questionHtml: `
+      <p>Each biscuit packet contains one robot.</p>
+      <p>There are 4 possible colours: red, yellow, blue and green, and each colour is equally likely.</p>
+      <p>Find the probability that the <strong>first four packets</strong> Amos opens all contain <strong>different coloured robots</strong>. Your code is the probability multiplied by 1000</p>
+    `,
+    baseCode: "938"
+  },
+  {
+    title: "Lock 4 – Taxi Escape Grid",
+    story: "Eight friends must flee in two taxis, but the seating rules are strict. Count the valid arrangements to trigger the next release.",
+    questionHtml: `
+      <p>Eight friends travel in two taxis, P and Q, with 4 passengers in each taxi.</p>
+      <p>Each taxi has 1 front seat and 3 back seats.</p>
+      <p>Mark sits in the <strong>front of taxi P</strong>, and Jon and Sarah sit in the <strong>back of taxi P next to each other</strong>.</p>
+      <p>Find the number of different seating arrangements possible.</p>
+    `,
+    baseCode: "480"
+  },
+  {
+    title: "Lock 5 – Substitute Scanner",
+    story: "A new rugby player joins the squad. Use the new mean to uncover the mystery weight.",
+    questionHtml: `
+      <p>Team B has these 15 player weights, in kg:</p>
+      <p><code>75, 79, 94, 101, 96, 77, 111, 108, 83, 84, 86, 115, 82, 113, 95</code></p>
+      <p>A new player joins, and the mean weight of the 16 players is now <strong>93.9 kg</strong>.</p>
+      <p>Find the weight of the new player.</p>
+    `,
+    baseCode: "103"
+  },
+  {
+    title: "Lock 6 – Spinner Signal",
+    story: "Two fair spinners feed a random sum into the lock. You only escape if you can work out the conditional probability.",
+    questionHtml: `
+      <p>Spinner A has edges numbered <code>1, 2, 3, 3</code>.</p>
+      <p>Spinner B has edges numbered <code>-3, -2, -1, 1</code>.</p>
+      <p>Each spinner is spun once and <code>X</code> is the sum.</p>
+      <p>Find the probability that <code>X</code> is <strong>even</strong>, given that <code>X</code> is <strong>positive</strong>. Multiply your result by 1000.</p>
+    `,
+    baseCode: "556"
+  },
+  {
+    title: "Lock 7 – Normal Distribution Core",
+    story: "The final chamber runs on a normal model. Decode the probability and the vault is yours.",
+    questionHtml: `
+      <p>The random variable <code>Y</code> is normally distributed with mean <code>μ</code> and standard deviation <code>σ</code>.</p>
+      <p>It is given that <code>σ = 2μ/3</code>.</p>
+      <p>Find the probability that a random value of <code>Y</code> is less than <code>2μ</code>. Your solution is probability multiplied by 1000.</p>
+    `,
+    baseCode: "933"
+  }
+];
+
+    let currentIndex = loadProgress();
+    if (currentIndex > locks.length) currentIndex = 0;
+
+    function updateProgress() {
+      const total = locks.length;
+      const currentDisplay = Math.min(currentIndex + 1, total);
+      progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
+      progressBarFill.style.width = ((currentIndex / total) * 100) + "%";
+    }
+
+    function showLock(index) {
+      const lock = locks[index];
+
+      lockTitleEl.textContent = lock.title;
+      lockStoryEl.textContent = lock.story;
+      lockQuestionEl.innerHTML = lock.questionHtml;
+
+      lockBadgeEl.textContent = "Code: 3 digits";
+      codeInputEl.value = "";
+      codeInputEl.disabled = false;
+      submitBtn.disabled = false;
+
+      feedbackEl.textContent = "";
+      feedbackEl.className = "feedback";
+
+      lockCardEl.style.display = "block";
+      finalMessageEl.style.display = "none";
+
+      updateProgress();
+      codeInputEl.focus();
+    }
+
+    function showFinal() {
+      lockCardEl.style.display = "none";
+      finalMessageEl.style.display = "block";
+      progressTextEl.textContent = "Complete";
+      progressBarFill.style.width = "100%";
+    }
+
+    function normaliseCodeInput(value) {
+      return (value || "").replace(/\s+/g, "");
+    }
+
+    function checkCode() {
+      const input = normaliseCodeInput(codeInputEl.value);
+
+      if (!/^\d{3}$/.test(input)) {
+        feedbackEl.textContent = "Codes are exactly 3 digits.";
+        feedbackEl.className = "feedback error";
+        return;
+      }
+
+      const lock = locks[currentIndex];
+      const expected = format3(lock.baseCode);
+
+      if (input !== expected) {
+        feedbackEl.textContent = "Incorrect code. Check your working and try again.";
+        feedbackEl.className = "feedback error";
+        codeInputEl.select();
+        return;
+      }
+
+      feedbackEl.textContent = "Correct code! Lock opened.";
+      feedbackEl.className = "feedback success";
+      codeInputEl.disabled = true;
+      submitBtn.disabled = true;
+
+      if (typeof confetti === "function") {
+        confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 } });
+      }
+
+      setTimeout(() => {
+        currentIndex++;
+        saveProgress(currentIndex);
+
+        if (currentIndex >= locks.length) showFinal();
+        else showLock(currentIndex);
+      }, 650);
+    }
+
+    function resetProgress() {
+      if (!confirm("Reset all progress and go back to Lock 1?")) return;
+      currentIndex = 0;
+      clearProgress();
+      showLock(currentIndex);
+    }
+
+    submitBtn.addEventListener("click", checkCode);
+    resetBtn.addEventListener("click", resetProgress);
+    restartBtn.addEventListener("click", resetProgress);
+    codeInputEl.addEventListener("keyup", (e) => {
+      if (e.key === "Enter") checkCode();
+    });
+
+    if (currentIndex >= locks.length) showFinal();
+    else showLock(currentIndex);
+
+    const coachQuotes = [
+  "Discipline is choosing what you want most over what you want now.",
+  "Pressure is a privilege.",
+  "One more rep. One more mark. One more win.",
+  "You do not rise to the occasion. You fall to your level of preparation.",
+  "Lock in and trust your training.",
+  "Winners do the boring things better.",
+  "Focus on the next move, not the whole mountain.",
+  "Stay calm. Be sharp. Finish strong.",
+  "Confidence comes from preparation.",
+  "Get comfortable being uncomfortable.",
+  "Small steps, repeated, become domination.",
+  "The standard is the standard.",
+  "Effort is a choice.",
+  "You are closer than you think.",
+  "Train your mind to stay when it gets hard.",
+  "Sharp minds finish papers well.",
+  "Every solved question is proof you’re improving.",
+  "Composure creates marks.",
+  "Make the hard parts your advantage.",
+  "Keep going. That’s where the edge is."
+];
+
+const footerNotes = [
+  "One lock at a time.",
+  "Accuracy first. Speed second.",
+  "Stay calm and trust your method.",
+  "Clean working wins marks.",
+  "Focus on the next step."
+];
+
+document.getElementById("footer-quote").textContent =
+  coachQuotes[Math.floor(Math.random() * coachQuotes.length)];
+
+document.getElementById("footer-note").textContent =
+  footerNotes[Math.floor(Math.random() * footerNotes.length)];
+  
+  </script>
+</body>
+</html>
