@@ -390,7 +390,7 @@
         <div class="overlay" id="game-overlay">
           <div class="panel">
             <h3 id="overlay-title">Ready?</h3>
-            <p id="overlay-text">Press Start, then tap, click, or hit the space bar to flap upward.</p>
+            <p id="overlay-text">Tap, click, or press space to begin. The game starts 3 seconds after your first input.</p>
             <div class="panel-actions">
               <button class="btn btn-gold" id="start-btn" type="button">Start Run</button>
             </div>
@@ -414,7 +414,6 @@
     const fwCtx = fwCanvas.getContext('2d');
     let fwW = 0;
     let fwH = 0;
-    const fireworks = [];
     const sparks = [];
 
     function resizeFireworks() {
@@ -477,7 +476,6 @@
     const overlayTitle = document.getElementById('overlay-title');
     const overlayText = document.getElementById('overlay-text');
     const startBtn = document.getElementById('start-btn');
-    const resetAllBtn = document.getElementById('reset-all-btn');
     const scoreDisplay = document.getElementById('score-display');
     const bestDisplay = document.getElementById('best-display');
     const triesDisplay = document.getElementById('tries-display');
@@ -494,7 +492,8 @@
       pipeSpacing: 240,
       pipeSpeed: 2.4,
       maxScore: 20,
-      maxTries: 3
+      maxTries: 3,
+      countdownMs: 3000
     };
 
     let bestScore = 0;
@@ -502,11 +501,14 @@
     let score = 0;
     let running = false;
     let won = false;
+    let countdownActive = false;
     let animationId = null;
+    let countdownTimer = null;
+    let countdownEndTime = 0;
 
     const bird = {
       x: GAME.birdX,
-      y: GAME.height / 2,
+      y: GAME.height - 300,
       vy: 0,
       r: 18
     };
@@ -514,7 +516,7 @@
     let pipes = [];
 
     function resetBird() {
-      bird.y = GAME.height / 2;
+      bird.y = GAME.height - 300;
       bird.vy = 0;
     }
 
@@ -549,27 +551,58 @@
       overlay.classList.add('hidden');
     }
 
-    function resetChallenge() {
+    function drawCountdownText() {
+      if (!countdownActive) return;
+      const remaining = Math.max(0, Math.ceil((countdownEndTime - Date.now()) / 1000));
+      ctx.fillStyle = 'rgba(20, 8, 8, 0.65)';
+      ctx.fillRect(GAME.width / 2 - 95, 90, 190, 90);
+      ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+      ctx.strokeRect(GAME.width / 2 - 95, 90, 190, 90);
+      ctx.fillStyle = '#fff7ed';
+      ctx.font = '900 48px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(remaining > 0 ? remaining : 'GO!', GAME.width / 2, 148);
+      ctx.textAlign = 'left';
+    }
+
+    function prepareChallenge() {
       won = false;
       triesLeft = GAME.maxTries;
       triesDisplay.textContent = triesLeft;
       starWrap.classList.add('hidden');
-      cancelAnimationFrame(animationId);
       running = false;
+      countdownActive = false;
+      clearInterval(countdownTimer);
+      cancelAnimationFrame(animationId);
       resetRun();
       draw();
-      showOverlay('Ready?', 'Press Start, then tap, click, or hit the space bar to flap upward.');
+      showOverlay('Ready?', 'Tap, click, or press space to begin. The game starts 3 seconds after your first input.', 'Start Run');
     }
 
-    function startRun() {
-      if (won) return;
-      if (triesLeft <= 0) {
-        showOverlay('No Tries Left', 'Reset the challenge to try for the red star again.', 'Play Again');
-        return;
-      }
+    function startCountdown() {
+      if (won || running || countdownActive || triesLeft <= 0) return;
+
       resetRun();
-      running = true;
+      countdownActive = true;
+      countdownEndTime = Date.now() + GAME.countdownMs;
+
+      showOverlay('Get Ready', 'Starting in 3 seconds...', 'Starting...');
+      draw();
+
+      countdownTimer = setInterval(() => {
+        draw();
+        if (Date.now() >= countdownEndTime) {
+          clearInterval(countdownTimer);
+          countdownActive = false;
+          beginRun();
+        }
+      }, 100);
+    }
+
+    function beginRun() {
+      if (won || running || triesLeft <= 0) return;
       hideOverlay();
+      running = true;
       loop();
     }
 
@@ -580,19 +613,31 @@
 
     function endRun(message) {
       running = false;
+      countdownActive = false;
+      clearInterval(countdownTimer);
       cancelAnimationFrame(animationId);
       triesLeft -= 1;
       triesDisplay.textContent = triesLeft;
 
       if (triesLeft > 0) {
-        showOverlay('Run Over', `${message} You have ${triesLeft} chance${triesLeft === 1 ? '' : 's'} left.`, 'Try Again');
+        showOverlay(
+          'Run Over',
+          `${message} You have ${triesLeft} chance${triesLeft === 1 ? '' : 's'} left. Tap, click, or press space to start the next run.`,
+          'Start Next Run'
+        );
       } else {
-        showOverlay('Challenge Over', `${message} You used all 3 chances. Reset to try again.`, 'No Tries Left');
+        showOverlay(
+          'Challenge Over',
+          `${message} You used all 3 chances.`,
+          'No Tries Left'
+        );
       }
     }
 
     function winChallenge() {
       running = false;
+      countdownActive = false;
+      clearInterval(countdownTimer);
       won = true;
       cancelAnimationFrame(animationId);
       starWrap.classList.remove('hidden');
@@ -752,6 +797,7 @@
       drawPipes();
       drawBird();
       drawScoreOnCanvas();
+      drawCountdownText();
     }
 
     function loop() {
@@ -760,20 +806,36 @@
       if (running) animationId = requestAnimationFrame(loop);
     }
 
-    startBtn.addEventListener('click', () => {
-      if (!running && !won && triesLeft > 0) startRun();
-    });
+    function handlePrimaryAction(e) {
+      if (e) e.preventDefault();
 
-    resetAllBtn.addEventListener('click', resetChallenge);
-    canvas.addEventListener('click', flap);
+      if (won) return;
+
+      if (overlay.classList.contains('hidden')) {
+        flap();
+        return;
+      }
+
+      if (!running && !countdownActive && triesLeft > 0) {
+        startCountdown();
+      }
+    }
+
+    startBtn.addEventListener('click', handlePrimaryAction);
+    canvas.addEventListener('click', handlePrimaryAction);
+    canvas.addEventListener('touchstart', handlePrimaryAction, { passive: false });
+
+    overlay.addEventListener('click', handlePrimaryAction);
+    overlay.addEventListener('touchstart', handlePrimaryAction, { passive: false });
+
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Space') {
         e.preventDefault();
-        if (running) flap();
+        handlePrimaryAction(e);
       }
     });
 
-    resetChallenge();
+    prepareChallenge();
   </script>
 </body>
 </html>
