@@ -21,6 +21,23 @@
       padding: 1.5rem;
     }
 
+    a.btn {
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #f9fafb;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 10px 20px rgba(22, 163, 74, 0.35);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
     .container {
       max-width: 900px;
       width: 100%;
@@ -301,6 +318,7 @@
     <div id="final-message" class="final-message" style="display:none;">
       <h2>Vault Unlocked!</h2>
       <p>You’ve cracked every lock and completed the Pure Mathematics escape room.</p>
+      <a class="btn" href="trophy-room.html">Claim Victory</a>
       <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
     </div>
 
@@ -748,7 +766,7 @@ document.getElementById("footer-quote").textContent =
 
 document.getElementById("footer-note").textContent =
   footerNotes[Math.floor(Math.random() * footerNotes.length)];
-  
+
   </script>
 </body>
 </html>
