@@ -2,108 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pure Mathematics 3 Escape Room – Exam Vault Heist</title>
+  <title>Pure Mathematics 3 Escape Room – Final Boss Vault</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * { box-sizing: border-box; }
 
+    :root {
+      --bg-1: #0d0f12;
+      --bg-2: #15181d;
+      --bg-3: #1d2128;
+      --panel: rgba(25, 29, 36, 0.94);
+      --panel-2: rgba(18, 21, 27, 0.96);
+      --steel: #cbd5e1;
+      --ink: #e5e7eb;
+      --muted: #9ca3af;
+      --line: rgba(148, 163, 184, 0.20);
+      --line-strong: rgba(148, 163, 184, 0.34);
+      --accent: #60a5fa;
+      --accent-2: #3b82f6;
+      --ember: #f97316;
+      --ember-2: #fb923c;
+      --success: #22c55e;
+      --danger: #f87171;
+      --shadow: 0 24px 54px rgba(0, 0, 0, 0.50);
+      --shadow-soft: 0 14px 30px rgba(0, 0, 0, 0.32);
+    }
+
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(59, 130, 246, 0.22), transparent 38%),
-        linear-gradient(180deg, #0b1220 0%, #020617 100%);
-      color: #e5e7eb;
       min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
       display: flex;
       align-items: stretch;
       justify-content: center;
       padding: 1.5rem;
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.14), transparent 25%),
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 28%),
+        radial-gradient(circle at bottom center, rgba(255, 255, 255, 0.04), transparent 40%),
+        linear-gradient(180deg, #090b0e 0%, #0f1217 32%, #171b22 68%, #0c0f14 100%);
     }
 
-    a.btn {
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.7rem;
-  padding: 0.5rem 1.1rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: #f9fafb;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  box-shadow: 0 10px 20px rgba(22, 163, 74, 0.35);
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
-}
-
     .container {
-      max-width: 900px;
       width: 100%;
-      background: rgba(15, 23, 42, 0.92);
-      border-radius: 1.5rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      padding: 1.75rem 1.75rem 2rem;
+      max-width: 980px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.00)),
+        var(--panel);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 1.6rem;
+      box-shadow: var(--shadow);
+      padding: 1.8rem 1.8rem 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.018) 50%, transparent 100%);
+      opacity: 0.6;
     }
 
     header {
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-      padding-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.9rem;
     }
 
     header h1 {
       margin: 0;
-      font-size: 1.6rem;
+      font-size: 1.78rem;
+      line-height: 1.12;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      color: #f8fafc;
+      text-shadow: 0 0 16px rgba(96, 165, 250, 0.14);
     }
 
     header p {
-      margin: 0.4rem 0 0;
-      font-size: 0.95rem;
-      color: #9ca3af;
+      margin: 0.48rem 0 0;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 800px;
     }
 
     .status-bar {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.8rem;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.9rem;
-      color: #9ca3af;
     }
 
     .pill {
-      padding: 0.25rem 0.7rem;
+      padding: 0.42rem 0.82rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,0.03);
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
+      color: #dbe4ee;
+      font-size: 0.92rem;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(4px);
     }
 
-    .pill span.icon {
-      width: 0.6rem;
-      height: 0.6rem;
+    .pill .icon {
+      width: 0.65rem;
+      height: 0.65rem;
       border-radius: 999px;
-      background: #3b82f6;
-      box-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+      background: linear-gradient(135deg, var(--accent), var(--ember));
+      box-shadow: 0 0 10px rgba(249, 115, 22, 0.45);
     }
 
     .progress-bar {
       flex: 1;
-      min-width: 150px;
-      background: rgba(15, 23, 42, 0.9);
+      min-width: 180px;
+      height: 12px;
       border-radius: 999px;
       overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      height: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
       position: relative;
     }
 
@@ -111,169 +143,234 @@
       position: absolute;
       inset: 0;
       width: 0%;
-      background: linear-gradient(90deg, #3b82f6, #93c5fd);
-      transition: width 0.3s ease;
+      background: linear-gradient(90deg, var(--accent), #7dd3fc, var(--ember));
+      box-shadow: inset 0 0 14px rgba(255,255,255,0.18);
+      transition: width 0.35s ease;
     }
 
     .lock-card {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 1.25rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 1.25rem 1.5rem 1.3rem;
+      position: relative;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00)),
+        var(--panel-2);
+      border-radius: 1.3rem;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      padding: 1.3rem 1.45rem 1.35rem;
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 0.85rem;
     }
 
     .lock-title {
-      font-size: 1.2rem;
-      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: #f8fafc;
     }
 
     .lock-badge {
       font-size: 0.8rem;
-      padding: 0.15rem 0.55rem;
+      padding: 0.22rem 0.64rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #e5e7eb;
+      border: 1px solid rgba(96, 165, 250, 0.34);
+      background: rgba(59, 130, 246, 0.08);
+      color: #dbeafe;
+      white-space: nowrap;
     }
 
     .lock-story {
-      font-size: 0.95rem;
-      color: #9ca3af;
-      line-height: 1.5;
+      font-size: 0.96rem;
+      line-height: 1.55;
+      color: var(--muted);
     }
 
     .lock-question {
-      font-size: 0.97rem;
-      line-height: 1.6;
+      font-size: 0.98rem;
+      line-height: 1.68;
+      color: var(--ink);
     }
 
-    .lock-question p { margin: 0.4rem 0; }
-    .lock-question ol,
-    .lock-question ul { margin: 0.4rem 0 0.4rem 1.2rem; }
+    .lock-question p { margin: 0.42rem 0; }
+
+    .lock-question code {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #f8fafc;
+      border-radius: 0.4rem;
+      padding: 0.12rem 0.38rem;
+      font-size: 0.95em;
+    }
+
+    .lock-question math {
+      max-width: 100%;
+      overflow-x: auto;
+    }
 
     .input-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      margin-top: 0.2rem;
+      gap: 0.8rem;
+      align-items: end;
+      margin-top: 0.15rem;
+    }
+
+    .input-block {
+      min-width: 185px;
     }
 
     label {
+      display: inline-block;
+      margin-bottom: 0.3rem;
       font-size: 0.9rem;
-      color: #9ca3af;
+      color: var(--muted);
     }
 
     input[type="text"] {
-      padding: 0.5rem 0.8rem;
-      border-radius: 0.6rem;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
+      width: 170px;
+      padding: 0.64rem 0.84rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(6, 8, 12, 0.75);
+      color: var(--ink);
       font-size: 1rem;
-      width: 160px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.35);
     }
 
     input[type="text"]:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.35);
+      border-color: rgba(96, 165, 250, 0.6);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.14);
     }
 
-    button {
+    button,
+    a.btn {
       cursor: pointer;
       border: none;
-      border-radius: 0.7rem;
-      padding: 0.5rem 1.1rem;
+      border-radius: 0.82rem;
+      padding: 0.7rem 1.12rem;
       font-size: 0.95rem;
-      font-weight: 500;
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      color: #f9fafb;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
-      transition: transform 0.08s ease, box-shadow 0.08s ease;
+      justify-content: center;
+      gap: 0.45rem;
+      text-decoration: none;
+      transition: transform 0.08s ease, box-shadow 0.12s ease;
     }
 
-    button:hover {
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-2), var(--accent), #93c5fd);
+      color: #eff6ff;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.28);
+    }
+
+    .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.45);
+      box-shadow: 0 16px 28px rgba(37, 99, 235, 0.34);
     }
 
-    button:active {
+    .btn-primary:active {
       transform: translateY(0);
-      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.35);
     }
 
     .btn-secondary {
-      background: transparent;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      box-shadow: none;
+      background: rgba(255,255,255,0.04);
       color: #e5e7eb;
+      border: 1px solid var(--line-strong);
+      box-shadow: none;
     }
 
     .btn-secondary:hover {
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.22);
     }
 
     .feedback {
-      min-height: 1.25rem;
-      font-size: 0.92rem;
-      margin-top: 0.2rem;
+      min-height: 1.28rem;
+      margin-top: 0.12rem;
+      font-size: 0.94rem;
+      font-weight: 600;
     }
 
-    .feedback.error { color: #f97373; }
-    .feedback.success { color: #22c55e; }
+    .feedback.error { color: var(--danger); }
+    .feedback.success { color: var(--success); }
 
     .footer {
-      margin-top: 18px;
-      padding: 16px 18px;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      background: rgba(15, 23, 42, 0.65);
-      border-radius: 16px;
+      position: relative;
+      z-index: 1;
+      margin-top: 0.1rem;
+      padding: 1rem 1.1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(249, 115, 22, 0.16);
+      background:
+        linear-gradient(135deg, rgba(59, 130, 246, 0.10), rgba(249, 115, 22, 0.08)),
+        rgba(255,255,255,0.02);
       text-align: center;
+      box-shadow: var(--shadow-soft);
     }
 
     .footer-quote {
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 800;
       color: #f8fafc;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.015em;
     }
 
     .footer-note {
-      margin-top: 6px;
-      font-size: 0.9rem;
-      color: #94a3b8;
+      margin-top: 0.35rem;
+      font-size: 0.92rem;
+      color: #cbd5e1;
     }
 
     .final-message {
+      position: relative;
+      z-index: 1;
       text-align: center;
-      padding: 1.3rem 0.5rem 0.5rem;
+      padding: 1.4rem 0.5rem 0.5rem;
     }
 
     .final-message h2 {
-      margin: 0 0 0.4rem;
-      font-size: 1.3rem;
+      margin: 0 0 0.45rem;
+      font-size: 1.45rem;
+      color: #f8fafc;
     }
 
     .final-message p {
-      margin: 0.2rem 0;
-      font-size: 0.95rem;
-      color: #9ca3af;
+      margin: 0.22rem 0;
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    .final-actions {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
     }
 
     @media (max-width: 640px) {
-      .container { padding: 1.25rem 1rem 1.5rem; }
-      header h1 { font-size: 1.3rem; }
-      .lock-card { padding: 1rem 0.9rem 1.1rem; }
+      body { padding: 1rem; }
+      .container { padding: 1.2rem 1rem 1.45rem; }
+      header h1 { font-size: 1.38rem; }
+      .lock-card { padding: 1rem 0.95rem 1.08rem; }
+      .lock-title {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .input-row {
+        align-items: stretch;
+      }
+      input[type="text"] {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -281,19 +378,19 @@
 <body>
   <div class="container">
     <header>
-      <h1>Pure Mathematics 3 Exam Vault Heist</h1>
-      <p>Crack each lock by solving the pure mathematics question and entering the correct 3-digit code. Unlock all 11 to complete the review.</p>
+      <h1>Pure Mathematics 3 – Final Boss Vault</h1>
+      <p>Grind through each pure mathematics lock, enter the correct 3-digit code, and break the vault open. Clean algebra. Cold nerve. No freebies.</p>
     </header>
 
     <div class="status-bar">
       <div class="pill">
         <span class="icon"></span>
-        <span id="progress-text">Lock 1 of 11</span>
+        <span id="progress-text">Lock 1 of 14</span>
       </div>
       <div class="progress-bar">
         <div class="progress-bar-fill" id="progress-bar-fill"></div>
       </div>
-      <div class="pill">Mode: <strong>Linear</strong></div>
+      <div class="pill">Mode: <strong>Final Boss Grind</strong></div>
     </div>
 
     <div class="lock-card" id="lock-card">
@@ -301,31 +398,37 @@
         <span id="lock-title">Lock 1</span>
         <span class="lock-badge" id="lock-badge">Code: 3 digits</span>
       </div>
+
       <div class="lock-story" id="lock-story"></div>
       <div class="lock-question" id="lock-question"></div>
 
       <div class="input-row">
-        <div>
-          <label for="code-input">Enter 3-digit code:</label><br />
-          <input type="text" id="code-input" maxlength="3" autocomplete="off" />
+        <div class="input-block">
+          <label for="code-input">Enter 3-digit code:</label>
+          <input type="text" id="code-input" maxlength="3" autocomplete="off" inputmode="numeric" />
         </div>
-        <button id="submit-btn">Submit code <span>⤴</span></button>
-        <button class="btn-secondary" id="reset-btn">Reset progress</button>
+        <button id="submit-btn" class="btn-primary">Submit code <span>⤴</span></button>
+        <button id="reset-btn" class="btn-secondary">Reset progress</button>
       </div>
+
       <div id="feedback" class="feedback"></div>
     </div>
 
     <div id="final-message" class="final-message" style="display:none;">
       <h2>Vault Unlocked!</h2>
-      <p>You’ve cracked every lock and completed the Pure Mathematics escape room.</p>
-      <a class="btn" href="trophy-room.html">Claim Victory</a>
-      <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
+      <p>You cracked every lock and cleared the Pure Mathematics final boss run.</p>
+      <p>No shortcuts. No panic. Just proper work under pressure.</p>
+      <div class="final-actions">
+        <a class="btn btn-primary" href="trophy-room.html">Claim Victory</a>
+        <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
+      </div>
     </div>
 
-   <div class="footer">
-  <div class="footer-quote" id="footer-quote"></div>
-  <div class="footer-note" id="footer-note"></div>
-</div>
+    <div class="footer">
+      <div class="footer-quote" id="footer-quote"></div>
+      <div class="footer-note" id="footer-note"></div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -345,11 +448,15 @@
     const lockCardEl = document.getElementById("lock-card");
     const finalMessageEl = document.getElementById("final-message");
     const restartBtn = document.getElementById("restart-btn");
+    const footerQuoteEl = document.getElementById("footer-quote");
+    const footerNoteEl = document.getElementById("footer-note");
 
-    const PROGRESS_KEY = "pureMathEscapeProgress_v1";
+    const PROGRESS_KEY = "pureMathEscapeProgress_v2";
 
     function saveProgress(index) {
-      try { localStorage.setItem(PROGRESS_KEY, String(index)); } catch (_) {}
+      try {
+        localStorage.setItem(PROGRESS_KEY, String(index));
+      } catch (_) {}
     }
 
     function loadProgress() {
@@ -364,274 +471,433 @@
     }
 
     function clearProgress() {
-      try { localStorage.removeItem(PROGRESS_KEY); } catch (_) {}
+      try {
+        localStorage.removeItem(PROGRESS_KEY);
+      } catch (_) {}
     }
 
-    function format3(n) {
-      return String(n).padStart(3, "0");
+    function format3(value) {
+      return String(value).padStart(3, "0");
     }
 
     const locks = [
-  {
-    title: "Lock 1 – Boundary Breach",
-    story: "The alarm only shuts down if you find the two exact boundary values of the safe zone.",
-    questionHtml: `
-      <p>Solve the inequality</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mn>1</mn>
-          <mo>+</mo>
-          <mn>3</mn><mi>x</mi>
-          <mo>&lt;</mo>
-          <mo>|</mo>
-          <mn>4</mn><mi>x</mi>
-          <mo>-</mo>
-          <mn>2</mn>
-          <mo>|</mo>
-        </math>
-      </p>
-      <p>Express your answer using exact boundary values.</p>
-      <p><strong>Code rule:</strong> write the smaller boundary as <code>p/q</code> and the larger boundary as <code>r</code>. The 3-digit code is <code>pqr</code>.</p>
-    `,
-    baseCode: "173"
-  },
-  {
-    title: "Lock 2 – Parametric Reactor",
-    story: "A curved flight path passes through the reactor core. You need the gradient at the exact trigger point.",
-    questionHtml: `
-      <p>The curve is defined parametrically by</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mi>x</mi><mo>=</mo><mi>ln</mi><mo>(</mo><msup><mi>t</mi><mn>2</mn></msup><mo>)</mo>
-          <mo>,</mo>
-          <mspace width="1em"/>
-          <mi>y</mi><mo>=</mo><msup><mi>e</mi><mrow><mn>2</mn><mo>-</mo><msup><mi>t</mi><mn>2</mn></msup></mrow></msup>
-        </math>
-      </p>
-      <p>Find the gradient of the curve when <code>t = e</code>.</p>
-      <p><strong>Code rule:</strong> use the magnitude of your answer, rounded to 3 significant figures, then scale to a 3-digit integer.</p>
-    `,
-    baseCode: "337"
-  },
-  {
-    title: "Lock 3 – Polynomial Forge",
-    story: "Two hidden constants control the forge door. Extract both to unlock it.",
-    questionHtml: `
-      <p>The polynomial</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mi>p</mi><mo>(</mo><mi>x</mi><mo>)</mo>
-          <mo>=</mo>
-          <mn>2</mn><msup><mi>x</mi><mn>3</mn></msup>
-          <mo>+</mo>
-          <mi>a</mi><msup><mi>x</mi><mn>2</mn></msup>
-          <mo>-</mo>
-          <mn>11</mn><mi>x</mi>
-          <mo>+</mo>
-          <mi>b</mi>
-        </math>
-      </p>
-      <p>is divisible by <code>2x - 1</code>, and when <code>p(x)</code> is divided by <code>x + 1</code> the remainder is <code>12</code>.</p>
-      <p>Find the values of <code>a</code> and <code>b</code>.</p>
-      <p><strong>Code rule:</strong> if <code>a</code> is negative and <code>b</code> is positive, the code is <code>|a|b0</code>.</p>
-    `,
-    baseCode: "360"
-  },
-  {
-    title: "Lock 4 – Argand Watchtower",
-    story: "The watchtower scans a complex region. Only the greatest possible angle will disable it.",
-    questionHtml: `
-      <p>Complex numbers <code>z</code> are restricted by</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mo>|</mo><mi>z</mi><mo>-</mo><mo>(</mo><mn>4</mn><mo>+</mo><mn>3</mn><mi>i</mi><mo>)</mo><mo>|</mo>
-          <mo>&le;</mo>
-          <mn>2</mn>
-          <mspace width="1em"/>
-          <mtext>and</mtext>
-          <mspace width="1em"/>
-          <mi>Re</mi><mo>(</mo><mi>z</mi><mo>)</mo>
-          <mo>&le;</mo>
-          <mn>3</mn>
-        </math>
-      </p>
-      <p>Find the greatest possible value of <code>arg(z)</code> in radians.</p>
-      <p><strong>Code rule:</strong> round to 3 significant figures and scale to a 3-digit integer.</p>
-    `,
-    baseCode: "106"
-  },
-  {
-    title: "Lock 5 – Integral Chamber",
-    story: "An exact integral is engraved into the chamber door. Evaluate it perfectly to proceed.",
-    questionHtml: `
-      <p>Find the exact value of</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <msubsup>
-            <mo>&#x222B;</mo>
-            <mn>0</mn>
-            <mn>6</mn>
-          </msubsup>
-          <mfrac>
-            <mrow>
-              <mi>x</mi><mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo>
-            </mrow>
-            <mrow>
-              <msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn>
-            </mrow>
-          </mfrac>
-          <mspace width="0.3em"/>
-          <mi>d</mi><mi>x</mi>
-        </math>
-      </p>
-      <p><strong>Code rule:</strong> after finding the exact value, convert it to a decimal correct to 3 significant figures and scale to a 3-digit integer.</p>
-    `,
-    baseCode: "465"
-  },
-  {
-    title: "Lock 6 – Iteration Relay",
-    story: "The relay system accepts only the root produced by repeated iteration.",
-    questionHtml: `
-      <p>Solve the equation</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mi>cot</mi><mi>x</mi>
-          <mo>=</mo>
-          <mn>2</mn>
-          <mo>-</mo>
-          <mi>cos</mi><mi>x</mi>
-        </math>
-      </p>
-      <p>for the root in the interval <code>0 &lt; x &le; π/2</code>, using iteration.</p>
-      <p>Use the iteration</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
-          <mo>=</mo>
-          <msup><mi>tan</mi><mrow><mo>-</mo><mn>1</mn></mrow></msup>
-          <mrow>
-            <mo>(</mo>
-            <mfrac>
+      {
+        title: "Lock 1 – Boundary Breach",
+        story: "The alarm only shuts down if you find the two exact boundary values of the safe zone.",
+        questionHtml: `
+          <p>Solve the inequality</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
               <mn>1</mn>
-              <mrow><mn>2</mn><mo>-</mo><mi>cos</mi><msub><mi>x</mi><mi>n</mi></msub></mrow>
-            </mfrac>
-            <mo>)</mo>
-          </mrow>
-        </math>
-      </p>
-      <p>Give the root correct to 2 decimal places.</p>
-      <p><strong>Code rule:</strong> use the root to 3 significant figures and scale to a 3-digit integer.</p>
-    `,
-    baseCode: "685"
-  },
-  {
-    title: "Lock 7 – Triple-Angle Firewall",
-    story: "The firewall collapses only when all valid angles are found.",
-    questionHtml: `
-      <p>Solve the equation</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mi>cos</mi><mn>3</mn><mi>&#952;</mi>
-          <mo>+</mo>
-          <mi>cos</mi><mi>&#952;</mi><mi>cos</mi><mn>2</mn><mi>&#952;</mi>
-          <mo>=</mo>
-          <msup><mi>cos</mi><mn>2</mn></msup><mi>&#952;</mi>
-        </math>
-      </p>
-      <p>for <code>0&deg; &le; θ &le; 180&deg;</code>.</p>
-      <p><strong>Code rule:</strong> round the three solutions to the nearest degree. Let them be <code>p &lt; q &lt; r</code>. The code is made from the tens digit of <code>p</code>, the tens digit of <code>q</code>, and the units digit of <code>r</code>.</p>
-    `,
-    baseCode: "298"
-  },
-  {
-    title: "Lock 8 – Complex Decoder",
-    story: "A damaged complex-number decoder hides two possible states. Recover them both.",
-    questionHtml: `
-      <p>It is given that</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mfrac>
-            <mrow><mn>2</mn><mo>+</mo><mn>3</mn><mi>a</mi><mi>i</mi></mrow>
-            <mrow><mi>a</mi><mo>+</mo><mn>2</mn><mi>i</mi></mrow>
-          </mfrac>
-          <mo>=</mo>
-          <mi>&#955;</mi>
-          <mo>(</mo><mn>2</mn><mo>-</mo><mi>i</mi><mo>)</mo>
-        </math>
-      </p>
-      <p>where <code>a</code> and <code>λ</code> are real constants.</p>
-      <p>Find the possible values of <code>a</code> and the corresponding values of <code>λ</code>.</p>
-      <p><strong>Code rule:</strong> use the positive value of <code>a</code> written as a fraction in simplest form. If <code>a = p/q</code>, the code is <code>pq3</code>.</p>
-    `,
-    baseCode: "233"
-  },
-  {
-    title: "Lock 9 – Area Core",
-    story: "The core field is bounded by a trigonometric wave. Exact area only.",
-    questionHtml: `
-      <p>The curve is</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mi>y</mi>
-          <mo>=</mo>
-          <mi>sin</mi><mi>x</mi><mi>cos</mi><mn>2</mn><mi>x</mi>
-        </math>
-      </p>
-      <p>The enclosed region <code>R</code> is the region between the curve and the x-axis from <code>x = π/4</code> to <code>x = 3π/4</code>.</p>
-      <p>Find the exact area of <code>R</code>.</p>
-      <p><strong>Code rule:</strong> convert your exact answer to a decimal correct to 3 significant figures and scale to a 3-digit integer.</p>
-    `,
-    baseCode: "943"
-  },
-  {
-    title: "Lock 10 – Vector Drop Shaft",
-    story: "A vertical shaft opens only when the exact perpendicular distance is found.",
-    questionHtml: `
-      <p>The line <code>l</code> is given by</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mi>r</mi>
-          <mo>=</mo>
-          <mrow>
-            <mo>(</mo><mn>3</mn><mo>,</mo><mo>-</mo><mn>2</mn><mo>,</mo><mn>1</mn><mo>)</mo>
-          </mrow>
-          <mo>+</mo>
-          <mi>&#955;</mi>
-          <mrow>
-            <mo>(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>)</mo>
-          </mrow>
-        </math>
-      </p>
-      <p>Find the length of the perpendicular from the point <code>(6, -3, 6)</code> to the line <code>l</code>.</p>
-      <p><strong>Code rule:</strong> use the answer correct to 3 significant figures and scale to a 3-digit integer.</p>
-    `,
-    baseCode: "110"
-  },
-  {
-    title: "Lock 11 – Infinity Gate",
-    story: "The final gate watches what happens as x grows without bound. Only the exact limiting value will release the vault.",
-    questionHtml: `
-      <p>The variables <code>x</code> and <code>y</code> satisfy</p>
-      <p style="text-align:center;">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac>
-          <mo>+</mo>
-          <mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac>
-          <mo>+</mo>
-          <msup><mi>y</mi><mn>2</mn></msup>
-          <mo>+</mo>
-          <mi>y</mi>
-          <mo>=</mo>
-          <mn>0</mn>
-        </math>
-      </p>
-      <p>with <code>x = 1</code> when <code>y = 1</code>.</p>
-      <p>Determine what happens to <code>y</code> as <code>x &rarr; &infin;</code>, giving your answer in exact form.</p>
-      <p><strong>Code rule:</strong> convert the exact limiting value to a decimal correct to 3 significant figures and scale to a 3-digit integer.</p>
-    `,
-    baseCode: "225"
-  }
-];
+              <mo>+</mo>
+              <mn>3</mn><mi>x</mi>
+              <mo>&lt;</mo>
+              <mo>|</mo>
+              <mn>4</mn><mi>x</mi>
+              <mo>-</mo>
+              <mn>2</mn>
+              <mo>|</mo>
+            </math>
+          </p>
+          <p>Express your answer using exact boundary values.</p>
+          <p><strong>Code rule:</strong> write the smaller boundary as <code>p/q</code> and the larger boundary as <code>r</code>. The 3-digit code is <code>pqr</code>.</p>
+        `,
+        baseCode: "173"
+      },
+      {
+        title: "Lock 2 – Polynomial Forge",
+        story: "Two hidden constants control the forge door. Extract both to unlock it.",
+        questionHtml: `
+          <p>The polynomial</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mi>p</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+              <mo>=</mo>
+              <mn>2</mn><msup><mi>x</mi><mn>3</mn></msup>
+              <mo>+</mo>
+              <mi>a</mi><msup><mi>x</mi><mn>2</mn></msup>
+              <mo>-</mo>
+              <mn>11</mn><mi>x</mi>
+              <mo>+</mo>
+              <mi>b</mi>
+            </math>
+          </p>
+          <p>is divisible by <code>2x - 1</code>, and when <code>p(x)</code> is divided by <code>x + 1</code> the remainder is <code>12</code>.</p>
+          <p>Find the values of <code>a</code> and <code>b</code>.</p>
+          <p><strong>Code rule:</strong> if <code>a</code> is negative and <code>b</code> is positive, the code is <code>|a|b0</code>.</p>
+        `,
+        baseCode: "360"
+      },
+      {
+        title: "Lock 3 – Argand Watchtower",
+        story: "The watchtower scans a complex region. Only the greatest possible angle will disable it.",
+        questionHtml: `
+          <p>Complex numbers <code>z</code> are restricted by</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mo>|</mo><mi>z</mi><mo>-</mo><mo>(</mo><mn>4</mn><mo>+</mo><mn>3</mn><mi>i</mi><mo>)</mo><mo>|</mo>
+              <mo>&le;</mo>
+              <mn>2</mn>
+              <mspace width="1em"/>
+              <mtext>and</mtext>
+              <mspace width="1em"/>
+              <mi>Re</mi><mo>(</mo><mi>z</mi><mo>)</mo>
+              <mo>&le;</mo>
+              <mn>3</mn>
+            </math>
+          </p>
+          <p>Find the greatest possible value of <code>arg(z)</code> in radians.</p>
+          <p><strong>Code rule:</strong> round to 3 significant figures and scale to a 3-digit integer.</p>
+        `,
+        baseCode: "106"
+      },
+      {
+        title: "Lock 4 – Integral Chamber",
+        story: "An exact integral is engraved into the chamber door. Evaluate it perfectly to proceed.",
+        questionHtml: `
+          <p>Find the exact value of</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <msubsup>
+                <mo>&#x222B;</mo>
+                <mn>0</mn>
+                <mn>6</mn>
+              </msubsup>
+              <mfrac>
+                <mrow>
+                  <mi>x</mi><mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo>
+                </mrow>
+                <mrow>
+                  <msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn>
+                </mrow>
+              </mfrac>
+              <mspace width="0.3em"/>
+              <mi>d</mi><mi>x</mi>
+            </math>
+          </p>
+          <p><strong>Code rule:</strong> after finding the exact value, convert it to a decimal correct to 3 significant figures and scale to a 3-digit integer.</p>
+        `,
+        baseCode: "465"
+      },
+      {
+        title: "Lock 5 – Iteration Relay",
+        story: "The relay system accepts only the root produced by repeated iteration.",
+        questionHtml: `
+          <p>Solve the equation</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mi>cot</mi><mi>x</mi>
+              <mo>=</mo>
+              <mn>2</mn>
+              <mo>-</mo>
+              <mi>cos</mi><mi>x</mi>
+            </math>
+          </p>
+          <p>for the root in the interval <code>0 &lt; x &le; π/2</code>, using iteration.</p>
+          <p>Use the iteration</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub>
+              <mo>=</mo>
+              <msup><mi>tan</mi><mrow><mo>-</mo><mn>1</mn></mrow></msup>
+              <mrow>
+                <mo>(</mo>
+                <mfrac>
+                  <mn>1</mn>
+                  <mrow><mn>2</mn><mo>-</mo><mi>cos</mi><msub><mi>x</mi><mi>n</mi></msub></mrow>
+                </mfrac>
+                <mo>)</mo>
+              </mrow>
+            </math>
+          </p>
+          <p>Give the root correct to 2 decimal places.</p>
+          <p><strong>Code rule:</strong> use the root to 3 significant figures and scale to a 3-digit integer.</p>
+        `,
+        baseCode: "685"
+      },
+      {
+        title: "Lock 6 – Triple-Angle Firewall",
+        story: "The firewall collapses only when all valid angles are found.",
+        questionHtml: `
+          <p>Solve the equation</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mi>cos</mi><mn>3</mn><mi>&#952;</mi>
+              <mo>+</mo>
+              <mi>cos</mi><mi>&#952;</mi><mi>cos</mi><mn>2</mn><mi>&#952;</mi>
+              <mo>=</mo>
+              <msup><mi>cos</mi><mn>2</mn></msup><mi>&#952;</mi>
+            </math>
+          </p>
+          <p>for <code>0&deg; &le; θ &le; 180&deg;</code>.</p>
+          <p><strong>Code rule:</strong> round the three solutions to the nearest degree. Let them be <code>p &lt; q &lt; r</code>. The code is made from the tens digit of <code>p</code>, the tens digit of <code>q</code>, and the units digit of <code>r</code>.</p>
+        `,
+        baseCode: "298"
+      },
+      {
+        title: "Lock 7 – Complex Decoder",
+        story: "A damaged complex-number decoder hides two possible states. Recover them both.",
+        questionHtml: `
+          <p>It is given that</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mfrac>
+                <mrow><mn>2</mn><mo>+</mo><mn>3</mn><mi>a</mi><mi>i</mi></mrow>
+                <mrow><mi>a</mi><mo>+</mo><mn>2</mn><mi>i</mi></mrow>
+              </mfrac>
+              <mo>=</mo>
+              <mi>&#955;</mi>
+              <mo>(</mo><mn>2</mn><mo>-</mo><mi>i</mi><mo>)</mo>
+            </math>
+          </p>
+          <p>where <code>a</code> and <code>λ</code> are real constants.</p>
+          <p>Find the possible values of <code>a</code> and the corresponding values of <code>λ</code>.</p>
+          <p><strong>Code rule:</strong> use the positive value of <code>a</code> written as a fraction in simplest form. If <code>a = p/q</code>, the code is <code>pq3</code>.</p>
+        `,
+        baseCode: "223"
+      },
+      {
+        title: "Lock 8 – Area Core",
+        story: "The core field is bounded by a trigonometric wave. Exact area only.",
+        questionHtml: `
+          <p>The curve is</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mi>y</mi>
+              <mo>=</mo>
+              <mi>sin</mi><mi>x</mi><mi>cos</mi><mn>2</mn><mi>x</mi>
+            </math>
+          </p>
+          <p>The enclosed region <code>R</code> is the region between the curve and the x-axis from <code>x = π/4</code> to <code>x = 3π/4</code>.</p>
+          <p>Find the exact area of <code>R</code>.</p>
+          <p><strong>Code rule:</strong> convert your exact answer to a decimal correct to 3 significant figures and scale to a 3-digit integer.</p>
+        `,
+        baseCode: "943"
+      },
+      {
+        title: "Lock 9 – Trig Signal Sweep",
+        story: "A rotating signal cuts through the vault sensors. Only the correct angle will align the beam.",
+        questionHtml: `
+          <p>Solve the equation</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mi>cos</mi><mo>(</mo><mi>&#952;</mi><mo>-</mo><mn>60</mn><mo>&deg;</mo><mo>)</mo>
+              <mo>=</mo>
+              <mn>3</mn><mi>sin</mi><mi>&#952;</mi>
+            </math>
+          </p>
+          <p>for <code>0&deg; &le; &#952; &le; 360&deg;</code>.</p>
+          <p><strong>Code rule:</strong> use the smaller solution correct to 1 decimal place, remove the decimal point, and take the 3-digit code.</p>
+        `,
+        baseCode: "132"
+      },
+      {
+        title: "Lock 10 – Logarithm Hatch",
+        story: "A hidden value of <code>y</code> controls the hatch release. Crack the transformed equation to open it.",
+        questionHtml: `
+          <p>Solve the equation</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mi>log</mi><msub><mn>3</mn><mrow></mrow></msub>
+              <mo>(</mo><mn>4</mn><mi>y</mi><mo>+</mo><mn>1</mn><mo>)</mo>
+              <mo>=</mo>
+              <mn>1</mn>
+              <mo>+</mo>
+              <mn>2</mn><mi>log</mi><msub><mn>3</mn><mrow></mrow></msub>
+              <mo>(</mo><mn>2</mn><mi>y</mi><mo>-</mo><mn>1</mn><mo>)</mo>
+            </math>
+          </p>
+          <p>Give your answer correct to 2 decimal places.</p>
+          <p><strong>Code rule:</strong> multiply your answer by <code>100</code> and round to the nearest integer.</p>
+        `,
+        baseCode: "119"
+      },
+      {
+        title: "Lock 11 – Parametric Tangent Rail",
+        story: "A parametric rail cuts across the chamber. The tangent at the reset point gives the unlock slope.",
+        questionHtml: `
+          <p>The curve is given parametrically by</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mi>x</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mi>cos</mi><mi>t</mi></mrow></mfrac>
+              <mo>,</mo>
+              <mspace width="1em"/>
+              <mi>y</mi><mo>=</mo><mi>ln</mi><mo>(</mo><mi>tan</mi><mi>t</mi><mo>)</mo>
+            </math>
+          </p>
+          <p>where <code>0 &lt; t &lt; &pi;/2</code>.</p>
+          <p>Find the equation of the tangent to the curve at the point where <code>y = 0</code>.</p>
+          <p><strong>Code rule:</strong> use the gradient correct to 3 significant figures, remove the decimal point, and take the 3-digit code.</p>
+        `,
+        baseCode: "141"
+      },
+      {
+        title: "Lock 12 – Insect Population Peak",
+        story: "The prediction model spikes to one greatest population. Find that maximum before the system overloads.",
+        questionHtml: `
+          <p>The number of insects in a population is modelled by</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mfrac><mrow><mi>d</mi><mi>N</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac>
+              <mo>=</mo>
+              <mi>k</mi><msup><mi>N</mi><mrow><mn>3</mn><mo>/</mo><mn>2</mn></mrow></msup>
+              <mi>cos</mi><mo>(</mo><mn>0.02</mn><mi>t</mi><mo>)</mo>
+            </math>
+          </p>
+          <p>It is given that when <code>t = 0</code>, <code>N = 100</code>, and when <code>t = 50</code>, <code>N = 625</code>.</p>
+          <p>Find the <strong>greatest value of <code>N</code></strong> predicted by this model.</p>
+          <p><strong>Code rule:</strong> round the greatest value of <code>N</code> to the nearest whole number, then use its first 3 digits.</p>
+        `,
+        baseCode: "121"
+      },
+      {
+        title: "Lock 13 – Reflection Corridor",
+        story: "A point is reflected across a laser line in 3D space. Only the reflected position opens the corridor.",
+        questionHtml: `
+          <p>With respect to the origin <code>O</code>, the point <code>A</code> has position vector</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mover><mi>OA</mi><mo>&rarr;</mo></mover>
+              <mo>=</mo>
+              <mi>i</mi><mo>+</mo><mn>5</mn><mi>j</mi><mo>+</mo><mn>6</mn><mi>k</mi>
+            </math>
+          </p>
+          <p>The line <code>l</code> has vector equation</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mi>r</mi>
+              <mo>=</mo>
+              <mn>4</mn><mi>i</mi><mo>+</mo><mi>k</mi>
+              <mo>+</mo>
+              <mi>&#955;</mi>
+              <mo>(</mo><mo>-</mo><mi>i</mi><mo>+</mo><mn>2</mn><mi>j</mi><mo>+</mo><mn>3</mn><mi>k</mi><mo>)</mo>
+            </math>
+          </p>
+          <p>Find the position vector of the reflection of <code>A</code> in <code>l</code>.</p>
+          <p><strong>Code rule:</strong> if the reflected point is <code>(p, q, r)</code>, the code is <code>pqr</code>.</p>
+        `,
+        baseCode: "338"
+      },
+      {
+        title: "Lock 14 – Iteration Vault",
+        story: "The final vault accepts only the converged value of <code>a</code>. Iterate carefully or get yeeted back to the start.",
+        questionHtml: `
+          <p>The constant <code>a</code> satisfies</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <msubsup><mo>&#x222B;</mo><mn>1</mn><mi>a</mi></msubsup>
+              <msup><mi>x</mi><mn>2</mn></msup>
+              <mi>ln</mi><mi>x</mi>
+              <mspace width="0.3em"/>
+              <mi>d</mi><mi>x</mi>
+              <mo>=</mo>
+              <mn>4</mn>
+            </math>
+          </p>
+          <p>Use an iterative formula based on the equation</p>
+          <p style="text-align:center;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mi>a</mi>
+              <mo>=</mo>
+              <msup>
+                <mrow>
+                  <mo>(</mo>
+                  <mfrac><mn>35</mn><mrow><mn>3</mn><mi>ln</mi><mi>a</mi><mo>-</mo><mn>1</mn></mrow></mfrac>
+                  <mo>)</mo>
+                </mrow>
+                <mrow><mn>1</mn><mo>/</mo><mn>3</mn></mrow>
+              </msup>
+            </math>
+          </p>
+          <p>to determine <code>a</code> correct to 2 decimal places.</p>
+          <p><strong>Code rule:</strong> multiply your final value of <code>a</code> by <code>100</code> and round to the nearest integer.</p>
+        `,
+        baseCode: "264"
+      }
+    ];
+
+    const footerMessages = [
+      {
+        quote: "Discipline is choosing what you want most over what you want now.",
+        note: "Choose your room and go to work."
+      },
+      {
+        quote: "Pressure is a privilege.",
+        note: "Accuracy first. Speed second."
+      },
+      {
+        quote: "One more rep. One more mark. One more win.",
+        note: "One page. One lock. One win."
+      },
+      {
+        quote: "You do not rise to the occasion. You fall to your level of preparation.",
+        note: "Stay calm and trust your method."
+      },
+      {
+        quote: "Lock in and trust your training.",
+        note: "Build marks through clean working."
+      },
+      {
+        quote: "Winners do the boring things better.",
+        note: "Choose your room and go to work."
+      },
+      {
+        quote: "Focus on the next move, not the whole mountain.",
+        note: "Accuracy first. Speed second."
+      },
+      {
+        quote: "Stay calm. Be sharp. Finish strong.",
+        note: "One page. One lock. One win."
+      },
+      {
+        quote: "Confidence comes from preparation.",
+        note: "Stay calm and trust your method."
+      },
+      {
+        quote: "Get comfortable being uncomfortable.",
+        note: "Build marks through clean working."
+      },
+      {
+        quote: "Small steps, repeated, become domination.",
+        note: "Choose your room and go to work."
+      },
+      {
+        quote: "The standard is the standard.",
+        note: "Accuracy first. Speed second."
+      },
+      {
+        quote: "Effort is a choice.",
+        note: "One page. One lock. One win."
+      },
+      {
+        quote: "You are closer than you think.",
+        note: "Stay calm and trust your method."
+      },
+      {
+        quote: "Train your mind to stay when it gets hard.",
+        note: "Build marks through clean working."
+      },
+      {
+        quote: "Sharp minds finish papers well.",
+        note: "Choose your room and go to work."
+      },
+      {
+        quote: "Every solved question is proof you’re improving.",
+        note: "Accuracy first. Speed second."
+      },
+      {
+        quote: "Composure creates marks.",
+        note: "One page. One lock. One win."
+      },
+      {
+        quote: "Make the hard parts your advantage.",
+        note: "Stay calm and trust your method."
+      },
+      {
+        quote: "Keep going. That’s where the edge is.",
+        note: "Build marks through clean working."
+      }
+    ];
 
     let currentIndex = loadProgress();
     if (currentIndex > locks.length) currentIndex = 0;
@@ -640,7 +906,13 @@
       const total = locks.length;
       const currentDisplay = Math.min(currentIndex + 1, total);
       progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
-      progressBarFill.style.width = ((currentIndex / total) * 100) + "%";
+      progressBarFill.style.width = `${(currentIndex / total) * 100}%`;
+    }
+
+    function updateFooter(index) {
+      const message = footerMessages[index % footerMessages.length];
+      footerQuoteEl.textContent = message.quote;
+      footerNoteEl.textContent = message.note;
     }
 
     function showLock(index) {
@@ -649,8 +921,8 @@
       lockTitleEl.textContent = lock.title;
       lockStoryEl.textContent = lock.story;
       lockQuestionEl.innerHTML = lock.questionHtml;
-
       lockBadgeEl.textContent = "Code: 3 digits";
+
       codeInputEl.value = "";
       codeInputEl.disabled = false;
       submitBtn.disabled = false;
@@ -662,6 +934,7 @@
       finalMessageEl.style.display = "none";
 
       updateProgress();
+      updateFooter(index);
       codeInputEl.focus();
     }
 
@@ -670,6 +943,8 @@
       finalMessageEl.style.display = "block";
       progressTextEl.textContent = "Complete";
       progressBarFill.style.width = "100%";
+      footerQuoteEl.textContent = "Final boss cleared.";
+      footerNoteEl.textContent = "Build marks through clean working.";
     }
 
     function normaliseCodeInput(value) {
@@ -680,7 +955,7 @@
       const input = normaliseCodeInput(codeInputEl.value);
 
       if (!/^\d{3}$/.test(input)) {
-        feedbackEl.textContent = "Codes are exactly 3 digits.";
+        feedbackEl.textContent = "Codes must be exactly 3 digits.";
         feedbackEl.className = "feedback error";
         return;
       }
@@ -701,16 +976,23 @@
       submitBtn.disabled = true;
 
       if (typeof confetti === "function") {
-        confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 } });
+        confetti({
+          particleCount: 130,
+          spread: 72,
+          origin: { y: 0.7 }
+        });
       }
 
       setTimeout(() => {
         currentIndex++;
         saveProgress(currentIndex);
 
-        if (currentIndex >= locks.length) showFinal();
-        else showLock(currentIndex);
-      }, 650);
+        if (currentIndex >= locks.length) {
+          showFinal();
+        } else {
+          showLock(currentIndex);
+        }
+      }, 700);
     }
 
     function resetProgress() {
@@ -723,50 +1005,16 @@
     submitBtn.addEventListener("click", checkCode);
     resetBtn.addEventListener("click", resetProgress);
     restartBtn.addEventListener("click", resetProgress);
+
     codeInputEl.addEventListener("keyup", (e) => {
       if (e.key === "Enter") checkCode();
     });
 
-    if (currentIndex >= locks.length) showFinal();
-    else showLock(currentIndex);
-
-    const coachQuotes = [
-  "Discipline is choosing what you want most over what you want now.",
-  "Pressure is a privilege.",
-  "One more rep. One more mark. One more win.",
-  "You do not rise to the occasion. You fall to your level of preparation.",
-  "Lock in and trust your training.",
-  "Winners do the boring things better.",
-  "Focus on the next move, not the whole mountain.",
-  "Stay calm. Be sharp. Finish strong.",
-  "Confidence comes from preparation.",
-  "Get comfortable being uncomfortable.",
-  "Small steps, repeated, become domination.",
-  "The standard is the standard.",
-  "Effort is a choice.",
-  "You are closer than you think.",
-  "Train your mind to stay when it gets hard.",
-  "Sharp minds finish papers well.",
-  "Every solved question is proof you’re improving.",
-  "Composure creates marks.",
-  "Make the hard parts your advantage.",
-  "Keep going. That’s where the edge is."
-];
-
-const footerNotes = [
-  "One lock at a time.",
-  "Accuracy first. Speed second.",
-  "Stay calm and trust your method.",
-  "Clean working wins marks.",
-  "Focus on the next step."
-];
-
-document.getElementById("footer-quote").textContent =
-  coachQuotes[Math.floor(Math.random() * coachQuotes.length)];
-
-document.getElementById("footer-note").textContent =
-  footerNotes[Math.floor(Math.random() * footerNotes.length)];
-
+    if (currentIndex >= locks.length) {
+      showFinal();
+    } else {
+      showLock(currentIndex);
+    }
   </script>
 </body>
 </html>

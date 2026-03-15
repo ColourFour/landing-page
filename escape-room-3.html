@@ -2,108 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Statistics Escape Room – Exam Vault Heist</title>
+  <title>Statistics Escape Room – Bright Vault Sprint</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * { box-sizing: border-box; }
 
+    :root {
+      --bg-1: #f4fbff;
+      --bg-2: #eefcf5;
+      --bg-3: #fff8e8;
+      --panel: rgba(255, 255, 255, 0.88);
+      --panel-strong: rgba(255, 255, 255, 0.96);
+      --ink: #123047;
+      --muted: #5f7285;
+      --line: rgba(18, 48, 71, 0.14);
+      --accent: #14b8a6;
+      --accent-2: #22c55e;
+      --accent-3: #f59e0b;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --shadow: 0 18px 40px rgba(28, 67, 102, 0.14);
+      --shadow-soft: 0 10px 24px rgba(28, 67, 102, 0.10);
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(34, 197, 94, 0.22), transparent 38%),
-        linear-gradient(180deg, #0b1220 0%, #020617 100%);
-      color: #e5e7eb;
+      color: var(--ink);
       min-height: 100vh;
       display: flex;
       align-items: stretch;
       justify-content: center;
       padding: 1.5rem;
+      background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.18), transparent 32%),
+        radial-gradient(circle at bottom center, rgba(245, 158, 11, 0.14), transparent 36%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 52%, var(--bg-3) 100%);
     }
 
-    a.btn {
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.7rem;
-  padding: 0.5rem 1.1rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: #f9fafb;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  box-shadow: 0 10px 20px rgba(22, 163, 74, 0.35);
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
-}
-
     .container {
-      max-width: 900px;
+      max-width: 960px;
       width: 100%;
-      background: rgba(15, 23, 42, 0.92);
-      border-radius: 1.5rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      padding: 1.75rem 1.75rem 2rem;
+      background: var(--panel);
+      backdrop-filter: blur(8px);
+      border-radius: 1.75rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      padding: 1.8rem 1.8rem 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.15rem;
     }
 
     header {
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-      padding-bottom: 0.75rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--line);
     }
 
     header h1 {
       margin: 0;
-      font-size: 1.6rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      font-size: 1.75rem;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      color: #0f3f5f;
     }
 
     header p {
-      margin: 0.4rem 0 0;
-      font-size: 0.95rem;
-      color: #9ca3af;
+      margin: 0.5rem 0 0;
+      font-size: 0.98rem;
+      color: var(--muted);
+      line-height: 1.5;
     }
 
     .status-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.8rem;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.9rem;
-      color: #9ca3af;
     }
 
     .pill {
-      padding: 0.25rem 0.7rem;
+      padding: 0.45rem 0.8rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
+      border: 1px solid rgba(20, 184, 166, 0.18);
+      background: rgba(255, 255, 255, 0.75);
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
+      color: #28516b;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.92rem;
     }
 
-    .pill span.icon {
-      width: 0.6rem;
-      height: 0.6rem;
+    .pill .icon {
+      width: 0.65rem;
+      height: 0.65rem;
       border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
     }
 
     .progress-bar {
       flex: 1;
-      min-width: 150px;
-      background: rgba(15, 23, 42, 0.9);
+      min-width: 180px;
+      height: 12px;
+      background: rgba(18, 48, 71, 0.08);
       border-radius: 999px;
       overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      height: 10px;
+      border: 1px solid rgba(18, 48, 71, 0.08);
       position: relative;
     }
 
@@ -111,169 +119,237 @@
       position: absolute;
       inset: 0;
       width: 0%;
-      background: linear-gradient(90deg, #22c55e, #86efac);
-      transition: width 0.3s ease;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), #86efac);
+      transition: width 0.35s ease;
     }
 
     .lock-card {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 1.25rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 1.25rem 1.5rem 1.3rem;
+      background: var(--panel-strong);
+      border-radius: 1.4rem;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      padding: 1.35rem 1.45rem 1.4rem;
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 0.85rem;
     }
 
     .lock-title {
-      font-size: 1.2rem;
-      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: #114867;
     }
 
     .lock-badge {
       font-size: 0.8rem;
-      padding: 0.15rem 0.55rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #e5e7eb;
+      background: rgba(20, 184, 166, 0.08);
+      border: 1px solid rgba(20, 184, 166, 0.18);
+      color: #0f766e;
+      white-space: nowrap;
     }
 
     .lock-story {
-      font-size: 0.95rem;
-      color: #9ca3af;
-      line-height: 1.5;
+      font-size: 0.97rem;
+      line-height: 1.55;
+      color: var(--muted);
     }
 
     .lock-question {
-      font-size: 0.97rem;
-      line-height: 1.6;
+      font-size: 0.99rem;
+      line-height: 1.68;
+      color: var(--ink);
     }
 
-    .lock-question p { margin: 0.4rem 0; }
-    .lock-question ol,
-    .lock-question ul { margin: 0.4rem 0 0.4rem 1.2rem; }
+    .lock-question p {
+      margin: 0.42rem 0;
+    }
+
+    .lock-question code {
+      background: rgba(20, 184, 166, 0.08);
+      color: #0f4e63;
+      padding: 0.12rem 0.38rem;
+      border-radius: 0.38rem;
+      font-size: 0.96em;
+    }
 
     .input-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      margin-top: 0.2rem;
+      gap: 0.8rem;
+      align-items: end;
+      margin-top: 0.15rem;
+    }
+
+    .input-block {
+      min-width: 180px;
     }
 
     label {
+      display: inline-block;
+      margin-bottom: 0.3rem;
       font-size: 0.9rem;
-      color: #9ca3af;
+      color: var(--muted);
     }
 
     input[type="text"] {
-      padding: 0.5rem 0.8rem;
-      border-radius: 0.6rem;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
+      width: 170px;
+      padding: 0.62rem 0.85rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(18, 48, 71, 0.16);
+      background: white;
+      color: var(--ink);
       font-size: 1rem;
-      width: 160px;
+      font-weight: 600;
+      box-shadow: inset 0 1px 2px rgba(18, 48, 71, 0.05);
     }
 
     input[type="text"]:focus {
       outline: none;
-      border-color: #22c55e;
-      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.35);
+      border-color: rgba(20, 184, 166, 0.55);
+      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.12);
     }
 
-    button {
+    button,
+    a.btn {
       cursor: pointer;
       border: none;
-      border-radius: 0.7rem;
-      padding: 0.5rem 1.1rem;
+      border-radius: 0.85rem;
+      padding: 0.7rem 1.15rem;
       font-size: 0.95rem;
-      font-weight: 500;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #f9fafb;
+      font-weight: 700;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.35);
-      transition: transform 0.08s ease, box-shadow 0.08s ease;
+      justify-content: center;
+      gap: 0.45rem;
+      transition: transform 0.08s ease, box-shadow 0.12s ease, opacity 0.12s ease;
     }
 
-    button:hover {
+    button:hover,
+    a.btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(22, 163, 74, 0.45);
     }
 
-    button:active {
+    button:active,
+    a.btn:active {
       transform: translateY(0);
-      box-shadow: 0 8px 16px rgba(22, 163, 74, 0.35);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 12px 24px rgba(20, 184, 166, 0.22);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 16px 28px rgba(20, 184, 166, 0.26);
     }
 
     .btn-secondary {
-      background: transparent;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      box-shadow: none;
-      color: #e5e7eb;
-    }
-
-    .btn-secondary:hover {
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
+      background: rgba(255, 255, 255, 0.8);
+      color: #28516b;
+      border: 1px solid rgba(18, 48, 71, 0.14);
+      box-shadow: var(--shadow-soft);
     }
 
     .feedback {
       min-height: 1.25rem;
-      font-size: 0.92rem;
-      margin-top: 0.2rem;
+      font-size: 0.94rem;
+      font-weight: 600;
+      margin-top: 0.15rem;
     }
 
-    .feedback.error { color: #f97373; }
-    .feedback.success { color: #22c55e; }
+    .feedback.error {
+      color: var(--danger);
+    }
+
+    .feedback.success {
+      color: var(--success);
+    }
 
     .footer {
-      margin-top: 18px;
-      padding: 16px 18px;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      background: rgba(15, 23, 42, 0.65);
-      border-radius: 16px;
+      margin-top: 0.2rem;
+      padding: 1rem 1.1rem;
+      border-radius: 1.1rem;
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.10), rgba(245, 158, 11, 0.10));
+      border: 1px solid rgba(20, 184, 166, 0.12);
       text-align: center;
+      box-shadow: var(--shadow-soft);
     }
 
     .footer-quote {
       font-size: 1rem;
-      font-weight: 700;
-      color: #f8fafc;
-      letter-spacing: 0.02em;
+      font-weight: 800;
+      color: #114867;
+      letter-spacing: 0.01em;
     }
 
     .footer-note {
-      margin-top: 6px;
-      font-size: 0.9rem;
-      color: #94a3b8;
+      margin-top: 0.35rem;
+      font-size: 0.92rem;
+      color: var(--muted);
     }
 
     .final-message {
       text-align: center;
-      padding: 1.3rem 0.5rem 0.5rem;
+      padding: 1.35rem 0.5rem 0.5rem;
     }
 
     .final-message h2 {
-      margin: 0 0 0.4rem;
-      font-size: 1.3rem;
+      margin: 0 0 0.45rem;
+      font-size: 1.45rem;
+      color: #0f766e;
     }
 
     .final-message p {
-      margin: 0.2rem 0;
-      font-size: 0.95rem;
-      color: #9ca3af;
+      margin: 0.25rem 0;
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    .final-actions {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
     }
 
     @media (max-width: 640px) {
-      .container { padding: 1.25rem 1rem 1.5rem; }
-      header h1 { font-size: 1.3rem; }
-      .lock-card { padding: 1rem 0.9rem 1.1rem; }
+      body {
+        padding: 1rem;
+      }
+
+      .container {
+        padding: 1.2rem 1rem 1.4rem;
+      }
+
+      header h1 {
+        font-size: 1.42rem;
+      }
+
+      .lock-card {
+        padding: 1rem 0.95rem 1.1rem;
+      }
+
+      .lock-title {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .input-row {
+        align-items: stretch;
+      }
+
+      input[type="text"] {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -281,19 +357,19 @@
 <body>
   <div class="container">
     <header>
-      <h1>Statistics Exam Vault Heist</h1>
-      <p>Crack each lock by solving the stats question and entering the correct 3-digit code. Unlock all 7 to complete the review.</p>
+      <h1>Statistics Exam Vault Sprint</h1>
+      <p>Solve each statistics challenge, enter the correct 3-digit code, and light up the whole vault. Clean working, sharp thinking, no chaos goblins.</p>
     </header>
 
     <div class="status-bar">
       <div class="pill">
         <span class="icon"></span>
-        <span id="progress-text">Lock 1 of 7</span>
+        <span id="progress-text">Lock 1 of 10</span>
       </div>
       <div class="progress-bar">
         <div class="progress-bar-fill" id="progress-bar-fill"></div>
       </div>
-      <div class="pill">Mode: <strong>Linear</strong></div>
+      <div class="pill">Mode: <strong>Linear Sprint</strong></div>
     </div>
 
     <div class="lock-card" id="lock-card">
@@ -301,31 +377,37 @@
         <span id="lock-title">Lock 1</span>
         <span class="lock-badge" id="lock-badge">Code: 3 digits</span>
       </div>
+
       <div class="lock-story" id="lock-story"></div>
       <div class="lock-question" id="lock-question"></div>
 
       <div class="input-row">
-        <div>
-          <label for="code-input">Enter 3-digit code:</label><br />
-          <input type="text" id="code-input" maxlength="3" autocomplete="off" />
+        <div class="input-block">
+          <label for="code-input">Enter 3-digit code:</label>
+          <input type="text" id="code-input" maxlength="3" autocomplete="off" inputmode="numeric" />
         </div>
-        <button id="submit-btn">Submit code <span>⤴</span></button>
-        <button class="btn-secondary" id="reset-btn">Reset progress</button>
+        <button id="submit-btn" class="btn-primary">Submit code <span>⤴</span></button>
+        <button id="reset-btn" class="btn-secondary">Reset progress</button>
       </div>
+
       <div id="feedback" class="feedback"></div>
     </div>
 
     <div id="final-message" class="final-message" style="display:none;">
       <h2>Vault Unlocked!</h2>
-      <p>You’ve cracked every lock and completed the Statistics escape room.</p>
-      <a class="btn" href="trophy-room.html">Claim Victory</a>
-      <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
+      <p>You cracked every lock and completed the statistics sprint.</p>
+      <p>That was tidy, fast, and very mathematically suspicious in the best way.</p>
+      <div class="final-actions">
+        <a class="btn btn-primary" href="trophy-room.html">Claim Victory</a>
+        <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
+      </div>
     </div>
 
     <div class="footer">
-  <div class="footer-quote" id="footer-quote"></div>
-  <div class="footer-note" id="footer-note"></div>
-</div>
+      <div class="footer-quote" id="footer-quote"></div>
+      <div class="footer-note" id="footer-note"></div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -345,11 +427,15 @@
     const lockCardEl = document.getElementById("lock-card");
     const finalMessageEl = document.getElementById("final-message");
     const restartBtn = document.getElementById("restart-btn");
+    const footerQuoteEl = document.getElementById("footer-quote");
+    const footerNoteEl = document.getElementById("footer-note");
 
-    const PROGRESS_KEY = "statsEscapeProgress_v1";
+    const PROGRESS_KEY = "statsEscapeProgress_v2";
 
     function saveProgress(index) {
-      try { localStorage.setItem(PROGRESS_KEY, String(index)); } catch (_) {}
+      try {
+        localStorage.setItem(PROGRESS_KEY, String(index));
+      } catch (_) {}
     }
 
     function loadProgress() {
@@ -364,84 +450,227 @@
     }
 
     function clearProgress() {
-      try { localStorage.removeItem(PROGRESS_KEY); } catch (_) {}
+      try {
+        localStorage.removeItem(PROGRESS_KEY);
+      } catch (_) {}
     }
 
-    function format3(n) {
-      return String(n).padStart(3, "0");
+    function format3(value) {
+      return String(value).padStart(3, "0");
     }
 
-   const locks = [
+    const locks = [
+      {
+        title: "Lock 1 – The Missing Data Vault",
+        story: "A damaged statistics console gives you two totals. Recover how many data values were recorded to open the first lock.",
+        questionHtml: `
+          <p>A broken archive screen shows:</p>
+          <p><code>Σ(x - 100) = 216</code> and <code>Σx = 2416</code>.</p>
+          <p>Work out how many values were in the dataset.</p>
+        `,
+        baseCode: "220"
+      },
+      {
+        title: "Lock 2 – Taxi Escape Grid",
+        story: "Eight friends must flee in two taxis, but the seating rules are strict. Count the valid arrangements to trigger the next release.",
+        questionHtml: `
+          <p>Eight friends travel in two taxis, P and Q, with 4 passengers in each taxi.</p>
+          <p>Each taxi has 1 front seat and 3 back seats.</p>
+          <p>Mark sits in the <strong>front of taxi P</strong>, and Jon and Sarah sit in the <strong>back of taxi P next to each other</strong>.</p>
+          <p>Find the number of different seating arrangements possible.</p>
+        `,
+        baseCode: "480"
+      },
+      {
+        title: "Lock 3 – Substitute Scanner",
+        story: "A new rugby player joins the squad. Use the updated mean to uncover the mystery weight.",
+        questionHtml: `
+          <p>Team B has these 15 player weights, in kg:</p>
+          <p><code>75, 79, 94, 101, 96, 77, 111, 108, 83, 84, 86, 115, 82, 113, 95</code></p>
+          <p>A new player joins, and the mean weight of the 16 players is now <strong>93.9 kg</strong>.</p>
+          <p>Find the weight of the new player.</p>
+          <p><strong>Code rule:</strong> use the integer part of the answer.</p>
+        `,
+        baseCode: "103"
+      },
+      {
+        title: "Lock 4 – Spinner Signal",
+        story: "Two fair spinners feed a random sum into the lock. You only escape if you can work out the conditional probability.",
+        questionHtml: `
+          <p>Spinner A has edges numbered <code>1, 2, 3, 3</code>.</p>
+          <p>Spinner B has edges numbered <code>-3, -2, -1, 1</code>.</p>
+          <p>Each spinner is spun once and <code>X</code> is the sum.</p>
+          <p>Find the probability that <code>X</code> is <strong>even</strong>, given that <code>X</code> is <strong>positive</strong>.</p>
+          <p><strong>Code rule:</strong> multiply your probability by <code>1000</code> and round to the nearest whole number.</p>
+        `,
+        baseCode: "556"
+      },
+      {
+        title: "Lock 5 – Normal Distribution Core",
+        story: "The final chamber runs on a normal model. Decode the probability and the vault is yours.",
+        questionHtml: `
+          <p>The random variable <code>Y</code> is normally distributed with mean <code>μ</code> and standard deviation <code>σ</code>.</p>
+          <p>It is given that <code>σ = 2μ/3</code>.</p>
+          <p>Find the probability that a random value of <code>Y</code> is less than <code>2μ</code>.</p>
+          <p><strong>Code rule:</strong> multiply your probability by <code>1000</code> and round to the nearest whole number.</p>
+        `,
+        baseCode: "933"
+      },
+      {
+        title: "Lock 6 – Marble Relay",
+        story: "A red marble changes the system, but a blue marble resets it. Only the correct conditional probability will open the relay gate.",
+        questionHtml: `
+          <p>A bag contains <code>9 blue</code> marbles and <code>3 red</code> marbles.</p>
+          <p>One marble is chosen at random.</p>
+          <p>If this marble is blue, it is replaced. If this marble is red, it is not replaced.</p>
+          <p>A second marble is then chosen.</p>
+          <p>Find the probability that the <strong>first marble was blue</strong>, given that the <strong>second marble was red</strong>.</p>
+          <p><strong>Code rule:</strong> multiply your probability by <code>1000</code> and round to the nearest whole number.</p>
+        `,
+        baseCode: "805"
+      },
+      {
+        title: "Lock 7 – Striker Sequence",
+        story: "Sam gets 10 shots at the target board. The door opens only if you can decode the chance that she falls short of 8 goals.",
+        questionHtml: `
+          <p>Sam scores on any attempt with probability <code>0.7</code>, independently of all other attempts.</p>
+          <p>She makes <strong>10 attempts</strong>.</p>
+          <p>Find the probability that she scores on <strong>fewer than 8</strong> of these attempts.</p>
+          <p><strong>Code rule:</strong> multiply your probability by <code>1000</code> and round to the nearest whole number.</p>
+        `,
+        baseCode: "617"
+      },
+      {
+        title: "Lock 8 – Third Goal Trigger",
+        story: "Wei keeps firing until he reaches three goals. The lock only responds if you catch the exact finishing moment.",
+        questionHtml: `
+          <p>Wei scores on any attempt with probability <code>0.6</code>, independently of all other attempts.</p>
+          <p>He keeps making attempts until he has scored <strong>3 goals</strong>.</p>
+          <p>Find the probability that he scores his <strong>third goal on his 7th attempt</strong>.</p>
+          <p><strong>Code rule:</strong> multiply your probability by <code>1000</code> sum 100 and round to the nearest whole number.</p>
+        `,
+        baseCode: "183"
+      },
+      {
+        title: "Lock 9 – Puzzle Hall Average",
+        story: "A time log from 150 puzzle-solvers has survived. Estimate the mean completion time to restore the hall display.",
+        questionHtml: `
+          <p>The times taken, in minutes, by 150 students to complete a puzzle are shown below.</p>
+          <p><code>0 ≤ t < 20: 8</code></p>
+          <p><code>20 ≤ t < 30: 23</code></p>
+          <p><code>30 ≤ t < 35: 35</code></p>
+          <p><code>35 ≤ t < 40: 52</code></p>
+          <p><code>40 ≤ t < 50: 20</code></p>
+          <p><code>50 ≤ t < 70: 12</code></p>
+          <p>Calculate an <strong>estimate for the mean time</strong>.</p>
+          <p><strong>Code rule:</strong> multiply your estimate by <code>10</code> and round to the nearest whole number.</p>
+        `,
+        baseCode: "358"
+      },
+      {
+        title: "Lock 10 – Rice Bag Sweep",
+        story: "A packing machine fills rice bags around a normal distribution. Work out how many heavy bags to expect in a random sweep.",
+        questionHtml: `
+          <p>The masses of small bags of rice are normally distributed with mean <code>1.20 kg</code> and standard deviation <code>0.16 kg</code>.</p>
+          <p>In a random sample of <strong>500</strong> bags, how many would you expect to have mass <strong>greater than 1.26 kg</strong>?</p>
+        `,
+        baseCode: "177"
+      },
+      {
+        title: "Lock 11 – Variance Chamber",
+        story: "Tournament points are fed into a variance engine. Stabilise the chamber by calculating the spread exactly.",
+        questionHtml: `
+          <p>In each game, Anil scores:</p>
+          <p><code>2</code> points for a win, <code>1</code> point for a draw, and <code>0</code> points for a loss.</p>
+          <p>The probabilities for each game are <code>0.5</code> for a win, <code>0.3</code> for a draw, and <code>0.2</code> for a loss.</p>
+          <p>The random variable <code>X</code> is the total number of points Anil scores in his first <strong>3 games</strong>.</p>
+          <p>Find <strong>Var(X)</strong>.</p>
+          <p><strong>Code rule:</strong> multiply your variance by <code>100</code>.</p>
+        `,
+        baseCode: "183"
+      }
+    ];
+
+   const footerMessages = [
   {
-    title: "Lock 1 – The Missing Data Vault",
-    story: "A damaged statistics console gives you two totals. Recover how many data values were recorded to open the first lock.",
-    questionHtml: `
-      <p>A broken archive screen shows:</p>
-      <p><code>Σ(x - 100) = 216</code> and <code>Σx = 2416</code>.</p>
-      <p>Work out how many values were in the dataset.</p>
-    `,
-    baseCode: "220"
+    quote: "Discipline is choosing what you want most over what you want now.",
+    note: "Choose your room and go to work."
   },
   {
-    title: "Lock 2 – Committee Blackout",
-    story: "A security team of 6 is chosen at random from 7 men and 9 women. You will only have success if no men are present.",
-    questionHtml: `
-      <p>Find the probability that the committee contains <strong>no men</strong>. Your code is the solution multiplied by 1000</p>
-    `,
-    baseCode: "105"
+    quote: "Pressure is a privilege.",
+    note: "Accuracy first. Speed second."
   },
   {
-    title: "Lock 3 – Robot Colour Raid",
-    story: "Amos tears open four biscuit packets in a row. The vault opens only if all four robots are different colours.",
-    questionHtml: `
-      <p>Each biscuit packet contains one robot.</p>
-      <p>There are 4 possible colours: red, yellow, blue and green, and each colour is equally likely.</p>
-      <p>Find the probability that the <strong>first four packets</strong> Amos opens all contain <strong>different coloured robots</strong>. Your code is the probability multiplied by 1000</p>
-    `,
-    baseCode: "938"
+    quote: "One more rep. One more mark. One more win.",
+    note: "One page. One lock. One win."
   },
   {
-    title: "Lock 4 – Taxi Escape Grid",
-    story: "Eight friends must flee in two taxis, but the seating rules are strict. Count the valid arrangements to trigger the next release.",
-    questionHtml: `
-      <p>Eight friends travel in two taxis, P and Q, with 4 passengers in each taxi.</p>
-      <p>Each taxi has 1 front seat and 3 back seats.</p>
-      <p>Mark sits in the <strong>front of taxi P</strong>, and Jon and Sarah sit in the <strong>back of taxi P next to each other</strong>.</p>
-      <p>Find the number of different seating arrangements possible.</p>
-    `,
-    baseCode: "480"
+    quote: "You do not rise to the occasion. You fall to your level of preparation.",
+    note: "Stay calm and trust your method."
   },
   {
-    title: "Lock 5 – Substitute Scanner",
-    story: "A new rugby player joins the squad. Use the new mean to uncover the mystery weight.",
-    questionHtml: `
-      <p>Team B has these 15 player weights, in kg:</p>
-      <p><code>75, 79, 94, 101, 96, 77, 111, 108, 83, 84, 86, 115, 82, 113, 95</code></p>
-      <p>A new player joins, and the mean weight of the 16 players is now <strong>93.9 kg</strong>.</p>
-      <p>Find the weight of the new player.</p>
-    `,
-    baseCode: "103"
+    quote: "Lock in and trust your training.",
+    note: "Build marks through clean working."
   },
   {
-    title: "Lock 6 – Spinner Signal",
-    story: "Two fair spinners feed a random sum into the lock. You only escape if you can work out the conditional probability.",
-    questionHtml: `
-      <p>Spinner A has edges numbered <code>1, 2, 3, 3</code>.</p>
-      <p>Spinner B has edges numbered <code>-3, -2, -1, 1</code>.</p>
-      <p>Each spinner is spun once and <code>X</code> is the sum.</p>
-      <p>Find the probability that <code>X</code> is <strong>even</strong>, given that <code>X</code> is <strong>positive</strong>. Multiply your result by 1000.</p>
-    `,
-    baseCode: "556"
+    quote: "Winners do the boring things better.",
+    note: "Choose your room and go to work."
   },
   {
-    title: "Lock 7 – Normal Distribution Core",
-    story: "The final chamber runs on a normal model. Decode the probability and the vault is yours.",
-    questionHtml: `
-      <p>The random variable <code>Y</code> is normally distributed with mean <code>μ</code> and standard deviation <code>σ</code>.</p>
-      <p>It is given that <code>σ = 2μ/3</code>.</p>
-      <p>Find the probability that a random value of <code>Y</code> is less than <code>2μ</code>. Your solution is probability multiplied by 1000.</p>
-    `,
-    baseCode: "933"
+    quote: "Focus on the next move, not the whole mountain.",
+    note: "Accuracy first. Speed second."
+  },
+  {
+    quote: "Stay calm. Be sharp. Finish strong.",
+    note: "One page. One lock. One win."
+  },
+  {
+    quote: "Confidence comes from preparation.",
+    note: "Stay calm and trust your method."
+  },
+  {
+    quote: "Get comfortable being uncomfortable.",
+    note: "Build marks through clean working."
+  },
+  {
+    quote: "Small steps, repeated, become domination.",
+    note: "Choose your room and go to work."
+  },
+  {
+    quote: "The standard is the standard.",
+    note: "Accuracy first. Speed second."
+  },
+  {
+    quote: "Effort is a choice.",
+    note: "One page. One lock. One win."
+  },
+  {
+    quote: "You are closer than you think.",
+    note: "Stay calm and trust your method."
+  },
+  {
+    quote: "Train your mind to stay when it gets hard.",
+    note: "Build marks through clean working."
+  },
+  {
+    quote: "Sharp minds finish papers well.",
+    note: "Choose your room and go to work."
+  },
+  {
+    quote: "Every solved question is proof you’re improving.",
+    note: "Accuracy first. Speed second."
+  },
+  {
+    quote: "Composure creates marks.",
+    note: "One page. One lock. One win."
+  },
+  {
+    quote: "Make the hard parts your advantage.",
+    note: "Stay calm and trust your method."
+  },
+  {
+    quote: "Keep going. That’s where the edge is.",
+    note: "Build marks through clean working."
   }
 ];
 
@@ -452,7 +681,13 @@
       const total = locks.length;
       const currentDisplay = Math.min(currentIndex + 1, total);
       progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
-      progressBarFill.style.width = ((currentIndex / total) * 100) + "%";
+      progressBarFill.style.width = `${(currentIndex / total) * 100}%`;
+    }
+
+    function updateFooter(index) {
+      const message = footerMessages[index % footerMessages.length];
+      footerQuoteEl.textContent = message.quote;
+      footerNoteEl.textContent = message.note;
     }
 
     function showLock(index) {
@@ -461,8 +696,8 @@
       lockTitleEl.textContent = lock.title;
       lockStoryEl.textContent = lock.story;
       lockQuestionEl.innerHTML = lock.questionHtml;
-
       lockBadgeEl.textContent = "Code: 3 digits";
+
       codeInputEl.value = "";
       codeInputEl.disabled = false;
       submitBtn.disabled = false;
@@ -474,6 +709,7 @@
       finalMessageEl.style.display = "none";
 
       updateProgress();
+      updateFooter(index);
       codeInputEl.focus();
     }
 
@@ -482,6 +718,8 @@
       finalMessageEl.style.display = "block";
       progressTextEl.textContent = "Complete";
       progressBarFill.style.width = "100%";
+      footerQuoteEl.textContent = "Vault complete. Brains victorious.";
+      footerNoteEl.textContent = "You cleared every lock. That is deeply inconvenient for the vault security team.";
     }
 
     function normaliseCodeInput(value) {
@@ -492,7 +730,7 @@
       const input = normaliseCodeInput(codeInputEl.value);
 
       if (!/^\d{3}$/.test(input)) {
-        feedbackEl.textContent = "Codes are exactly 3 digits.";
+        feedbackEl.textContent = "Codes must be exactly 3 digits.";
         feedbackEl.className = "feedback error";
         return;
       }
@@ -501,7 +739,7 @@
       const expected = format3(lock.baseCode);
 
       if (input !== expected) {
-        feedbackEl.textContent = "Incorrect code. Check your working and try again.";
+        feedbackEl.textContent = "Not quite. Check the method and try again.";
         feedbackEl.className = "feedback error";
         codeInputEl.select();
         return;
@@ -513,16 +751,23 @@
       submitBtn.disabled = true;
 
       if (typeof confetti === "function") {
-        confetti({ particleCount: 120, spread: 70, origin: { y: 0.7 } });
+        confetti({
+          particleCount: 130,
+          spread: 75,
+          origin: { y: 0.7 }
+        });
       }
 
       setTimeout(() => {
         currentIndex++;
         saveProgress(currentIndex);
 
-        if (currentIndex >= locks.length) showFinal();
-        else showLock(currentIndex);
-      }, 650);
+        if (currentIndex >= locks.length) {
+          showFinal();
+        } else {
+          showLock(currentIndex);
+        }
+      }, 700);
     }
 
     function resetProgress() {
@@ -535,50 +780,16 @@
     submitBtn.addEventListener("click", checkCode);
     resetBtn.addEventListener("click", resetProgress);
     restartBtn.addEventListener("click", resetProgress);
+
     codeInputEl.addEventListener("keyup", (e) => {
       if (e.key === "Enter") checkCode();
     });
 
-    if (currentIndex >= locks.length) showFinal();
-    else showLock(currentIndex);
-
-    const coachQuotes = [
-  "Discipline is choosing what you want most over what you want now.",
-  "Pressure is a privilege.",
-  "One more rep. One more mark. One more win.",
-  "You do not rise to the occasion. You fall to your level of preparation.",
-  "Lock in and trust your training.",
-  "Winners do the boring things better.",
-  "Focus on the next move, not the whole mountain.",
-  "Stay calm. Be sharp. Finish strong.",
-  "Confidence comes from preparation.",
-  "Get comfortable being uncomfortable.",
-  "Small steps, repeated, become domination.",
-  "The standard is the standard.",
-  "Effort is a choice.",
-  "You are closer than you think.",
-  "Train your mind to stay when it gets hard.",
-  "Sharp minds finish papers well.",
-  "Every solved question is proof you’re improving.",
-  "Composure creates marks.",
-  "Make the hard parts your advantage.",
-  "Keep going. That’s where the edge is."
-];
-
-const footerNotes = [
-  "One lock at a time.",
-  "Accuracy first. Speed second.",
-  "Stay calm and trust your method.",
-  "Clean working wins marks.",
-  "Focus on the next step."
-];
-
-document.getElementById("footer-quote").textContent =
-  coachQuotes[Math.floor(Math.random() * coachQuotes.length)];
-
-document.getElementById("footer-note").textContent =
-  footerNotes[Math.floor(Math.random() * footerNotes.length)];
-
+    if (currentIndex >= locks.length) {
+      showFinal();
+    } else {
+      showLock(currentIndex);
+    }
   </script>
 </body>
 </html>
