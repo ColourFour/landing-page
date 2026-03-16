@@ -2,817 +2,854 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Mechanics Escape Room – Field Test Vault</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Victory Screen</title>
   <style>
-    * { box-sizing: border-box; }
-
     :root {
-      --bg-1: #f5efe3;
-      --bg-2: #eadfcf;
-      --bg-3: #d9c7ad;
-      --panel: rgba(255, 251, 244, 0.88);
-      --panel-strong: rgba(255, 252, 247, 0.96);
-      --ink: #2f2419;
-      --muted: #6f6253;
-      --line: rgba(92, 74, 56, 0.16);
-      --line-strong: rgba(92, 74, 56, 0.26);
-      --accent: #a67c52;
-      --accent-2: #8a6844;
-      --accent-3: #c19a6b;
-      --success: #2f855a;
-      --danger: #c53030;
-      --shadow: 0 18px 38px rgba(70, 52, 37, 0.18);
-      --shadow-soft: 0 10px 22px rgba(70, 52, 37, 0.12);
+      --bg1: #120303;
+      --bg2: #2a0d0d;
+      --gold1: #facc15;
+      --gold2: #f59e0b;
+      --gold3: #fde68a;
+      --red: #dc2626;
+      --red-soft: #fecaca;
+      --ink: #fff7ed;
+      --panel: rgba(20, 8, 8, 0.78);
+      --line: rgba(255,255,255,0.14);
     }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
-      min-height: 100vh;
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      padding: 1.5rem;
       background:
-        radial-gradient(circle at top left, rgba(193, 154, 107, 0.22), transparent 26%),
-        radial-gradient(circle at top right, rgba(166, 124, 82, 0.16), transparent 28%),
-        radial-gradient(circle at bottom center, rgba(255,255,255,0.18), transparent 38%),
-        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 54%, var(--bg-3) 100%);
+        radial-gradient(circle at 20% 20%, rgba(250, 204, 21, 0.14), transparent 22%),
+        radial-gradient(circle at 80% 15%, rgba(239, 68, 68, 0.16), transparent 22%),
+        radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.12), transparent 26%),
+        linear-gradient(180deg, var(--bg2), #090202 65%, #130505 100%);
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 980px;
-      width: 100%;
-      background: var(--panel);
-      backdrop-filter: blur(8px);
-      border-radius: 1.65rem;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,0.55);
-      padding: 1.8rem 1.8rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    header {
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 0.9rem;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.75rem;
-      line-height: 1.12;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      color: #3d2d1f;
-    }
-
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 0.98rem;
-      line-height: 1.55;
-      color: var(--muted);
-      max-width: 820px;
-    }
-
-    .status-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .pill {
-      padding: 0.42rem 0.82rem;
-      border-radius: 999px;
-      border: 1px solid rgba(92, 74, 56, 0.18);
-      background: rgba(255,255,255,0.62);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      color: #5d4a39;
-      font-size: 0.92rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .pill .icon {
-      width: 0.65rem;
-      height: 0.65rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-3));
-      box-shadow: 0 0 10px rgba(193, 154, 107, 0.4);
-    }
-
-    .progress-bar {
-      flex: 1;
-      min-width: 180px;
-      height: 12px;
-      background: rgba(92, 74, 56, 0.08);
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid rgba(92, 74, 56, 0.10);
+    .hero {
+      min-height: 100vh;
       position: relative;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+      isolation: isolate;
+      overflow: hidden;
     }
 
-    .progress-bar-fill {
+    .hero::before {
+      content: "";
       position: absolute;
       inset: 0;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-3), #d7b78e);
-      transition: width 0.35s ease;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 38%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 28%, rgba(255,255,255,0.03));
+      z-index: -2;
     }
 
-    .lock-card {
-      background: var(--panel-strong);
-      border-radius: 1.35rem;
+    .trophy-bg {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.18;
+      filter: drop-shadow(0 0 30px rgba(250, 204, 21, 0.22));
+    }
+
+    .trophy-bg svg {
+      width: min(70vw, 700px);
+      height: auto;
+    }
+
+    #fireworks {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-card {
+      position: relative;
+      width: min(900px, 100%);
+      padding: 28px 24px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(36, 11, 11, 0.88), rgba(16, 5, 5, 0.82));
       border: 1px solid var(--line);
-      box-shadow: var(--shadow-soft);
-      padding: 1.3rem 1.45rem 1.35rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      text-align: center;
+      backdrop-filter: blur(6px);
+      z-index: 1;
     }
 
-    .lock-title {
-      font-size: 1.22rem;
-      font-weight: 700;
-      display: flex;
+    .hero-badge {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      color: #3b2b1d;
-    }
-
-    .lock-badge {
-      font-size: 0.8rem;
-      padding: 0.22rem 0.62rem;
+      gap: 8px;
+      padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(166, 124, 82, 0.24);
-      background: rgba(193, 154, 107, 0.10);
-      color: #6e5337;
-      white-space: nowrap;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--gold3);
+      margin-bottom: 14px;
     }
 
-    .lock-story {
-      font-size: 0.96rem;
-      color: var(--muted);
-      line-height: 1.55;
+    h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 7vw, 5rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 20px rgba(250, 204, 21, 0.18);
     }
 
-    .lock-question {
-      font-size: 0.98rem;
-      line-height: 1.65;
-      color: var(--ink);
+    .hero p {
+      margin: 16px auto 0;
+      max-width: 700px;
+      font-size: 1.08rem;
+      line-height: 1.6;
+      color: #f5d9c7;
     }
 
-    .lock-question p { margin: 0.42rem 0; }
-
-    .lock-question code {
-      background: rgba(166, 124, 82, 0.10);
-      color: #4b3827;
-      padding: 0.12rem 0.38rem;
-      border-radius: 0.38rem;
-      font-size: 0.96em;
-    }
-
-    .input-row {
+    .hero-actions {
+      margin-top: 24px;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem;
-      align-items: end;
-      margin-top: 0.15rem;
+      justify-content: center;
+      gap: 12px;
     }
 
-    .input-block {
-      min-width: 180px;
-    }
-
-    label {
-      display: inline-block;
-      margin-bottom: 0.3rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    input[type="text"] {
-      width: 170px;
-      padding: 0.64rem 0.84rem;
-      border-radius: 0.72rem;
-      border: 1px solid rgba(92, 74, 56, 0.18);
-      background: white;
-      color: var(--ink);
-      font-size: 1rem;
-      font-weight: 700;
-      box-shadow: inset 0 1px 2px rgba(92, 74, 56, 0.05);
-    }
-
-    input[type="text"]:focus {
-      outline: none;
-      border-color: rgba(166, 124, 82, 0.55);
-      box-shadow: 0 0 0 4px rgba(193, 154, 107, 0.12);
-    }
-
-    button,
-    a.btn {
+    .btn {
+      appearance: none;
+      border: 0;
+      text-decoration: none;
       cursor: pointer;
-      border: none;
-      border-radius: 0.82rem;
-      padding: 0.7rem 1.12rem;
-      font-size: 0.95rem;
-      font-weight: 700;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.45rem;
-      text-decoration: none;
-      transition: transform 0.08s ease, box-shadow 0.12s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #fffdf8;
-      box-shadow: 0 12px 24px rgba(138, 104, 68, 0.24);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 28px rgba(138, 104, 68, 0.30);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.65);
-      border: 1px solid rgba(92, 74, 56, 0.16);
-      color: #5d4a39;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-1px);
-    }
-
-    .feedback {
-      min-height: 1.28rem;
-      font-size: 0.94rem;
-      font-weight: 600;
-      margin-top: 0.15rem;
-    }
-
-    .feedback.error { color: var(--danger); }
-    .feedback.success { color: var(--success); }
-
-    .footer {
-      margin-top: 0.1rem;
-      padding: 1rem 1.1rem;
-      border-radius: 1rem;
-      background: linear-gradient(135deg, rgba(193,154,107,0.12), rgba(166,124,82,0.10));
-      border: 1px solid rgba(166,124,82,0.16);
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .footer-quote {
-      font-size: 1rem;
+      padding: 13px 18px;
+      border-radius: 16px;
       font-weight: 800;
-      color: #3b2b1d;
-      letter-spacing: 0.01em;
+      font-size: 1rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
     }
 
-    .footer-note {
-      margin-top: 0.35rem;
-      font-size: 0.92rem;
-      color: var(--muted);
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.02); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-gold {
+      color: #331700;
+      background: linear-gradient(135deg, var(--gold1), var(--gold2));
+      box-shadow: 0 12px 28px rgba(245, 158, 11, 0.3);
     }
 
-    .final-message {
+    .btn-ghost {
+      color: var(--ink);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .section {
+      padding: 42px 20px 80px;
+    }
+
+    .game-wrap {
+      width: min(960px, 100%);
+      margin: 0 auto;
+      padding: 24px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(29, 11, 11, 0.9), rgba(14, 5, 5, 0.9));
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    .game-head {
       text-align: center;
-      padding: 1.4rem 0.5rem 0.5rem;
+      margin-bottom: 18px;
     }
 
-    .final-message h2 {
-      margin: 0 0 0.45rem;
-      font-size: 1.45rem;
-      color: #4a3724;
+    .game-head h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
     }
 
-    .final-message p {
-      margin: 0.22rem 0;
-      font-size: 0.98rem;
-      color: var(--muted);
+    .game-head p {
+      margin: 10px auto 0;
+      max-width: 760px;
+      color: #f5d9c7;
+      line-height: 1.55;
     }
 
-    .final-actions {
-      margin-top: 1rem;
+    .hud {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .hud-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .hud-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #d6b6a6;
+    }
+
+    .hud-value {
+      margin-top: 4px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .game-area {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, #4c0f10 0%, #7a1f1f 42%, #b45309 100%);
+    }
+
+    #gameCanvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      background:
+        linear-gradient(180deg, rgba(255, 245, 157, 0.18), transparent 45%),
+        linear-gradient(180deg, #571313, #9f2f2f 60%, #c27813 100%);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(10, 3, 3, 0.5);
+      transition: opacity 0.25s ease;
+    }
+
+    .overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .panel {
+      width: min(520px, 100%);
+      text-align: center;
+      padding: 22px 20px;
+      border-radius: 22px;
+      background: rgba(25, 9, 9, 0.86);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    }
+
+    .panel h3 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .panel p {
+      margin: 10px 0 0;
+      color: #f5d9c7;
+      line-height: 1.55;
+    }
+
+    .panel .panel-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 0.8rem;
     }
 
-    @media (max-width: 640px) {
-      body { padding: 1rem; }
-      .container { padding: 1.2rem 1rem 1.45rem; }
-      header h1 { font-size: 1.38rem; }
-      .lock-card { padding: 1rem 0.95rem 1.08rem; }
-      .lock-title {
-        flex-direction: column;
-        align-items: flex-start;
+    .star-zone {
+      margin-top: 18px;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .star-wrap.hidden { display: none; }
+    .star-wrap {
+      animation: popIn 0.7s ease;
+    }
+
+    .red-star {
+      width: 94px;
+      height: 94px;
+      margin: 0 auto 10px;
+      background: #dc2626;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 92%, 50% 71%, 21% 92%, 32% 57%, 2% 35%, 39% 35%);
+      filter: drop-shadow(0 0 16px rgba(220, 38, 38, 0.55));
+    }
+
+    .star-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fee2e2;
+    }
+
+    .star-text {
+      margin-top: 6px;
+      color: #fecaca;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 760px) {
+      .hud {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      .input-row {
-        align-items: stretch;
-      }
-      input[type="text"] {
-        width: 100%;
-      }
+      .hero-card, .game-wrap { padding: 20px 16px; }
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <header>
-      <h1>Mechanics Exam Vault – Field Test</h1>
-      <p>Crack each mechanics lock by solving the motion, force, or energy problem and entering the correct 3-digit code. Steady method beats chaos every time.</p>
-    </header>
+  <section class="hero">
+    <canvas id="fireworks"></canvas>
 
-    <div class="status-bar">
-      <div class="pill">
-        <span class="icon"></span>
-        <span id="progress-text">Lock 1 of 10</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-bar-fill" id="progress-bar-fill"></div>
-      </div>
-      <div class="pill">Mode: <strong>Linear Field Run</strong></div>
+    <div class="trophy-bg" aria-hidden="true">
+      <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M96 36h108v28c0 21 13 39 33 46v19c0 30-19 56-47 66l-7 2v23h23c9 0 16 7 16 16v6H78v-6c0-9 7-16 16-16h23v-23l-7-2c-28-10-47-36-47-66v-19c20-7 33-25 33-46V36Z" fill="#FACC15" opacity="0.9"/>
+        <path d="M78 52H45c0 35 18 58 51 63" stroke="#FACC15" stroke-width="16" stroke-linecap="round"/>
+        <path d="M222 52h33c0 35-18 58-51 63" stroke="#FACC15" stroke-width="16" stroke-linecap="round"/>
+        <rect x="120" y="218" width="60" height="24" rx="10" fill="#F59E0B"/>
+      </svg>
     </div>
 
-    <div class="lock-card" id="lock-card">
-      <div class="lock-title">
-        <span id="lock-title">Lock 1</span>
-        <span class="lock-badge" id="lock-badge">Code: 3 digits</span>
+    <div class="hero-card">
+      <div class="hero-badge">🏆 Vault Cleared</div>
+      <h1>Victory Unlocked</h1>
+      <p>
+        You cleared the room. Celebrate first, then scroll down for the bonus challenge.
+        Beat the golden bird run in three tries and earn the red star.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#bonus-game">Go to Bonus Game</a>
+        <button class="btn btn-ghost" id="burst-btn" type="button">More Fireworks</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bonus-game">
+    <div class="game-wrap">
+      <div class="game-head">
+        <h2>Golden Bird Challenge</h2>
+        <p>
+          You have <strong>3 chances</strong>. Reach a score of <strong>20</strong> to win the bonus round.
+          The pipes are forgiving, the bird is gold, and success earns you a giant red star.
+        </p>
       </div>
 
-      <div class="lock-story" id="lock-story"></div>
-      <div class="lock-question" id="lock-question"></div>
-
-      <div class="input-row">
-        <div class="input-block">
-          <label for="code-input">Enter 3-digit code:</label>
-          <input type="text" id="code-input" maxlength="3" autocomplete="off" inputmode="numeric" />
+      <div class="hud">
+        <div class="hud-card">
+          <div class="hud-label">Score</div>
+          <div class="hud-value" id="score-display">0</div>
         </div>
-        <button id="submit-btn" class="btn-primary">Submit code <span>⤴</span></button>
-        <button id="reset-btn" class="btn-secondary">Reset progress</button>
+        <div class="hud-card">
+          <div class="hud-label">Best</div>
+          <div class="hud-value" id="best-display">0</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Tries Left</div>
+          <div class="hud-value" id="tries-display">3</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Goal</div>
+          <div class="hud-value">20</div>
+        </div>
       </div>
 
-      <div id="feedback" class="feedback"></div>
-    </div>
+      <div class="game-area">
+        <canvas id="gameCanvas" width="900" height="520"></canvas>
 
-    <div id="final-message" class="final-message" style="display:none;">
-      <h2>Vault Unlocked!</h2>
-      <p>You cracked every active mechanics lock and completed the field test.</p>
-      <p>Nice bit of force-and-motion wizardry there.</p>
-      <div class="final-actions">
-        <a class="btn btn-primary" href="trophy-room.html">Claim Victory</a>
-        <button id="restart-btn" class="btn-secondary">Restart from Lock 1</button>
+        <div class="overlay" id="game-overlay">
+          <div class="panel">
+            <h3 id="overlay-title">Ready?</h3>
+            <p id="overlay-text">Tap, click, or press space to begin. The game starts 3 seconds after your first input.</p>
+            <div class="panel-actions">
+              <button class="btn btn-gold" id="start-btn" type="button">Start Run</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="star-zone">
+        <div class="star-wrap hidden" id="star-wrap">
+          <div class="red-star"></div>
+          <div class="star-title">Red Star Earned</div>
+          <div class="star-text">You beat the Golden Bird Challenge.</div>
+        </div>
       </div>
     </div>
-
-    <div class="footer">
-      <div class="footer-quote" id="footer-quote"></div>
-      <div class="footer-note" id="footer-note"></div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  </section>
 
   <script>
-    "use strict";
+    // ---------- Fireworks hero background ----------
+    const fwCanvas = document.getElementById('fireworks');
+    const fwCtx = fwCanvas.getContext('2d');
+    let fwW = 0;
+    let fwH = 0;
+    const sparks = [];
 
-    const lockTitleEl = document.getElementById("lock-title");
-    const lockBadgeEl = document.getElementById("lock-badge");
-    const lockStoryEl = document.getElementById("lock-story");
-    const lockQuestionEl = document.getElementById("lock-question");
-    const codeInputEl = document.getElementById("code-input");
-    const submitBtn = document.getElementById("submit-btn");
-    const resetBtn = document.getElementById("reset-btn");
-    const feedbackEl = document.getElementById("feedback");
-    const progressTextEl = document.getElementById("progress-text");
-    const progressBarFill = document.getElementById("progress-bar-fill");
-    const lockCardEl = document.getElementById("lock-card");
-    const finalMessageEl = document.getElementById("final-message");
-    const restartBtn = document.getElementById("restart-btn");
-    const footerQuoteEl = document.getElementById("footer-quote");
-    const footerNoteEl = document.getElementById("footer-note");
-
-    const PROGRESS_KEY = "mechanicsEscapeProgress_v2";
-
-    function saveProgress(index) {
-      try {
-        localStorage.setItem(PROGRESS_KEY, String(index));
-      } catch (_) {}
+    function resizeFireworks() {
+      fwW = fwCanvas.width = window.innerWidth;
+      fwH = fwCanvas.height = window.innerHeight;
     }
+    resizeFireworks();
+    window.addEventListener('resize', resizeFireworks);
 
-    function loadProgress() {
-      try {
-        const raw = localStorage.getItem(PROGRESS_KEY);
-        if (raw === null) return 0;
-        const idx = parseInt(raw, 10);
-        return Number.isFinite(idx) && idx >= 0 ? idx : 0;
-      } catch (_) {
-        return 0;
-      }
-    }
-
-    function clearProgress() {
-      try {
-        localStorage.removeItem(PROGRESS_KEY);
-      } catch (_) {}
-    }
-
-    function format3(value) {
-      return String(value).padStart(3, "0");
-    }
-
-    const locks = [
-      {
-        title: "Lock 1 – Collision Chamber",
-        story: "A momentum gate has glitched and accepts only the larger possible outcome.",
-        questionHtml: `
-          <p>Particle <strong>P</strong> has mass <code>0.1 kg</code> and is projected at <code>4 m s^-1</code> towards stationary particle <strong>Q</strong> of mass <code>0.4 kg</code> on a smooth horizontal plane.</p>
-          <p>After the collision, the two particles have equal speeds.</p>
-          <p>There are two possible values for the speed of <strong>P</strong> after the collision. Find both, then enter the <strong>larger</strong> one as your code value.</p>
-        `,
-        baseCode: "133"
-      },
-      {
-        title: "Lock 2 – Tow-Bar Control Room",
-        story: "The transport system is overloaded. Find the hidden trailer mass to reopen the route.",
-        questionHtml: `
-          <p>A car of mass <code>1500 kg</code> tows a trailer of mass <code>m kg</code> along a straight horizontal road.</p>
-          <p>The trailer experiences a resistance of <code>200 N</code>. The tow-bar tension is <code>300 N</code>. The car-trailer system accelerates at <code>1.25 m s^-2</code>.</p>
-          <p>Find the value of <code>m</code>.</p>
-          <p><strong>Code rule:</strong> use the value of <code>m</code> as a 3-digit code, adding a leading zero if needed.</p>
-        `,
-        baseCode: "080"
-      },
-
-      // {
-      //   title: "Lock 3 – Ring Equilibrium Node",
-      //   story: "A suspended ring is balanced on the edge of failure. The lock opens with the tension only.",
-      //   questionHtml: `
-      //     <p>A smooth ring of mass <code>0.2 kg</code> is threaded on a light string <code>ARB</code>. The string is taut, <code>ABR = 90°</code>, and the angle between <code>AR</code> and the vertical is <code>60°</code>.</p>
-      //     <p>The ring is held in equilibrium by an extra force acting perpendicular to <code>AR</code>.</p>
-      //     <p>Find the <strong>tension in the string</strong>.</p>
-      //   `,
-      //   baseCode: "536"
-      // },
-
-      {
-        title: "Lock 3 – Hill Engine Test",
-        story: "The lorry reaches the incline. Only the steady climbing speed will power the next door.",
-        questionHtml: `
-          <p>A lorry has mass <code>15 000 kg</code>. Its engine power is constant at <code>200 kW</code> and the resistance force remains <code>6000 N</code>.</p>
-          <p>The lorry now climbs a straight hill inclined at <code>1°</code> to the horizontal.</p>
-          <p>Find the <strong>steady speed</strong> the lorry can maintain up the hill.</p>
-          <p><strong>Code rule:</strong> use the speed correct to <code>3 significant figures</code>, then remove the decimal point.</p>
-        `,
-        baseCode: "232"
-      },
-      {
-        title: "Lock 4 – Acceleration Spike",
-        story: "The particle’s motion log is incomplete. Track the motion and identify the greatest acceleration in the first 10 seconds.",
-        questionHtml: `
-          <p>A particle starts from rest at point <code>O</code>.</p>
-          <p>For <code>0 ≤ t ≤ 9</code>, its acceleration is <code>a = kt^(1/2)</code>, where <code>k</code> is a constant.</p>
-          <p>At <code>t = 9</code>, the velocity is <code>1.8 m s^-1</code>.</p>
-          <p>For <code>t > 9</code>, the velocity is <code>v = 0.2(t - 9)^2 + 1.8</code>.</p>
-          <p>Find the <strong>greatest acceleration</strong> during the first <code>10</code> seconds.</p>
-          <p><strong>Code rule:</strong> write the answer to <code>3 significant figures</code>, then remove the decimal point.</p>
-        `,
-        baseCode: "400"
-      },
-      {
-        title: "Lock 5 – Elevator Pressure Seal",
-        story: "The crate is about to lose contact. Work out the greatest force from the floor and its direction to stabilise the lift.",
-        questionHtml: `
-          <p>An elevator accelerates upwards at <code>0.4 m s^-2</code> for <code>5 s</code>, then moves at constant speed for <code>25 s</code>, then decelerates at <code>0.2 m s^-2</code> until it comes to rest.</p>
-          <p>The elevator has mass <code>1200 kg</code>. A crate of mass <code>50 kg</code> rests on its floor.</p>
-          <p>Find the <strong>greatest magnitude</strong> of the force exerted on the crate by the floor, and determine its direction.</p>
-          <p><strong>Code rule:</strong> enter the magnitude only.</p>
-        `,
-        baseCode: "520"
-      },
-
-      // {
-      //   title: "Lock 7 – Slide Friction Core",
-      //   story: "The child reaches the end of the slide and stops exactly at Z. The final lock needs the friction coefficient.",
-      //   questionHtml: `
-      //     <p>A child of mass <code>25 kg</code> starts from rest at <code>X</code> on a rough slide.</p>
-      //     <p>Point <code>X</code> is <code>1.8 m</code> above <code>Y</code>. The straight section <code>YZ</code> has length <code>2 m</code> and is inclined at angle <code>θ</code> where <code>sin θ = 0.28</code>.</p>
-      //     <p>The work done against resistance from <code>X</code> to <code>Y</code> is <code>50 J</code>, and the child comes to rest at <code>Z</code>.</p>
-      //     <p>Find the <strong>coefficient of friction</strong> on <code>YZ</code>.</p>
-      //     <p>Use its decimal value to <strong>3 significant figures</strong> for the code.</p>
-      //   `,
-      //   baseCode: "113"
-      // },
-
-      {
-        title: "Lock 6 – Crate Drag Timer",
-        story: "The winch keeps pulling, but the system only unlocks if you calculate the drag time exactly.",
-        questionHtml: `
-          <p>A crate of mass <code>200 kg</code> is pulled at constant speed along horizontal ground by a horizontal rope attached to a winch.</p>
-          <p>The winch works at a constant rate of <code>4.5 kW</code> and there is a constant resistance force of magnitude <code>600 N</code>.</p>
-          <p>Find the time taken for the crate to move a distance of <code>15 m</code>.</p>
-          <p><strong>Code rule:</strong> multiply your answer in seconds by <code>100</code>.</p>
-        `,
-        baseCode: "200"
-      },
-      {
-        title: "Lock 7 – Rope Break Delay",
-        story: "The rope snaps and the crate begins to grind to a halt. Only the stopping time opens the next gate.",
-        questionHtml: `
-          <p>A crate of mass <code>200 kg</code> is being pulled at constant speed along horizontal ground by a winch working at <code>4.5 kW</code>.</p>
-          <p>There is a constant resistance force of magnitude <code>600 N</code>.</p>
-          <p>After the crate has moved <code>15 m</code>, the rope breaks.</p>
-          <p>Find the time taken, after the rope breaks, for the crate to come to rest.</p>
-          <p><strong>Code rule:</strong> multiply your answer in seconds by <code>100</code>.</p>
-        `,
-        baseCode: "250"
-      },
-      {
-        title: "Lock 8 – Mid-Air Collision Point",
-        story: "Two particles race toward the same vertical line. The lock accepts only the collision height.",
-        questionHtml: `
-          <p>Particle <code>P</code> is projected vertically upwards from horizontal ground with speed <code>15 m s^-1</code>.</p>
-          <p>At the same instant, particle <code>Q</code> is dropped from a height of <code>18 m</code> above the ground in the same vertical line.</p>
-          <p>Find the height above the ground at which the two particles collide.</p>
-          <p><strong>Code rule:</strong> multiply your answer in metres by <code>10</code>.</p>
-        `,
-        baseCode: "108"
-      },
-      {
-        title: "Lock 9 – Equal-Value Trigger",
-        story: "The motion log only stabilises when speed and distance match numerically. Find the exact trigger time.",
-        questionHtml: `
-          <p>A particle moves in a straight line starting from rest from a point <code>O</code>.</p>
-          <p>Its acceleration at time <code>t</code> seconds is <code>a = 4t^(1/2)</code>.</p>
-          <p>Find the time after leaving <code>O</code> at which the speed and the distance travelled are numerically equal.</p>
-          <p><strong>Code rule:</strong> multiply your answer in seconds by <code>100</code>.</p>
-        `,
-        baseCode: "250"
-      },
-      {
-        title: "Lock 10 – Coupling Stress Test",
-        story: "The locomotive surges forward and the coupling takes the strain. Work out the tension before the system tears apart.",
-        questionHtml: `
-          <p>A toy railway locomotive of mass <code>0.8 kg</code> tows a truck of mass <code>0.4 kg</code> on a straight horizontal track.</p>
-          <p>The locomotive was moving at constant speed <code>2 m s^-1</code> with a resistance force of <code>0.2 N</code>, and then the engine power is changed to <code>1.2 W</code>.</p>
-          <p>Find the magnitude of the tension in the coupling at the instant the locomotive begins to accelerate.</p>
-          <p><strong>Code rule:</strong> write your answer correct to <code>3 significant figures</code>, remove the decimal point, and take the 3-digit code.</p>
-        `,
-        baseCode: "133"
-      }
-
-      // {
-      //   title: "Lock 13 – Strut Shutdown",
-      //   story: "A horizontal force is applied to the block until one strut goes dead. The lock opens only with that force.",
-      //   questionHtml: `
-      //     <p>A block of mass <code>100 kg</code> is supported by two sloping struts at <code>45°</code> and a vertical rope of tension <code>500 N</code>.</p>
-      //     <p>A horizontal force of magnitude <code>F</code> is applied to the block in a direction parallel to the floor.</p>
-      //     <p>Find the value of <code>F</code> for which the magnitude of the force in one of the struts is zero.</p>
-      //   `,
-      //   baseCode: "500"
-      // },
-
-      // {
-      //   title: "Lock 14 – Grip Coefficient Chamber",
-      //   story: "The block climbs the plane, but only one friction value keeps the mechanics consistent.",
-      //   questionHtml: `
-      //     <p>A block of mass <code>2 kg</code> lies on a rough plane inclined at <code>30°</code> to the horizontal.</p>
-      //     <p>A light rope is attached to the block and is inclined at <code>20°</code> above a line of greatest slope.</p>
-      //     <p>It is given that the friction force is <code>5 N</code> and the acceleration of the block up the plane is <code>1.2 m s^-2</code>.</p>
-      //     <p>Find the coefficient of friction <code>μ</code>.</p>
-      //     <p><strong>Code rule:</strong> write your answer correct to <code>3 significant figures</code>, remove the decimal point, and take the 3-digit code.</p>
-      //   `,
-      //   baseCode: "455"
-      // },
-
-      // {
-      //   title: "Lock 15 – Track Reunion Point",
-      //   story: "After two collisions and one uphill grind, the particles meet again. The final mechanics gate wants the reunion point.",
-      //   questionHtml: `
-      //     <p>A particle <code>P</code> of mass <code>0.5 kg</code> is released from rest at <code>A</code> and collides with a particle <code>Q</code> of mass <code>0.1 kg</code> at <code>B</code>.</p>
-      //     <p>Immediately after the collision, the speed of <code>P</code> is <code>4 m s^-1</code> along the horizontal section <code>BC</code>, and the speed of <code>Q</code> is <code>10 m s^-1</code>.</p>
-      //     <p>When <code>Q</code> reaches <code>C</code>, it collides with a particle <code>R</code> of mass <code>0.4 kg</code>. The two coalesce and move up a slope, coming instantaneously to rest at <code>F</code>, where <code>CF = 0.4 m</code>.</p>
-      //     <p>Find the distance from <code>B</code> at which <code>P</code> collides with the combined particle.</p>
-      //     <p><strong>Code rule:</strong> multiply your answer in metres by <code>100</code> and round to the nearest whole number.</p>
-      //   `,
-      //   baseCode: "667"
-      // }
-    ];
-
-    const footerMessages = [
-      {
-        quote: "Discipline is choosing what you want most over what you want now.",
-        note: "Choose your room and go to work."
-      },
-      {
-        quote: "Pressure is a privilege.",
-        note: "Accuracy first. Speed second."
-      },
-      {
-        quote: "One more rep. One more mark. One more win.",
-        note: "One page. One lock. One win."
-      },
-      {
-        quote: "You do not rise to the occasion. You fall to your level of preparation.",
-        note: "Stay calm and trust your method."
-      },
-      {
-        quote: "Lock in and trust your training.",
-        note: "Build marks through clean working."
-      },
-      {
-        quote: "Winners do the boring things better.",
-        note: "Choose your room and go to work."
-      },
-      {
-        quote: "Focus on the next move, not the whole mountain.",
-        note: "Accuracy first. Speed second."
-      },
-      {
-        quote: "Stay calm. Be sharp. Finish strong.",
-        note: "One page. One lock. One win."
-      },
-      {
-        quote: "Confidence comes from preparation.",
-        note: "Stay calm and trust your method."
-      },
-      {
-        quote: "Get comfortable being uncomfortable.",
-        note: "Build marks through clean working."
-      },
-      {
-        quote: "Small steps, repeated, become domination.",
-        note: "Choose your room and go to work."
-      },
-      {
-        quote: "The standard is the standard.",
-        note: "Accuracy first. Speed second."
-      },
-      {
-        quote: "Effort is a choice.",
-        note: "One page. One lock. One win."
-      },
-      {
-        quote: "You are closer than you think.",
-        note: "Stay calm and trust your method."
-      },
-      {
-        quote: "Train your mind to stay when it gets hard.",
-        note: "Build marks through clean working."
-      },
-      {
-        quote: "Sharp minds finish papers well.",
-        note: "Choose your room and go to work."
-      },
-      {
-        quote: "Every solved question is proof you’re improving.",
-        note: "Accuracy first. Speed second."
-      },
-      {
-        quote: "Composure creates marks.",
-        note: "One page. One lock. One win."
-      },
-      {
-        quote: "Make the hard parts your advantage.",
-        note: "Stay calm and trust your method."
-      },
-      {
-        quote: "Keep going. That’s where the edge is.",
-        note: "Build marks through clean working."
-      }
-    ];
-
-    let currentIndex = loadProgress();
-    if (currentIndex > locks.length) currentIndex = 0;
-
-    function updateProgress() {
-      const total = locks.length;
-      const currentDisplay = Math.min(currentIndex + 1, total);
-      progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
-      progressBarFill.style.width = `${(currentIndex / total) * 100}%`;
-    }
-
-    function updateFooter(index) {
-      const message = footerMessages[index % footerMessages.length];
-      footerQuoteEl.textContent = message.quote;
-      footerNoteEl.textContent = message.note;
-    }
-
-    function showLock(index) {
-      const lock = locks[index];
-
-      lockTitleEl.textContent = lock.title;
-      lockStoryEl.textContent = lock.story;
-      lockQuestionEl.innerHTML = lock.questionHtml;
-      lockBadgeEl.textContent = "Code: 3 digits";
-
-      codeInputEl.value = "";
-      codeInputEl.disabled = false;
-      submitBtn.disabled = false;
-
-      feedbackEl.textContent = "";
-      feedbackEl.className = "feedback";
-
-      lockCardEl.style.display = "block";
-      finalMessageEl.style.display = "none";
-
-      updateProgress();
-      updateFooter(index);
-      codeInputEl.focus();
-    }
-
-    function showFinal() {
-      lockCardEl.style.display = "none";
-      finalMessageEl.style.display = "block";
-      progressTextEl.textContent = "Complete";
-      progressBarFill.style.width = "100%";
-      footerQuoteEl.textContent = "Field test complete.";
-      footerNoteEl.textContent = "Build marks through clean working.";
-    }
-
-    function normaliseCodeInput(value) {
-      return (value || "").replace(/\s+/g, "");
-    }
-
-    function checkCode() {
-      const input = normaliseCodeInput(codeInputEl.value);
-
-      if (!/^\d{3}$/.test(input)) {
-        feedbackEl.textContent = "Codes must be exactly 3 digits.";
-        feedbackEl.className = "feedback error";
-        return;
-      }
-
-      const lock = locks[currentIndex];
-      const expected = format3(lock.baseCode);
-
-      if (input !== expected) {
-        feedbackEl.textContent = "Incorrect code. Check your working and try again.";
-        feedbackEl.className = "feedback error";
-        codeInputEl.select();
-        return;
-      }
-
-      feedbackEl.textContent = "Correct code! Lock opened.";
-      feedbackEl.className = "feedback success";
-      codeInputEl.disabled = true;
-      submitBtn.disabled = true;
-
-      if (typeof confetti === "function") {
-        confetti({
-          particleCount: 120,
-          spread: 70,
-          origin: { y: 0.7 }
+    function launchFirework(x = Math.random() * fwW, y = fwH * (0.18 + Math.random() * 0.42)) {
+      const hue = [10, 22, 42, 50, 0][Math.floor(Math.random() * 5)];
+      for (let i = 0; i < 42; i++) {
+        const angle = (Math.PI * 2 * i) / 42 + Math.random() * 0.1;
+        const speed = 1.5 + Math.random() * 3.7;
+        sparks.push({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 45 + Math.random() * 28,
+          maxLife: 70,
+          hue,
+          size: 2 + Math.random() * 2.5
         });
       }
-
-      setTimeout(() => {
-        currentIndex++;
-        saveProgress(currentIndex);
-
-        if (currentIndex >= locks.length) {
-          showFinal();
-        } else {
-          showLock(currentIndex);
-        }
-      }, 700);
     }
 
-    function resetProgress() {
-      if (!confirm("Reset all progress and go back to Lock 1?")) return;
-      currentIndex = 0;
-      clearProgress();
-      showLock(currentIndex);
+    function updateFireworks() {
+      fwCtx.clearRect(0, 0, fwW, fwH);
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += 0.018;
+        s.life -= 1;
+        const alpha = Math.max(0, s.life / s.maxLife);
+        fwCtx.beginPath();
+        fwCtx.fillStyle = `hsla(${s.hue}, 95%, 62%, ${alpha})`;
+        fwCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        fwCtx.fill();
+        if (s.life <= 0) sparks.splice(i, 1);
+      }
+      requestAnimationFrame(updateFireworks);
     }
+    updateFireworks();
 
-    submitBtn.addEventListener("click", checkCode);
-    resetBtn.addEventListener("click", resetProgress);
-    restartBtn.addEventListener("click", resetProgress);
+    setInterval(() => {
+      launchFirework();
+    }, 1100);
 
-    codeInputEl.addEventListener("keyup", (e) => {
-      if (e.key === "Enter") checkCode();
+    document.getElementById('burst-btn').addEventListener('click', () => {
+      for (let i = 0; i < 4; i++) {
+        setTimeout(() => launchFirework(Math.random() * fwW, fwH * (0.15 + Math.random() * 0.35)), i * 150);
+      }
     });
 
-    if (currentIndex >= locks.length) {
-      showFinal();
-    } else {
-      showLock(currentIndex);
+    // ---------- Flappy-like game ----------
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const overlay = document.getElementById('game-overlay');
+    const overlayTitle = document.getElementById('overlay-title');
+    const overlayText = document.getElementById('overlay-text');
+    const startBtn = document.getElementById('start-btn');
+    const scoreDisplay = document.getElementById('score-display');
+    const bestDisplay = document.getElementById('best-display');
+    const triesDisplay = document.getElementById('tries-display');
+    const starWrap = document.getElementById('star-wrap');
+
+    const GAME = {
+      width: canvas.width,
+      height: canvas.height,
+      gravity: 0.42,
+      flap: -7.1,
+      birdX: 220,
+      pipeWidth: 88,
+      pipeGap: 190,
+      pipeGapMin: 190 * 0.85,
+      pipeGapMax: 190 * 1.15,
+      pipeSpacing: 240,
+      pipeSpeed: 2.4,
+      maxScore: 20,
+      maxTries: 3,
+      countdownMs: 3000
+    };
+
+    let bestScore = 0;
+    let triesLeft = GAME.maxTries;
+    let score = 0;
+    let running = false;
+    let won = false;
+    let countdownActive = false;
+    let animationId = null;
+    let countdownTimer = null;
+    let countdownEndTime = 0;
+
+    const bird = {
+      x: GAME.birdX,
+      y: GAME.height - 300,
+      vy: 0,
+      r: 18
+    };
+
+    let pipes = [];
+
+    function resetBird() {
+      bird.y = GAME.height - 300;
+      bird.vy = 0;
     }
+
+    function randomPipeGap() {
+      return GAME.pipeGapMin + Math.random() * (GAME.pipeGapMax - GAME.pipeGapMin);
+    }
+
+    function buildPipes() {
+      pipes = [];
+      const startX = GAME.width + 180;
+      for (let i = 0; i < 6; i++) {
+        const gap = randomPipeGap();
+        const topHeight = 80 + Math.random() * 150;
+        pipes.push({
+          x: startX + i * GAME.pipeSpacing,
+          topHeight,
+          gap,
+          counted: false
+        });
+      }
+    }
+
+    function resetRun() {
+      score = 0;
+      scoreDisplay.textContent = score;
+      resetBird();
+      buildPipes();
+    }
+
+    function showOverlay(title, text, startLabel = 'Start Run') {
+      overlayTitle.textContent = title;
+      overlayText.textContent = text;
+      startBtn.textContent = startLabel;
+      overlay.classList.remove('hidden');
+    }
+
+    function hideOverlay() {
+      overlay.classList.add('hidden');
+    }
+
+    function drawCountdownText() {
+      if (!countdownActive) return;
+      const remaining = Math.max(0, Math.ceil((countdownEndTime - Date.now()) / 1000));
+      ctx.fillStyle = 'rgba(20, 8, 8, 0.65)';
+      ctx.fillRect(GAME.width / 2 - 95, 90, 190, 90);
+      ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+      ctx.strokeRect(GAME.width / 2 - 95, 90, 190, 90);
+      ctx.fillStyle = '#fff7ed';
+      ctx.font = '900 48px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(remaining > 0 ? remaining : 'GO!', GAME.width / 2, 148);
+      ctx.textAlign = 'left';
+    }
+
+    function prepareChallenge() {
+      won = false;
+      triesLeft = GAME.maxTries;
+      triesDisplay.textContent = triesLeft;
+      starWrap.classList.add('hidden');
+      running = false;
+      countdownActive = false;
+      clearInterval(countdownTimer);
+      cancelAnimationFrame(animationId);
+      resetRun();
+      draw();
+      showOverlay('Ready?', 'Tap, click, or press space to begin. The game starts 3 seconds after your first input.', 'Start Run');
+    }
+
+    function startCountdown() {
+      if (won || running || countdownActive || triesLeft <= 0) return;
+
+      resetRun();
+      countdownActive = true;
+      countdownEndTime = Date.now() + GAME.countdownMs;
+
+      showOverlay('Get Ready', 'Starting in 3 seconds...', 'Starting...');
+      draw();
+
+      countdownTimer = setInterval(() => {
+        draw();
+        if (Date.now() >= countdownEndTime) {
+          clearInterval(countdownTimer);
+          countdownActive = false;
+          beginRun();
+        }
+      }, 100);
+    }
+
+    function beginRun() {
+      if (won || running || triesLeft <= 0) return;
+      hideOverlay();
+      running = true;
+      loop();
+    }
+
+    function flap() {
+      if (!running) return;
+      bird.vy = GAME.flap;
+    }
+
+    function endRun(message) {
+      running = false;
+      countdownActive = false;
+      clearInterval(countdownTimer);
+      cancelAnimationFrame(animationId);
+      triesLeft -= 1;
+      triesDisplay.textContent = triesLeft;
+
+      if (triesLeft > 0) {
+        showOverlay(
+          'Run Over',
+          `${message} You have ${triesLeft} chance${triesLeft === 1 ? '' : 's'} left. Tap, click, or press space to start the next run.`,
+          'Start Next Run'
+        );
+      } else {
+        showOverlay(
+          'Challenge Over',
+          `${message} You used all 3 chances.`,
+          'No Tries Left'
+        );
+      }
+    }
+
+    function winChallenge() {
+      running = false;
+      countdownActive = false;
+      clearInterval(countdownTimer);
+      won = true;
+      cancelAnimationFrame(animationId);
+      starWrap.classList.remove('hidden');
+      showOverlay('You Won!', 'Score 20 reached. The red star is yours.', 'Victory');
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => launchFirework(Math.random() * fwW, fwH * (0.15 + Math.random() * 0.35)), i * 170);
+      }
+    }
+
+    function update() {
+      bird.vy += GAME.gravity;
+      bird.y += bird.vy;
+
+      for (const pipe of pipes) {
+        pipe.x -= GAME.pipeSpeed;
+        if (pipe.x + GAME.pipeWidth < bird.x - bird.r && !pipe.counted) {
+          pipe.counted = true;
+          score += 1;
+          if (score > bestScore) bestScore = score;
+          scoreDisplay.textContent = score;
+          bestDisplay.textContent = bestScore;
+          if (score >= GAME.maxScore) {
+            winChallenge();
+            return;
+          }
+        }
+      }
+
+      const lastPipe = pipes[pipes.length - 1];
+      if (lastPipe.x < GAME.width - GAME.pipeSpacing) {
+        const gap = randomPipeGap();
+        const topHeight = 80 + Math.random() * 150;
+        pipes.push({
+          x: lastPipe.x + GAME.pipeSpacing,
+          topHeight,
+          gap,
+          counted: false
+        });
+      }
+      pipes = pipes.filter(pipe => pipe.x + GAME.pipeWidth > -40);
+
+      if (bird.y + bird.r > GAME.height - 34 || bird.y - bird.r < 0) {
+        endRun('You clipped the boundary.');
+        return;
+      }
+
+      for (const pipe of pipes) {
+        const gapTop = pipe.topHeight;
+        const gapBottom = gapTop + pipe.gap;
+        const withinX = bird.x + bird.r > pipe.x && bird.x - bird.r < pipe.x + GAME.pipeWidth;
+        const hitTop = bird.y - bird.r < gapTop;
+        const hitBottom = bird.y + bird.r > gapBottom;
+        if (withinX && (hitTop || hitBottom)) {
+          endRun('You hit a pipe.');
+          return;
+        }
+      }
+    }
+
+    function drawBackground() {
+      const g = ctx.createLinearGradient(0, 0, 0, GAME.height);
+      g.addColorStop(0, '#7f1d1d');
+      g.addColorStop(0.55, '#b91c1c');
+      g.addColorStop(1, '#d97706');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, GAME.width, GAME.height);
+
+      ctx.fillStyle = 'rgba(255, 245, 180, 0.10)';
+      ctx.beginPath();
+      ctx.arc(760, 90, 70, 0, Math.PI * 2);
+      ctx.fill();
+
+      for (let i = 0; i < 5; i++) {
+        ctx.fillStyle = 'rgba(255,255,255,0.05)';
+        ctx.beginPath();
+        ctx.ellipse(120 + i * 180, 110 + (i % 2) * 22, 55, 22, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.fillStyle = '#78350f';
+      ctx.fillRect(0, GAME.height - 34, GAME.width, 34);
+      ctx.fillStyle = '#f59e0b';
+      ctx.fillRect(0, GAME.height - 34, GAME.width, 8);
+    }
+
+    function drawPipes() {
+      for (const pipe of pipes) {
+        const gapTop = pipe.topHeight;
+        const gapBottom = gapTop + pipe.gap;
+
+        const pipeGradient = ctx.createLinearGradient(pipe.x, 0, pipe.x + GAME.pipeWidth, 0);
+        pipeGradient.addColorStop(0, '#16a34a');
+        pipeGradient.addColorStop(0.5, '#4ade80');
+        pipeGradient.addColorStop(1, '#15803d');
+
+        ctx.fillStyle = pipeGradient;
+        ctx.fillRect(pipe.x, 0, GAME.pipeWidth, gapTop);
+        ctx.fillRect(pipe.x, gapBottom, GAME.pipeWidth, GAME.height - gapBottom - 34);
+
+        ctx.fillStyle = '#86efac';
+        ctx.fillRect(pipe.x - 8, gapTop - 20, GAME.pipeWidth + 16, 20);
+        ctx.fillRect(pipe.x - 8, gapBottom, GAME.pipeWidth + 16, 20);
+      }
+    }
+
+    function drawBird() {
+      ctx.save();
+      ctx.translate(bird.x, bird.y);
+      ctx.rotate(Math.max(-0.45, Math.min(0.75, bird.vy * 0.05)));
+
+      const gold = ctx.createLinearGradient(-20, -20, 20, 20);
+      gold.addColorStop(0, '#fde68a');
+      gold.addColorStop(0.55, '#facc15');
+      gold.addColorStop(1, '#d97706');
+
+      ctx.fillStyle = gold;
+      ctx.beginPath();
+      ctx.arc(0, 0, bird.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = 'rgba(120,53,15,0.75)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#fff7ed';
+      ctx.beginPath();
+      ctx.arc(5, -5, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#111827';
+      ctx.beginPath();
+      ctx.arc(6.5, -5, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#ef4444';
+      ctx.beginPath();
+      ctx.moveTo(14, 1);
+      ctx.lineTo(28, 7);
+      ctx.lineTo(14, 13);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(255,255,255,0.28)';
+      ctx.beginPath();
+      ctx.ellipse(-6, -9, 7, 4, -0.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function drawScoreOnCanvas() {
+      ctx.fillStyle = 'rgba(20, 8, 8, 0.45)';
+      ctx.fillRect(16, 16, 170, 52);
+      ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+      ctx.strokeRect(16, 16, 170, 52);
+      ctx.fillStyle = '#fff7ed';
+      ctx.font = '800 28px system-ui, sans-serif';
+      ctx.fillText(`Score: ${score}`, 28, 50);
+    }
+
+    function draw() {
+      drawBackground();
+      drawPipes();
+      drawBird();
+      drawScoreOnCanvas();
+      drawCountdownText();
+    }
+
+    function loop() {
+      update();
+      draw();
+      if (running) animationId = requestAnimationFrame(loop);
+    }
+
+    function handlePrimaryAction(e) {
+      if (e) e.preventDefault();
+
+      if (won) return;
+
+      if (overlay.classList.contains('hidden')) {
+        flap();
+        return;
+      }
+
+      if (!running && !countdownActive && triesLeft > 0) {
+        startCountdown();
+      }
+    }
+
+    startBtn.addEventListener('click', handlePrimaryAction);
+    canvas.addEventListener('click', handlePrimaryAction);
+    canvas.addEventListener('touchstart', handlePrimaryAction, { passive: false });
+
+    overlay.addEventListener('click', handlePrimaryAction);
+    overlay.addEventListener('touchstart', handlePrimaryAction, { passive: false });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        handlePrimaryAction(e);
+      }
+    });
+
+    prepareChallenge();
   </script>
 </body>
 </html>
