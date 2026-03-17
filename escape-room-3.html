@@ -4,352 +4,60 @@
   <meta charset="UTF-8" />
   <title>Statistics Escape Room – Bright Vault Sprint</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/escape-room-core.css" />
   <style>
-    * { box-sizing: border-box; }
-
     :root {
-      --bg-1: #f4fbff;
-      --bg-2: #eefcf5;
-      --bg-3: #fff8e8;
-      --panel: rgba(255, 255, 255, 0.88);
-      --panel-strong: rgba(255, 255, 255, 0.96);
-      --ink: #123047;
-      --muted: #5f7285;
-      --line: rgba(18, 48, 71, 0.14);
-      --accent: #14b8a6;
-      --accent-2: #22c55e;
-      --accent-3: #f59e0b;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --shadow: 0 18px 40px rgba(28, 67, 102, 0.14);
-      --shadow-soft: 0 10px 24px rgba(28, 67, 102, 0.10);
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      min-height: 100vh;
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      padding: 1.5rem;
-      background:
+      --body-background:
         radial-gradient(circle at top left, rgba(20, 184, 166, 0.18), transparent 28%),
         radial-gradient(circle at top right, rgba(34, 197, 94, 0.18), transparent 32%),
         radial-gradient(circle at bottom center, rgba(245, 158, 11, 0.14), transparent 36%),
-        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 52%, var(--bg-3) 100%);
-    }
-
-    .container {
-      max-width: 960px;
-      width: 100%;
-      background: var(--panel);
-      backdrop-filter: blur(8px);
-      border-radius: 1.75rem;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      padding: 1.8rem 1.8rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.15rem;
-    }
-
-    header {
-      padding-bottom: 0.9rem;
-      border-bottom: 1px solid var(--line);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.75rem;
-      line-height: 1.15;
-      letter-spacing: 0.02em;
-      color: #0f3f5f;
-    }
-
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 0.98rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .status-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .pill {
-      padding: 0.45rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(20, 184, 166, 0.18);
-      background: rgba(255, 255, 255, 0.75);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      color: #28516b;
-      box-shadow: var(--shadow-soft);
-      font-size: 0.92rem;
-    }
-
-    .pill .icon {
-      width: 0.65rem;
-      height: 0.65rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
-    }
-
-    .progress-bar {
-      flex: 1;
-      min-width: 180px;
-      height: 12px;
-      background: rgba(18, 48, 71, 0.08);
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid rgba(18, 48, 71, 0.08);
-      position: relative;
-    }
-
-    .progress-bar-fill {
-      position: absolute;
-      inset: 0;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2), #86efac);
-      transition: width 0.35s ease;
-    }
-
-    .lock-card {
-      background: var(--panel-strong);
-      border-radius: 1.4rem;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-soft);
-      padding: 1.35rem 1.45rem 1.4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    .lock-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      font-size: 1.22rem;
-      font-weight: 700;
-      color: #114867;
-    }
-
-    .lock-badge {
-      font-size: 0.8rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(20, 184, 166, 0.08);
-      border: 1px solid rgba(20, 184, 166, 0.18);
-      color: #0f766e;
-      white-space: nowrap;
-    }
-
-    .lock-story {
-      font-size: 0.97rem;
-      line-height: 1.55;
-      color: var(--muted);
-    }
-
-    .lock-question {
-      font-size: 0.99rem;
-      line-height: 1.68;
-      color: var(--ink);
-    }
-
-    .lock-question p {
-      margin: 0.42rem 0;
-    }
-
-    .lock-question code {
-      background: rgba(20, 184, 166, 0.08);
-      color: #0f4e63;
-      padding: 0.12rem 0.38rem;
-      border-radius: 0.38rem;
-      font-size: 0.96em;
-    }
-
-    .input-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      align-items: end;
-      margin-top: 0.15rem;
-    }
-
-    .input-block {
-      min-width: 180px;
-    }
-
-    label {
-      display: inline-block;
-      margin-bottom: 0.3rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    input[type="text"] {
-      width: 170px;
-      padding: 0.62rem 0.85rem;
-      border-radius: 0.75rem;
-      border: 1px solid rgba(18, 48, 71, 0.16);
-      background: white;
-      color: var(--ink);
-      font-size: 1rem;
-      font-weight: 600;
-      box-shadow: inset 0 1px 2px rgba(18, 48, 71, 0.05);
-    }
-
-    input[type="text"]:focus {
-      outline: none;
-      border-color: rgba(20, 184, 166, 0.55);
-      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.12);
-    }
-
-    button,
-    a.btn {
-      cursor: pointer;
-      border: none;
-      border-radius: 0.85rem;
-      padding: 0.7rem 1.15rem;
-      font-size: 0.95rem;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      transition: transform 0.08s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-    }
-
-    button:hover,
-    a.btn:hover {
-      transform: translateY(-1px);
-    }
-
-    button:active,
-    a.btn:active {
-      transform: translateY(0);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: white;
-      box-shadow: 0 12px 24px rgba(20, 184, 166, 0.22);
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 16px 28px rgba(20, 184, 166, 0.26);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.8);
-      color: #28516b;
-      border: 1px solid rgba(18, 48, 71, 0.14);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .feedback {
-      min-height: 1.25rem;
-      font-size: 0.94rem;
-      font-weight: 600;
-      margin-top: 0.15rem;
-    }
-
-    .feedback.error {
-      color: var(--danger);
-    }
-
-    .feedback.success {
-      color: var(--success);
-    }
-
-    .footer {
-      margin-top: 0.2rem;
-      padding: 1rem 1.1rem;
-      border-radius: 1.1rem;
-      background: linear-gradient(135deg, rgba(20, 184, 166, 0.10), rgba(245, 158, 11, 0.10));
-      border: 1px solid rgba(20, 184, 166, 0.12);
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .footer-quote {
-      font-size: 1rem;
-      font-weight: 800;
-      color: #114867;
-      letter-spacing: 0.01em;
-    }
-
-    .footer-note {
-      margin-top: 0.35rem;
-      font-size: 0.92rem;
-      color: var(--muted);
-    }
-
-    .final-message {
-      text-align: center;
-      padding: 1.35rem 0.5rem 0.5rem;
-    }
-
-    .final-message h2 {
-      margin: 0 0 0.45rem;
-      font-size: 1.45rem;
-      color: #0f766e;
-    }
-
-    .final-message p {
-      margin: 0.25rem 0;
-      font-size: 0.98rem;
-      color: var(--muted);
-    }
-
-    .final-actions {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 1rem;
-      }
-
-      .container {
-        padding: 1.2rem 1rem 1.4rem;
-      }
-
-      header h1 {
-        font-size: 1.42rem;
-      }
-
-      .lock-card {
-        padding: 1rem 0.95rem 1.1rem;
-      }
-
-      .lock-title {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .input-row {
-        align-items: stretch;
-      }
-
-      input[type="text"] {
-        width: 100%;
-      }
+        linear-gradient(180deg, #f4fbff 0%, #eefcf5 52%, #fff8e8 100%);
+      --container-background: rgba(255, 255, 255, 0.88);
+      --container-border: 1px solid rgba(255, 255, 255, 0.75);
+      --container-radius: 1.75rem;
+      --container-shadow: 0 18px 40px rgba(28, 67, 102, 0.14);
+      --container-backdrop: blur(8px);
+      --ink: #123047;
+      --muted: #5f7285;
+      --line: rgba(18, 48, 71, 0.14);
+      --line-strong: rgba(20, 184, 166, 0.18);
+      --pill-background: rgba(255, 255, 255, 0.75);
+      --pill-color: #28516b;
+      --pill-shadow: 0 10px 24px rgba(28, 67, 102, 0.1);
+      --icon-gradient: linear-gradient(135deg, #14b8a6, #22c55e);
+      --icon-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+      --progress-background: rgba(18, 48, 71, 0.08);
+      --progress-fill: linear-gradient(90deg, #14b8a6, #22c55e, #86efac);
+      --panel-strong: rgba(255, 255, 255, 0.96);
+      --panel-shadow: 0 10px 24px rgba(28, 67, 102, 0.1);
+      --title-color: #114867;
+      --header-title-color: #0f3f5f;
+      --header-title-transform: none;
+      --header-title-spacing: 0.02em;
+      --badge-background: rgba(20, 184, 166, 0.08);
+      --badge-color: #0f766e;
+      --question-code-background: rgba(20, 184, 166, 0.08);
+      --question-code-color: #0f4e63;
+      --input-background: white;
+      --input-border: 1px solid rgba(18, 48, 71, 0.16);
+      --input-focus: rgba(20, 184, 166, 0.55);
+      --input-shadow: inset 0 1px 2px rgba(18, 48, 71, 0.05);
+      --button-primary-background: linear-gradient(135deg, #14b8a6, #22c55e);
+      --button-primary-color: white;
+      --button-primary-shadow: 0 12px 24px rgba(20, 184, 166, 0.22);
+      --button-primary-hover-shadow: 0 16px 28px rgba(20, 184, 166, 0.26);
+      --button-secondary-background: rgba(255, 255, 255, 0.8);
+      --button-secondary-color: #28516b;
+      --button-secondary-border: 1px solid rgba(18, 48, 71, 0.14);
+      --button-secondary-shadow: 0 10px 24px rgba(28, 67, 102, 0.1);
+      --button-secondary-hover-shadow: 0 10px 24px rgba(28, 67, 102, 0.1);
+      --success: #16a34a;
+      --danger: #dc2626;
+      --footer-background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(245, 158, 11, 0.1));
+      --footer-border: 1px solid rgba(20, 184, 166, 0.12);
+      --footer-shadow: 0 10px 24px rgba(28, 67, 102, 0.1);
+      --footer-quote-color: #114867;
+      --footer-note-color: #5f7285;
     }
   </style>
 </head>
@@ -410,54 +118,10 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="assets/escape-room-core.js"></script>
 
   <script>
     "use strict";
-
-    const lockTitleEl = document.getElementById("lock-title");
-    const lockBadgeEl = document.getElementById("lock-badge");
-    const lockStoryEl = document.getElementById("lock-story");
-    const lockQuestionEl = document.getElementById("lock-question");
-    const codeInputEl = document.getElementById("code-input");
-    const submitBtn = document.getElementById("submit-btn");
-    const resetBtn = document.getElementById("reset-btn");
-    const feedbackEl = document.getElementById("feedback");
-    const progressTextEl = document.getElementById("progress-text");
-    const progressBarFill = document.getElementById("progress-bar-fill");
-    const lockCardEl = document.getElementById("lock-card");
-    const finalMessageEl = document.getElementById("final-message");
-    const restartBtn = document.getElementById("restart-btn");
-    const footerQuoteEl = document.getElementById("footer-quote");
-    const footerNoteEl = document.getElementById("footer-note");
-
-    const PROGRESS_KEY = "statsEscapeProgress_v2";
-
-    function saveProgress(index) {
-      try {
-        localStorage.setItem(PROGRESS_KEY, String(index));
-      } catch (_) {}
-    }
-
-    function loadProgress() {
-      try {
-        const raw = localStorage.getItem(PROGRESS_KEY);
-        if (raw === null) return 0;
-        const idx = parseInt(raw, 10);
-        return Number.isFinite(idx) && idx >= 0 ? idx : 0;
-      } catch (_) {
-        return 0;
-      }
-    }
-
-    function clearProgress() {
-      try {
-        localStorage.removeItem(PROGRESS_KEY);
-      } catch (_) {}
-    }
-
-    function format3(value) {
-      return String(value).padStart(3, "0");
-    }
 
     const locks = [
       {
@@ -674,122 +338,23 @@
   }
 ];
 
-    let currentIndex = loadProgress();
-    if (currentIndex > locks.length) currentIndex = 0;
-
-    function updateProgress() {
-      const total = locks.length;
-      const currentDisplay = Math.min(currentIndex + 1, total);
-      progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
-      progressBarFill.style.width = `${(currentIndex / total) * 100}%`;
-    }
-
-    function updateFooter(index) {
-      const message = footerMessages[index % footerMessages.length];
-      footerQuoteEl.textContent = message.quote;
-      footerNoteEl.textContent = message.note;
-    }
-
-    function showLock(index) {
-      const lock = locks[index];
-
-      lockTitleEl.textContent = lock.title;
-      lockStoryEl.textContent = lock.story;
-      lockQuestionEl.innerHTML = lock.questionHtml;
-      lockBadgeEl.textContent = "Code: 3 digits";
-
-      codeInputEl.value = "";
-      codeInputEl.disabled = false;
-      submitBtn.disabled = false;
-
-      feedbackEl.textContent = "";
-      feedbackEl.className = "feedback";
-
-      lockCardEl.style.display = "block";
-      finalMessageEl.style.display = "none";
-
-      updateProgress();
-      updateFooter(index);
-      codeInputEl.focus();
-    }
-
-    function showFinal() {
-      lockCardEl.style.display = "none";
-      finalMessageEl.style.display = "block";
-      progressTextEl.textContent = "Complete";
-      progressBarFill.style.width = "100%";
-      footerQuoteEl.textContent = "Vault complete. Brains victorious.";
-      footerNoteEl.textContent = "You cleared every lock. That is deeply inconvenient for the vault security team.";
-    }
-
-    function normaliseCodeInput(value) {
-      return (value || "").replace(/\s+/g, "");
-    }
-
-    function checkCode() {
-      const input = normaliseCodeInput(codeInputEl.value);
-
-      if (!/^\d{3}$/.test(input)) {
-        feedbackEl.textContent = "Codes must be exactly 3 digits.";
-        feedbackEl.className = "feedback error";
-        return;
+    EscapeRoom.init({
+      storageKey: "statsEscapeProgress_v2",
+      locks,
+      incorrectCodeMessage: "Not quite. Check the method and try again.",
+      invalidCodeMessage: "Codes must be exactly 3 digits.",
+      confetti: {
+        particleCount: 130,
+        spread: 75,
+        origin: { y: 0.7 }
+      },
+      footer: {
+        mode: "index",
+        messages: footerMessages,
+        finalQuote: "Vault complete. Brains victorious.",
+        finalNote: "You cleared every lock. That is deeply inconvenient for the vault security team."
       }
-
-      const lock = locks[currentIndex];
-      const expected = format3(lock.baseCode);
-
-      if (input !== expected) {
-        feedbackEl.textContent = "Not quite. Check the method and try again.";
-        feedbackEl.className = "feedback error";
-        codeInputEl.select();
-        return;
-      }
-
-      feedbackEl.textContent = "Correct code! Lock opened.";
-      feedbackEl.className = "feedback success";
-      codeInputEl.disabled = true;
-      submitBtn.disabled = true;
-
-      if (typeof confetti === "function") {
-        confetti({
-          particleCount: 130,
-          spread: 75,
-          origin: { y: 0.7 }
-        });
-      }
-
-      setTimeout(() => {
-        currentIndex++;
-        saveProgress(currentIndex);
-
-        if (currentIndex >= locks.length) {
-          showFinal();
-        } else {
-          showLock(currentIndex);
-        }
-      }, 700);
-    }
-
-    function resetProgress() {
-      if (!confirm("Reset all progress and go back to Lock 1?")) return;
-      currentIndex = 0;
-      clearProgress();
-      showLock(currentIndex);
-    }
-
-    submitBtn.addEventListener("click", checkCode);
-    resetBtn.addEventListener("click", resetProgress);
-    restartBtn.addEventListener("click", resetProgress);
-
-    codeInputEl.addEventListener("keyup", (e) => {
-      if (e.key === "Enter") checkCode();
     });
-
-    if (currentIndex >= locks.length) {
-      showFinal();
-    } else {
-      showLock(currentIndex);
-    }
   </script>
 </body>
 </html>

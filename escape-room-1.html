@@ -4,264 +4,68 @@
   <meta charset="UTF-8">
   <title>Pure 3 Escape Room – Exam Vault Heist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/escape-room-core.css" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1f2933, #020617);
-      color: #e5e7eb;
-      min-height: 100vh;
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-
-    .container {
-      max-width: 900px;
-      width: 100%;
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 1.5rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      padding: 1.75rem 1.75rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    header {
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-      padding-bottom: 0.75rem;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.6rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    header p {
-      margin: 0.4rem 0 0;
-      font-size: 0.95rem;
-      color: #9ca3af;
-    }
-
-    .status-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.9rem;
-      color: #9ca3af;
-    }
-
-    .pill {
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .pill span.icon {
-      width: 0.6rem;
-      height: 0.6rem;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
-    }
-
-    .progress-bar {
-      flex: 1;
-      min-width: 150px;
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      height: 10px;
-      position: relative;
-    }
-
-    .progress-bar-fill {
-      position: absolute;
-      inset: 0;
-      width: 0%;
-      background: linear-gradient(90deg, #22c55e, #38bdf8);
-      transition: width 0.3s ease;
-    }
-
-    .lock-card {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 1.25rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 1.25rem 1.5rem 1.3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .lock-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-
-    .lock-badge {
-      font-size: 0.8rem;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #e5e7eb;
-    }
-
-    .lock-story {
-      font-size: 0.95rem;
-      color: #9ca3af;
-      line-height: 1.5;
-    }
-
-    .lock-question {
-      font-size: 0.97rem;
-      line-height: 1.6;
-    }
-
-    .lock-question p {
-      margin: 0.4rem 0;
-    }
-
-    .lock-question ol,
-    .lock-question ul {
-      margin: 0.4rem 0 0.4rem 1.2rem;
-    }
-
-    .input-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      margin-top: 0.2rem;
-    }
-
-    label {
-      font-size: 0.9rem;
-      color: #9ca3af;
-    }
-
-    input[type="text"] {
-      padding: 0.5rem 0.8rem;
-      border-radius: 0.6rem;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
-      font-size: 1rem;
-      width: 120px;
-    }
-
-    input[type="text"]:focus {
-      outline: none;
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
-    }
-
-    button {
-      cursor: pointer;
-      border: none;
-      border-radius: 0.7rem;
-      padding: 0.5rem 1.1rem;
-      font-size: 0.95rem;
-      font-weight: 500;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #f9fafb;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.4);
-      transition: transform 0.08s ease, box-shadow 0.08s ease;
-    }
-
-    button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(22, 163, 74, 0.5);
-    }
-
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 8px 16px rgba(22, 163, 74, 0.4);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      box-shadow: none;
-    }
-
-    .btn-secondary:hover {
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
-    }
-
-    .feedback {
-      min-height: 1.25rem;
-      font-size: 0.92rem;
-      margin-top: 0.2rem;
-    }
-
-    .feedback.error {
-      color: #f97373;
-    }
-
-    .feedback.success {
-      color: #22c55e;
+    :root {
+      --body-background: radial-gradient(circle at top, #1f2933, #020617);
+      --container-max-width: 900px;
+      --container-background: rgba(15, 23, 42, 0.9);
+      --container-border: 1px solid rgba(148, 163, 184, 0.25);
+      --container-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      --ink: #e5e7eb;
+      --muted: #9ca3af;
+      --line: rgba(148, 163, 184, 0.25);
+      --line-strong: rgba(148, 163, 184, 0.4);
+      --pill-background: transparent;
+      --pill-color: #9ca3af;
+      --icon-gradient: linear-gradient(135deg, #22c55e, #22c55e);
+      --icon-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+      --progress-background: rgba(15, 23, 42, 0.9);
+      --panel-strong: rgba(15, 23, 42, 0.95);
+      --panel-shadow: none;
+      --title-color: #e5e7eb;
+      --header-title-color: #e5e7eb;
+      --badge-background: transparent;
+      --badge-color: #e5e7eb;
+      --question-code-background: rgba(255, 255, 255, 0.08);
+      --question-code-color: #e5e7eb;
+      --input-background: rgba(15, 23, 42, 0.9);
+      --input-border: 1px solid rgba(148, 163, 184, 0.6);
+      --input-focus: #38bdf8;
+      --input-shadow: none;
+      --button-primary-background: linear-gradient(135deg, #22c55e, #16a34a);
+      --button-primary-color: #f9fafb;
+      --button-primary-shadow: 0 10px 20px rgba(22, 163, 74, 0.4);
+      --button-primary-hover-shadow: 0 14px 28px rgba(22, 163, 74, 0.5);
+      --button-secondary-background: transparent;
+      --button-secondary-color: #e5e7eb;
+      --button-secondary-border: 1px solid rgba(148, 163, 184, 0.6);
+      --button-secondary-hover-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
+      --success: #22c55e;
+      --danger: #f97373;
     }
 
     .footer {
-      font-size: 0.8rem;
-      color: #6b7280;
       display: flex;
       justify-content: space-between;
       gap: 0.6rem;
       flex-wrap: wrap;
+      padding: 0;
       margin-top: 0.4rem;
-    }
-
-    .final-message {
-      text-align: center;
-      padding: 1.3rem 0.5rem 0.5rem;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      color: #6b7280;
+      font-size: 0.8rem;
+      text-align: left;
     }
 
     .final-message h2 {
-      margin: 0 0 0.4rem;
       font-size: 1.3rem;
     }
 
     .final-message p {
-      margin: 0.2rem 0;
       font-size: 0.95rem;
-      color: #9ca3af;
-    }
-
-    @media (max-width: 640px) {
-      .container {
-        padding: 1.25rem 1rem 1.5rem;
-      }
-
-      header h1 {
-        font-size: 1.3rem;
-      }
-
-      .lock-card {
-        padding: 1rem 0.9rem 1.1rem;
-      }
     }
   </style>
 </head>
@@ -356,11 +160,9 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
+  <script src="assets/escape-room-core.js"></script>
   <script>
-  
-  
-    // --- DATA: Locks / Questions / Codes ---
+    const locks = [
     const locks = [
       {
   title: "Lock 1 – Complex Vault Key",
@@ -1045,177 +847,20 @@
   code: "962"
 }
     ];
-
-    // ----- PROGRESS PERSISTENCE -----
-const PROGRESS_KEY = "pure3EscapeProgress";
-
-function saveProgress(index) {
-  try {
-    localStorage.setItem(PROGRESS_KEY, String(index));
-  } catch (e) {
-    // If localStorage fails (private mode, etc.), just ignore
-  }
-}
-
-function loadProgress() {
-  try {
-    const raw = localStorage.getItem(PROGRESS_KEY);
-    if (raw === null) return 0;
-    const idx = parseInt(raw, 10);
-    if (!Number.isFinite(idx) || idx < 0) return 0;
-    if (idx > locks.length) return locks.length;
-    return idx;
-  } catch (e) {
-    return 0;
-  }
-}
-
-function clearProgress() {
-  try {
-    localStorage.removeItem(PROGRESS_KEY);
-  } catch (e) {
-    // ignore
-  }
-}
-    // --- State ---
-let currentIndex = loadProgress();    
-    
-
-    // --- DOM Elements ---
-    const lockTitleEl = document.getElementById("lock-title");
-    const lockBadgeEl = document.getElementById("lock-badge");
-    const lockStoryEl = document.getElementById("lock-story");
-    const lockQuestionEl = document.getElementById("lock-question");
-    const codeInputEl = document.getElementById("code-input");
-    const submitBtn = document.getElementById("submit-btn");
-    const resetBtn = document.getElementById("reset-btn");
-    const feedbackEl = document.getElementById("feedback");
-    const progressTextEl = document.getElementById("progress-text");
-    const progressBarFill = document.getElementById("progress-bar-fill");
-    const lockCardEl = document.getElementById("lock-card");
-    const finalMessageEl = document.getElementById("final-message");
-    const restartBtn = document.getElementById("restart-btn");
-
-    function updateProgress() {
-      const total = locks.length - 1;
-      const currentDisplay = Math.min(currentIndex + 1, total);
-      progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
-      const percent = (currentIndex / total) * 100;
-      progressBarFill.style.width = percent + "%";
-    }
-
-    function showLock(index) {
-      const lock = locks[index];
-      lockTitleEl.textContent = lock.title;
-      lockStoryEl.textContent = lock.story;
-      lockQuestionEl.innerHTML = lock.questionHtml;
-      lockBadgeEl.textContent = "Code: 3 digits";
-      codeInputEl.value = "";
-      codeInputEl.disabled = false;
-      feedbackEl.textContent = "";
-      feedbackEl.className = "feedback";
-      submitBtn.disabled = false;
-      updateProgress();
-      lockCardEl.style.display = "block";
-      finalMessageEl.style.display = "none";
-      codeInputEl.focus();
-    }
-
-    function showFinal() {
-  // Hide the lock card and show the finale block
-  lockCardEl.style.display = "none";
-  finalMessageEl.style.display = "block";
-
-  // Progress bar text + fill
-  progressTextEl.textContent = "Finale";
-  progressBarFill.style.width = "100%";
-
-  // Change background to a red theme
-  document.body.style.background =
-    "radial-gradient(circle at top, #7f1d1d, #450a0a)";
-
-  // Change the main header title
-  const headerTitle = document.querySelector("header h1");
-  if (headerTitle) {
-    headerTitle.textContent = "Finale – Real Vault Question";
-  }
-}
-
-    function normaliseCodeInput(value) {
-      return value.replace(/\s+/g, "").toUpperCase();
-    }
-
-    function checkCode() {
-      const inputRaw = codeInputEl.value;
-      const input = normaliseCodeInput(inputRaw);
-      const lock = locks[currentIndex];
-
-      if (!input) {
-        feedbackEl.textContent = "Enter a 3-digit code before submitting.";
-        feedbackEl.className = "feedback error";
-        return;
-      }
-
-      if (input.length !== 3 || !/^\d{3}$/.test(input)) {
-        feedbackEl.textContent = "Codes are exactly 3 digits (0–9 only).";
-        feedbackEl.className = "feedback error";
-        return;
-      }
-
-      if (input === lock.code) {
-        feedbackEl.textContent = "Correct code! Lock opened.";
-        feedbackEl.className = "feedback success";
-        codeInputEl.disabled = true;
-        submitBtn.disabled = true;
-
-        if (typeof confetti === "function") {
-    confetti({
-      particleCount: 120,
-      spread: 70,
-      origin: { y: 0.7 }
-    });
-  }
-        // Small delay then move to next lock
-       setTimeout(() => {
-  currentIndex++;
-  saveProgress(currentIndex);
-
-  if (currentIndex >= locks.length) {
-    showFinal();
-  } else {
-    showLock(currentIndex);
-  }
-}, 700);
-      } else {
-        feedbackEl.textContent = "Incorrect code. Check your working and try again.";
-        feedbackEl.className = "feedback error";
-        codeInputEl.select();
-      }
-    }
-
-   function resetProgress() {
-  if (!confirm("Reset all progress and go back to Lock 1?")) return;
-  currentIndex = 0;
-  clearProgress();
-  showLock(currentIndex);
-}
-
-    // --- Event listeners ---
-    submitBtn.addEventListener("click", checkCode);
-    resetBtn.addEventListener("click", resetProgress);
-    restartBtn.addEventListener("click", resetProgress);
-
-    codeInputEl.addEventListener("keyup", (event) => {
-      if (event.key === "Enter") {
-        checkCode();
+    EscapeRoom.init({
+      storageKey: "pure3EscapeProgress_v1",
+      locks,
+      totalLocks: 8,
+      finalProgressText: "Finale",
+      invalidCodeMessage: "Codes are exactly 3 digits (0–9 only).",
+      onShowFinal() {
+        document.body.style.background = "radial-gradient(circle at top, #7f1d1d, #450a0a)";
+        const headerTitle = document.querySelector("header h1");
+        if (headerTitle) {
+          headerTitle.textContent = "Finale – Real Vault Question";
+        }
       }
     });
-
-    // --- Initialise ---
-if (currentIndex >= locks.length) {
-  showFinal();
-} else {
-  showLock(currentIndex);
-}  </script>
+  </script>
 </body>
 </html>
