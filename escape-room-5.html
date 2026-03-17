@@ -179,6 +179,17 @@
       font-size: 0.96em;
     }
 
+    .lock-question img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0.9rem auto 0.7rem;
+      border-radius: 0.9rem;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      background: white;
+    }
+
     .input-row {
       display: flex;
       flex-wrap: wrap;
@@ -458,22 +469,11 @@
         `,
         baseCode: "080"
       },
-
-      // {
-      //   title: "Lock 3 – Ring Equilibrium Node",
-      //   story: "A suspended ring is balanced on the edge of failure. The lock opens with the tension only.",
-      //   questionHtml: `
-      //     <p>A smooth ring of mass <code>0.2 kg</code> is threaded on a light string <code>ARB</code>. The string is taut, <code>ABR = 90°</code>, and the angle between <code>AR</code> and the vertical is <code>60°</code>.</p>
-      //     <p>The ring is held in equilibrium by an extra force acting perpendicular to <code>AR</code>.</p>
-      //     <p>Find the <strong>tension in the string</strong>.</p>
-      //   `,
-      //   baseCode: "536"
-      // },
-
       {
         title: "Lock 3 – Hill Engine Test",
         story: "The lorry reaches the incline. Only the steady climbing speed will power the next door.",
         questionHtml: `
+          <img src="Images/lock3-question.png" alt="Question 3">
           <p>A lorry has mass <code>15 000 kg</code>. Its engine power is constant at <code>200 kW</code> and the resistance force remains <code>6000 N</code>.</p>
           <p>The lorry now climbs a straight hill inclined at <code>1°</code> to the horizontal.</p>
           <p>Find the <strong>steady speed</strong> the lorry can maintain up the hill.</p>
@@ -505,20 +505,6 @@
         `,
         baseCode: "520"
       },
-
-      // {
-      //   title: "Lock 7 – Slide Friction Core",
-      //   story: "The child reaches the end of the slide and stops exactly at Z. The final lock needs the friction coefficient.",
-      //   questionHtml: `
-      //     <p>A child of mass <code>25 kg</code> starts from rest at <code>X</code> on a rough slide.</p>
-      //     <p>Point <code>X</code> is <code>1.8 m</code> above <code>Y</code>. The straight section <code>YZ</code> has length <code>2 m</code> and is inclined at angle <code>θ</code> where <code>sin θ = 0.28</code>.</p>
-      //     <p>The work done against resistance from <code>X</code> to <code>Y</code> is <code>50 J</code>, and the child comes to rest at <code>Z</code>.</p>
-      //     <p>Find the <strong>coefficient of friction</strong> on <code>YZ</code>.</p>
-      //     <p>Use its decimal value to <strong>3 significant figures</strong> for the code.</p>
-      //   `,
-      //   baseCode: "113"
-      // },
-
       {
         title: "Lock 6 – Crate Drag Timer",
         story: "The winch keeps pulling, but the system only unlocks if you calculate the drag time exactly.",
@@ -534,6 +520,7 @@
         title: "Lock 7 – Rope Break Delay",
         story: "The rope snaps and the crate begins to grind to a halt. Only the stopping time opens the next gate.",
         questionHtml: `
+          <img src="Images/lock7-question.png" alt="Question 7">
           <p>A crate of mass <code>200 kg</code> is being pulled at constant speed along horizontal ground by a winch working at <code>4.5 kW</code>.</p>
           <p>There is a constant resistance force of magnitude <code>600 N</code>.</p>
           <p>After the crate has moved <code>15 m</code>, the rope breaks.</p>
@@ -574,44 +561,18 @@
           <p><strong>Code rule:</strong> write your answer correct to <code>3 significant figures</code>, remove the decimal point, and take the 3-digit code.</p>
         `,
         baseCode: "133"
+      },
+      {
+        title: "Lock 11 – Strut Shutdown",
+        story: "A horizontal force is applied to the block until one strut goes dead. The lock opens only with that force.",
+        questionHtml: `
+          <img src="Images/lock13-question.png" alt="Question 13">
+          <p>A block of mass <code>100 kg</code> is supported by two sloping struts at <code>45°</code> and a vertical rope of tension <code>500 N</code>.</p>
+          <p>A horizontal force of magnitude <code>F</code> is applied to the block in a direction parallel to the floor.</p>
+          <p>Find the value of <code>F</code> for which the magnitude of the force in one of the struts is zero.</p>
+        `,
+        baseCode: "500"
       }
-
-      // {
-      //   title: "Lock 13 – Strut Shutdown",
-      //   story: "A horizontal force is applied to the block until one strut goes dead. The lock opens only with that force.",
-      //   questionHtml: `
-      //     <p>A block of mass <code>100 kg</code> is supported by two sloping struts at <code>45°</code> and a vertical rope of tension <code>500 N</code>.</p>
-      //     <p>A horizontal force of magnitude <code>F</code> is applied to the block in a direction parallel to the floor.</p>
-      //     <p>Find the value of <code>F</code> for which the magnitude of the force in one of the struts is zero.</p>
-      //   `,
-      //   baseCode: "500"
-      // },
-
-      // {
-      //   title: "Lock 14 – Grip Coefficient Chamber",
-      //   story: "The block climbs the plane, but only one friction value keeps the mechanics consistent.",
-      //   questionHtml: `
-      //     <p>A block of mass <code>2 kg</code> lies on a rough plane inclined at <code>30°</code> to the horizontal.</p>
-      //     <p>A light rope is attached to the block and is inclined at <code>20°</code> above a line of greatest slope.</p>
-      //     <p>It is given that the friction force is <code>5 N</code> and the acceleration of the block up the plane is <code>1.2 m s^-2</code>.</p>
-      //     <p>Find the coefficient of friction <code>μ</code>.</p>
-      //     <p><strong>Code rule:</strong> write your answer correct to <code>3 significant figures</code>, remove the decimal point, and take the 3-digit code.</p>
-      //   `,
-      //   baseCode: "455"
-      // },
-
-      // {
-      //   title: "Lock 15 – Track Reunion Point",
-      //   story: "After two collisions and one uphill grind, the particles meet again. The final mechanics gate wants the reunion point.",
-      //   questionHtml: `
-      //     <p>A particle <code>P</code> of mass <code>0.5 kg</code> is released from rest at <code>A</code> and collides with a particle <code>Q</code> of mass <code>0.1 kg</code> at <code>B</code>.</p>
-      //     <p>Immediately after the collision, the speed of <code>P</code> is <code>4 m s^-1</code> along the horizontal section <code>BC</code>, and the speed of <code>Q</code> is <code>10 m s^-1</code>.</p>
-      //     <p>When <code>Q</code> reaches <code>C</code>, it collides with a particle <code>R</code> of mass <code>0.4 kg</code>. The two coalesce and move up a slope, coming instantaneously to rest at <code>F</code>, where <code>CF = 0.4 m</code>.</p>
-      //     <p>Find the distance from <code>B</code> at which <code>P</code> collides with the combined particle.</p>
-      //     <p><strong>Code rule:</strong> multiply your answer in metres by <code>100</code> and round to the nearest whole number.</p>
-      //   `,
-      //   baseCode: "667"
-      // }
     ];
 
     const footerMessages = [
