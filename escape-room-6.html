@@ -4,54 +4,57 @@
   <meta charset="UTF-8" />
   <title>Pure Mathematics 1 Escape Room – Spring Vault</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/escape-room-core.css" />
   <style>
-    * { box-sizing: border-box; }
-
     :root {
-      --bg-1: #f8fff6;
-      --bg-2: #eef9f7;
-      --bg-3: #fdf2f8;
-      --bg-4: #eef6ff;
-
-      --panel: rgba(255, 255, 255, 0.82);
-      --panel-strong: rgba(255, 255, 255, 0.94);
-
-      --ink: #23413a;
-      --muted: #61776f;
-
-      --line: rgba(95, 137, 122, 0.18);
-      --line-strong: rgba(95, 137, 122, 0.30);
-
-      --accent: #67b99a;
-      --accent-2: #4f9a7f;
-      --accent-3: #f29db6;
-      --accent-4: #8ecae6;
-      --accent-5: #ffd166;
-
-      --success: #239c63;
-      --danger: #d65a7a;
-
-      --shadow: 0 22px 48px rgba(78, 113, 98, 0.15);
-      --shadow-soft: 0 10px 24px rgba(78, 113, 98, 0.10);
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      min-height: 100vh;
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      padding: 1.5rem;
-      background:
+      --body-background:
         radial-gradient(circle at top left, rgba(242, 157, 182, 0.24), transparent 20%),
         radial-gradient(circle at top right, rgba(142, 202, 230, 0.24), transparent 22%),
-        radial-gradient(circle at bottom left, rgba(103, 185, 154, 0.20), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(103, 185, 154, 0.2), transparent 24%),
         radial-gradient(circle at bottom right, rgba(255, 209, 102, 0.16), transparent 18%),
-        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 32%, var(--bg-4) 68%, var(--bg-3) 100%);
-      position: relative;
-      overflow-x: hidden;
+        linear-gradient(180deg, #f8fff6 0%, #eef9f7 32%, #eef6ff 68%, #fdf2f8 100%);
+      --container-max-width: 900px;
+      --container-background: rgba(255, 255, 255, 0.82);
+      --container-border: 1px solid rgba(255, 255, 255, 0.8);
+      --container-shadow: 0 22px 48px rgba(78, 113, 98, 0.15);
+      --container-backdrop: blur(10px);
+      --ink: #23413a;
+      --muted: #61776f;
+      --line: rgba(95, 137, 122, 0.18);
+      --line-strong: rgba(95, 137, 122, 0.3);
+      --pill-background: rgba(255, 255, 255, 0.65);
+      --pill-color: #61776f;
+      --pill-shadow: 0 10px 24px rgba(78, 113, 98, 0.1);
+      --icon-gradient: linear-gradient(135deg, #67b99a, #f29db6);
+      --icon-shadow: 0 0 8px rgba(103, 185, 154, 0.45);
+      --progress-background: rgba(255, 255, 255, 0.55);
+      --progress-fill: linear-gradient(90deg, #67b99a, #8ecae6, #f29db6);
+      --panel-strong: rgba(255, 255, 255, 0.94);
+      --panel-shadow: 0 10px 24px rgba(78, 113, 98, 0.1);
+      --title-color: #295547;
+      --header-title-color: #265447;
+      --badge-background: rgba(255, 255, 255, 0.7);
+      --badge-color: #23413a;
+      --question-code-background: rgba(242, 157, 182, 0.12);
+      --question-code-color: #2f5648;
+      --input-background: rgba(255, 255, 255, 0.92);
+      --input-border: 1px solid rgba(95, 137, 122, 0.3);
+      --input-focus: #67b99a;
+      --button-primary-background: linear-gradient(135deg, #67b99a, #4f9a7f);
+      --button-primary-color: #f9fafb;
+      --button-primary-shadow: 0 10px 20px rgba(79, 154, 127, 0.28);
+      --button-primary-hover-shadow: 0 14px 28px rgba(79, 154, 127, 0.36);
+      --button-secondary-background: transparent;
+      --button-secondary-color: #23413a;
+      --button-secondary-border: 1px solid rgba(95, 137, 122, 0.3);
+      --button-secondary-hover-shadow: 0 6px 14px rgba(95, 137, 122, 0.12);
+      --success: #239c63;
+      --danger: #d65a7a;
+      --footer-background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(242, 157, 182, 0.1), rgba(142, 202, 230, 0.1));
+      --footer-border: 1px solid rgba(95, 137, 122, 0.18);
+      --footer-shadow: 0 10px 24px rgba(78, 113, 98, 0.1);
+      --footer-quote-color: #285345;
+      --footer-note-color: #61776f;
     }
 
     body::before,
@@ -99,22 +102,9 @@
     .container {
       position: relative;
       z-index: 1;
-      max-width: 900px;
-      width: 100%;
-      background: var(--panel);
-      backdrop-filter: blur(10px);
-      border-radius: 1.5rem;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      padding: 1.75rem 1.75rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
     }
 
     header {
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 0.75rem;
       position: relative;
     }
 
@@ -128,99 +118,7 @@
       font-size: 1rem;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 1.6rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: #265447;
-    }
-
-    header p {
-      margin: 0.4rem 0 0;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .status-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .pill {
-      padding: 0.3rem 0.72rem;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(255, 255, 255, 0.65);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .pill span.icon {
-      width: 0.6rem;
-      height: 0.6rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-3));
-      box-shadow: 0 0 8px rgba(103, 185, 154, 0.45);
-    }
-
-    a.btn {
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      border-radius: 0.7rem;
-      padding: 0.58rem 1.1rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, #67b99a, #4f9a7f);
-      color: #f9fafb;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      box-shadow: 0 10px 20px rgba(79, 154, 127, 0.28);
-      transition: transform 0.08s ease, box-shadow 0.08s ease;
-    }
-
-    a.btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(79, 154, 127, 0.36);
-    }
-
-    .progress-bar {
-      flex: 1;
-      min-width: 150px;
-      background: rgba(255, 255, 255, 0.55);
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid var(--line-strong);
-      height: 10px;
-      position: relative;
-    }
-
-    .progress-bar-fill {
-      position: absolute;
-      inset: 0;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-4), var(--accent-3));
-      transition: width 0.3s ease;
-    }
-
     .lock-card {
-      background: var(--panel-strong);
-      border-radius: 1.25rem;
-      border: 1px solid var(--line-strong);
-      padding: 1.25rem 1.5rem 1.3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
     }
@@ -235,146 +133,21 @@
       pointer-events: none;
     }
 
-    .lock-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      position: relative;
-      z-index: 1;
-      color: #295547;
-    }
-
-    .lock-badge {
-      font-size: 0.8rem;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      color: var(--ink);
-      background: rgba(255, 255, 255, 0.7);
-    }
-
-    .lock-story {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.5;
-      position: relative;
-      z-index: 1;
-    }
-
-    .lock-question {
-      font-size: 0.97rem;
-      line-height: 1.6;
-      position: relative;
-      z-index: 1;
-      color: var(--ink);
-    }
-
-    .lock-question p { margin: 0.4rem 0; }
-    .lock-question ol,
-    .lock-question ul { margin: 0.4rem 0 0.4rem 1.2rem; }
-
-    .lock-question code {
-      background: rgba(242, 157, 182, 0.12);
-      color: #2f5648;
-      padding: 0.12rem 0.38rem;
-      border-radius: 0.36rem;
-      font-size: 0.96em;
-    }
-
-    .input-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      margin-top: 0.2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    label {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    input[type="text"] {
-      padding: 0.55rem 0.8rem;
-      border-radius: 0.65rem;
-      border: 1px solid var(--line-strong);
-      background: rgba(255, 255, 255, 0.92);
-      color: var(--ink);
-      font-size: 1rem;
-      width: 160px;
-      font-weight: 700;
-    }
-
-    input[type="text"]:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(103, 185, 154, 0.14);
-    }
-
-    button {
-      cursor: pointer;
-      border: none;
-      border-radius: 0.7rem;
-      padding: 0.55rem 1.1rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, #67b99a, #4f9a7f);
-      color: #f9fafb;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      box-shadow: 0 10px 20px rgba(79, 154, 127, 0.28);
-      transition: transform 0.08s ease, box-shadow 0.08s ease;
-    }
-
-    button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(79, 154, 127, 0.36);
-    }
-
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 8px 16px rgba(79, 154, 127, 0.28);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--line-strong);
-      box-shadow: none;
-      color: var(--ink);
-    }
-
-    .btn-secondary:hover {
-      box-shadow: 0 6px 14px rgba(95, 137, 122, 0.12);
-    }
-
+    .lock-title,
+    .lock-story,
+    .lock-question,
+    .input-row,
     .feedback {
-      min-height: 1.25rem;
-      font-size: 0.92rem;
-      margin-top: 0.2rem;
       position: relative;
       z-index: 1;
-      font-weight: 600;
     }
-
-    .feedback.error { color: var(--danger); }
-    .feedback.success { color: var(--success); }
 
     .footer {
-      margin-top: 18px;
-      padding: 16px 18px;
-      border: 1px solid rgba(95, 137, 122, 0.18);
-      background: linear-gradient(135deg, rgba(255,255,255,0.72), rgba(242,157,182,0.10), rgba(142,202,230,0.10));
-      border-radius: 16px;
-      text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow-soft);
+      margin-top: 18px;
+      border-radius: 16px;
+      padding: 16px 18px;
     }
 
     .footer::before {
@@ -395,18 +168,8 @@
       color: rgba(103, 185, 154, 0.38);
     }
 
-    .footer-quote {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #285345;
-      letter-spacing: 0.02em;
-      transition: opacity 0.18s ease, transform 0.18s ease;
-    }
-
+    .footer-quote,
     .footer-note {
-      margin-top: 6px;
-      font-size: 0.9rem;
-      color: var(--muted);
       transition: opacity 0.18s ease, transform 0.18s ease;
     }
 
@@ -416,27 +179,7 @@
       transform: translateY(4px);
     }
 
-    .final-message {
-      text-align: center;
-      padding: 1.3rem 0.5rem 0.5rem;
-    }
-
-    .final-message h2 {
-      margin: 0 0 0.4rem;
-      font-size: 1.3rem;
-      color: #285345;
-    }
-
-    .final-message p {
-      margin: 0.2rem 0;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
     @media (max-width: 640px) {
-      .container { padding: 1.25rem 1rem 1.5rem; }
-      header h1 { font-size: 1.3rem; }
-      .lock-card { padding: 1rem 0.9rem 1.1rem; }
       header::after {
         position: static;
         display: block;
@@ -502,71 +245,10 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="assets/escape-room-core.js"></script>
 
   <script>
     "use strict";
-
-    const lockTitleEl = document.getElementById("lock-title");
-    const lockBadgeEl = document.getElementById("lock-badge");
-    const lockStoryEl = document.getElementById("lock-story");
-    const lockQuestionEl = document.getElementById("lock-question");
-    const codeInputEl = document.getElementById("code-input");
-    const submitBtn = document.getElementById("submit-btn");
-    const resetBtn = document.getElementById("reset-btn");
-    const feedbackEl = document.getElementById("feedback");
-    const progressTextEl = document.getElementById("progress-text");
-    const progressBarFill = document.getElementById("progress-bar-fill");
-    const lockCardEl = document.getElementById("lock-card");
-    const finalMessageEl = document.getElementById("final-message");
-    const restartBtn = document.getElementById("restart-btn");
-    const footerEl = document.getElementById("footer");
-    const footerQuoteEl = document.getElementById("footer-quote");
-    const footerNoteEl = document.getElementById("footer-note");
-
-    const PROGRESS_KEY = "pureMathEscapeProgress_v2";
-    const FOOTER_KEY = "pureMathEscapeFooterProgress_v1";
-
-    function saveProgress(index) {
-      try { localStorage.setItem(PROGRESS_KEY, String(index)); } catch (_) {}
-    }
-
-    function loadProgress() {
-      try {
-        const raw = localStorage.getItem(PROGRESS_KEY);
-        if (raw === null) return 0;
-        const idx = parseInt(raw, 10);
-        return Number.isFinite(idx) && idx >= 0 ? idx : 0;
-      } catch (_) {
-        return 0;
-      }
-    }
-
-    function clearProgress() {
-      try { localStorage.removeItem(PROGRESS_KEY); } catch (_) {}
-    }
-
-    function saveFooterIndex(index) {
-      try { localStorage.setItem(FOOTER_KEY, String(index)); } catch (_) {}
-    }
-
-    function loadFooterIndex() {
-      try {
-        const raw = localStorage.getItem(FOOTER_KEY);
-        if (raw === null) return 0;
-        const idx = parseInt(raw, 10);
-        return Number.isFinite(idx) && idx >= 0 ? idx : 0;
-      } catch (_) {
-        return 0;
-      }
-    }
-
-    function clearFooterIndex() {
-      try { localStorage.removeItem(FOOTER_KEY); } catch (_) {}
-    }
-
-    function format3(n) {
-      return String(n).padStart(3, "0");
-    }
 
     const locks = [
       {
@@ -914,132 +596,22 @@
       }
     ];
 
-    let currentIndex = loadProgress();
-    if (currentIndex > locks.length) currentIndex = 0;
-
-    let footerIndex = loadFooterIndex();
-
-    function updateProgress() {
-      const total = locks.length;
-      const currentDisplay = Math.min(currentIndex + 1, total);
-      progressTextEl.textContent = `Lock ${currentDisplay} of ${total}`;
-      progressBarFill.style.width = ((currentIndex / total) * 100) + "%";
-    }
-
-    function setFooterMessage() {
-      const message = footerMessages[footerIndex % footerMessages.length];
-      footerQuoteEl.textContent = message.quote;
-      footerNoteEl.textContent = message.note;
-    }
-
-    function advanceFooterMessage() {
-      footerEl.classList.add("fade");
-      setTimeout(() => {
-        footerIndex++;
-        saveFooterIndex(footerIndex);
-        setFooterMessage();
-        footerEl.classList.remove("fade");
-      }, 150);
-    }
-
-    function showLock(index) {
-      const lock = locks[index];
-
-      lockTitleEl.textContent = lock.title;
-      lockStoryEl.textContent = lock.story;
-      lockQuestionEl.innerHTML = lock.questionHtml;
-
-      lockBadgeEl.textContent = "Code: 3 digits";
-      codeInputEl.value = "";
-      codeInputEl.disabled = false;
-      submitBtn.disabled = false;
-
-      feedbackEl.textContent = "";
-      feedbackEl.className = "feedback";
-
-      lockCardEl.style.display = "block";
-      finalMessageEl.style.display = "none";
-
-      updateProgress();
-      setFooterMessage();
-      codeInputEl.focus();
-    }
-
-    function showFinal() {
-      lockCardEl.style.display = "none";
-      finalMessageEl.style.display = "block";
-      progressTextEl.textContent = "Complete";
-      progressBarFill.style.width = "100%";
-      footerQuoteEl.textContent = "Vault complete.";
-      footerNoteEl.textContent = "Calm method. Clean marks. Job done.";
-    }
-
-    function normaliseCodeInput(value) {
-      return (value || "").replace(/\s+/g, "");
-    }
-
-    function checkCode() {
-      const input = normaliseCodeInput(codeInputEl.value);
-
-      if (!/^\d{3}$/.test(input)) {
-        feedbackEl.textContent = "Codes are exactly 3 digits.";
-        feedbackEl.className = "feedback error";
-        return;
+    EscapeRoom.init({
+      storageKey: "pureMathEscapeProgress_v2",
+      locks,
+      successDelay: 650,
+      invalidCodeMessage: "Codes are exactly 3 digits.",
+      footer: {
+        mode: "persistent",
+        messages: footerMessages,
+        storageKey: "pureMathEscapeFooterProgress_v1",
+        advanceOnCorrect: true,
+        fadeClass: "fade",
+        fadeDuration: 150,
+        finalQuote: "Vault complete.",
+        finalNote: "Calm method. Clean marks. Job done."
       }
-
-      const lock = locks[currentIndex];
-      const expected = format3(lock.baseCode);
-
-      if (input !== expected) {
-        feedbackEl.textContent = "Incorrect code. Check your working and try again.";
-        feedbackEl.className = "feedback error";
-        codeInputEl.select();
-        return;
-      }
-
-      feedbackEl.textContent = "Correct code! Lock opened.";
-      feedbackEl.className = "feedback success";
-      codeInputEl.disabled = true;
-      submitBtn.disabled = true;
-
-      advanceFooterMessage();
-
-      if (typeof confetti === "function") {
-        confetti({
-          particleCount: 120,
-          spread: 70,
-          origin: { y: 0.7 }
-        });
-      }
-
-      setTimeout(() => {
-        currentIndex++;
-        saveProgress(currentIndex);
-
-        if (currentIndex >= locks.length) showFinal();
-        else showLock(currentIndex);
-      }, 650);
-    }
-
-    function resetProgress() {
-      if (!confirm("Reset all progress and go back to Lock 1?")) return;
-      currentIndex = 0;
-      footerIndex = 0;
-      clearProgress();
-      clearFooterIndex();
-      showLock(currentIndex);
-    }
-
-    submitBtn.addEventListener("click", checkCode);
-    resetBtn.addEventListener("click", resetProgress);
-    restartBtn.addEventListener("click", resetProgress);
-
-    codeInputEl.addEventListener("keyup", (e) => {
-      if (e.key === "Enter") checkCode();
     });
-
-    if (currentIndex >= locks.length) showFinal();
-    else showLock(currentIndex);
   </script>
 </body>
 </html>
