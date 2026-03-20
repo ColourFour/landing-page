@@ -117,8 +117,12 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script src="assets/escape-room-core.js"></script>
+  <script>
+  window.confetti = window.confetti || function () {
+    return Promise.resolve();
+  };
+</script>
+<script src="assets/escape-room-core.js"></script>
 
   <script>
     "use strict";
