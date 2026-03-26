@@ -359,26 +359,32 @@ questionHtml: `
 `,
 baseCode: "206"
       },
-      {
-        title: "Lock 10 – Logarithm Hatch",
-        story: "A hidden value of <code>y</code> controls the hatch release. Crack the transformed equation to open it.",
-        questionHtml: `
-          <p>Solve the equation</p>
-          <p style="text-align:center;">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-              <mi>log</mi><msub><mn>3</mn><mrow></mrow></msub>
-              <mo>(</mo><mn>4</mn><mi>y</mi><mo>+</mo><mn>1</mn><mo>)</mo>
-              <mo>=</mo>
-              <mn>1</mn>
-              <mo>+</mo>
-              <mn>2</mn><mi>log</mi><msub><mn>3</mn><mrow></mrow></msub>
-              <mo>(</mo><mn>2</mn><mi>y</mi><mo>-</mo><mn>1</mn><mo>)</mo>
-            </math>
-          </p>
-          <p>Give your answer correct to 2 decimal places.</p>
-          <p><strong>Code rule:</strong> multiply your answer by <code>100</code> and round to the nearest integer.</p>
-        `,
-        baseCode: "119"
+      {title: "Lock 10 – Logarithm Hatch",
+story: "A hidden value of <code>y</code> controls the hatch release. Crack the transformed equation to open it.",
+questionHtml: `
+  <p>Solve the equation</p>
+  <p style="text-align:center;">
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+      <msub>
+        <mi>log</mi>
+        <mn>3</mn>
+      </msub>
+      <mo>(</mo><mn>4</mn><mi>y</mi><mo>+</mo><mn>1</mn><mo>)</mo>
+      <mo>=</mo>
+      <mn>1</mn>
+      <mo>+</mo>
+      <mn>2</mn>
+      <msub>
+        <mi>log</mi>
+        <mn>3</mn>
+      </msub>
+      <mo>(</mo><mn>2</mn><mi>y</mi><mo>-</mo><mn>1</mn><mo>)</mo>
+    </math>
+  </p>
+  <p>Give your answer correct to 2 decimal places.</p>
+  <p><strong>Code rule:</strong> multiply your answer by <code>100</code> and round to the nearest integer.</p>
+`,
+baseCode: "119"
       },
       {
         title: "Lock 11 – Parametric Tangent Rail",
