@@ -277,7 +277,7 @@ baseCode: "180"
               </mrow>
             </math>
           </p>
-          <p>Give the root correct to 2 decimal places.</p>
+          <p>Give the root correct to 5 decimal places.</p>
           <p><strong>Code rule:</strong> use the root to 3 significant figures and scale to a 3-digit integer.</p>
         `,
         baseCode: "685"
@@ -324,22 +324,23 @@ baseCode: "180"
         baseCode: "233"
       },
       {
-        title: "Lock 8 – Area Core",
-        story: "The core field is bounded by a trigonometric wave. Exact area only.",
-        questionHtml: `
-          <p>The curve is</p>
-          <p style="text-align:center;">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-              <mi>y</mi>
-              <mo>=</mo>
-              <mi>sin</mi><mi>x</mi><mi>cos</mi><mn>2</mn><mi>x</mi>
-            </math>
-          </p>
-          <p>The enclosed region <code>R</code> is the region between the curve and the x-axis from <code>x = π/4</code> to <code>x = 3π/4</code>.</p>
-          <p>Find the exact area of <code>R</code>.</p>
-          <p><strong>Code rule:</strong> convert your exact answer to a decimal correct to 3 significant figures and scale to a 3-digit integer.</p>
-        `,
-        baseCode: "943"
+       title: "Lock 8 – Area Core",
+story: "The core field is bounded by a trigonometric wave. Only the exact area will stabilise it.",
+questionHtml: `
+  <p>The curve is</p>
+  <p style="text-align:center;">
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+      <mi>y</mi>
+      <mo>=</mo>
+      <mi>sin</mi><mi>x</mi><mi>cos</mi><mn>2</mn><mi>x</mi>
+    </math>
+  </p>
+  <p>The enclosed region <code>R</code> is the region between the curve and the x-axis from <code>x = π/4</code> to <code>x = 3π/4</code>.</p>
+  <p>Find the exact area of <code>R</code>.</p>
+  <p>Express your answer in the form <code>p√q / r</code>, where <code>p</code>, <code>q</code> and <code>r</code> are positive integers.</p>
+  <p><strong>Code rule:</strong> if the exact area is <code>p√q / r</code>, then the code is <code>pqr</code>.</p>
+`,
+baseCode: "223"
       },
       {
         title: "Lock 9 – Trig Signal Sweep",
