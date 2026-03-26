@@ -302,26 +302,28 @@ baseCode: "180"
         baseCode: "298"
       },
       {
-        title: "Lock 7 – Complex Decoder",
-        story: "A damaged complex-number decoder hides two possible states. Recover them both.",
-        questionHtml: `
-          <p>It is given that</p>
-          <p style="text-align:center;">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-              <mfrac>
-                <mrow><mn>2</mn><mo>+</mo><mn>3</mn><mi>a</mi><mi>i</mi></mrow>
-                <mrow><mi>a</mi><mo>+</mo><mn>2</mn><mi>i</mi></mrow>
-              </mfrac>
-              <mo>=</mo>
-              <mi>&#955;</mi>
-              <mo>(</mo><mn>2</mn><mo>-</mo><mi>i</mi><mo>)</mo>
-            </math>
-          </p>
-          <p>where <code>a</code> and <code>λ</code> are real constants.</p>
-          <p>Find the possible values of <code>a</code> and the corresponding values of <code>λ</code>.</p>
-          <p><strong>Code rule:</strong> use the positive value of <code>a</code> written as a fraction in simplest form. If <code>a = p/q</code>, the code is <code>pq3</code>.</p>
-        `,
-        baseCode: "233"
+        {
+  title: "Lock 7 – Complex Decoder",
+  story: "A damaged complex-number decoder hides two possible states. Recover both values of <code>a</code> and the matching values of <code>λ</code>.",
+  questionHtml: `
+    <p>It is given that</p>
+    <p style="text-align:center;">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <mfrac>
+          <mrow><mn>2</mn><mo>+</mo><mn>3</mn><mi>a</mi><mi>i</mi></mrow>
+          <mrow><mi>a</mi><mo>+</mo><mn>2</mn><mi>i</mi></mrow>
+        </mfrac>
+        <mo>=</mo>
+        <mi>&#955;</mi>
+        <mo>(</mo><mn>2</mn><mo>-</mo><mi>i</mi><mo>)</mo>
+      </math>
+    </p>
+    <p>where <code>a</code> and <code>λ</code> are real constants.</p>
+    <p>Find the possible values of <code>a</code> and the corresponding values of <code>λ</code>.</p>
+    <p><strong>Code rule:</strong> use the positive value of <code>a</code> and its corresponding value of <code>λ</code>, each written as a fraction in simplest form. If <code>a = p/q</code> and <code>λ = q/r</code>, the code is <code>pqr</code>.</p>
+  `,
+  baseCode: "235"
+
       },
       {
        title: "Lock 8 – Area Core",
