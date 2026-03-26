@@ -218,33 +218,33 @@
         `,
         baseCode: "106"
       },
-      {
-        title: "Lock 4 – Integral Chamber",
-        story: "An exact integral is engraved into the chamber door. Evaluate it perfectly to proceed.",
-        questionHtml: `
-          <p>Find the exact value of</p>
-          <p style="text-align:center;">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-              <msubsup>
-                <mo>&#x222B;</mo>
-                <mn>0</mn>
-                <mn>6</mn>
-              </msubsup>
-              <mfrac>
-                <mrow>
-                  <mi>x</mi><mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo>
-                </mrow>
-                <mrow>
-                  <msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn>
-                </mrow>
-              </mfrac>
-              <mspace width="0.3em"/>
-              <mi>d</mi><mi>x</mi>
-            </math>
-          </p>
-          <p><strong>Code rule:</strong> after finding the exact value, convert it to a decimal correct to 3 significant figures and scale to a 3-digit integer.</p>
-        `,
-        baseCode: "465"
+      {title: "Lock 4 – Integral Chamber",
+story: "An exact integral is engraved into the chamber door. The lock only accepts the positive product of the constants in the final exact form.",
+questionHtml: `
+  <p>Find the exact value of</p>
+  <p style="text-align:center;">
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+      <msubsup>
+        <mo>&#x222B;</mo>
+        <mn>0</mn>
+        <mn>6</mn>
+      </msubsup>
+      <mfrac>
+        <mrow>
+          <mi>x</mi><mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo>
+        </mrow>
+        <mrow>
+          <msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn>
+        </mrow>
+      </mfrac>
+      <mspace width="0.3em"/>
+      <mi>d</mi><mi>x</mi>
+    </math>
+  </p>
+  <p>Express your answer in the form <code>p + q ln(r) + s arctan(t)</code>.</p>
+  <p><strong>Code rule:</strong> the code is the <strong>positive value</strong> of the product <code>p × q × r × s × t</code>.</p>
+`,
+baseCode: "180"
       },
       {
         title: "Lock 5 – Iteration Relay",
