@@ -325,7 +325,7 @@ baseCode: "180"
       },
       {
        title: "Lock 8 – Area Core",
-story: "The core field is bounded by a trigonometric wave. Only the exact area will stabilise it.",
+story: "The core field is bounded by a trigonometric wave. Only the exact area will stabilise it. A previous adventurer was torn in to parts without first simplifying.",
 questionHtml: `
   <p>The curve is</p>
   <p style="text-align:center;">
@@ -343,21 +343,21 @@ questionHtml: `
 baseCode: "223"
       },
       {
-        title: "Lock 9 – Trig Signal Sweep",
-        story: "A rotating signal cuts through the vault sensors. Only the correct angle will align the beam.",
-        questionHtml: `
-          <p>Solve the equation</p>
-          <p style="text-align:center;">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-              <mi>cos</mi><mo>(</mo><mi>&#952;</mi><mo>-</mo><mn>60</mn><mo>&deg;</mo><mo>)</mo>
-              <mo>=</mo>
-              <mn>3</mn><mi>sin</mi><mi>&#952;</mi>
-            </math>
-          </p>
-          <p>for <code>0&deg; &le; &#952; &le; 360&deg;</code>.</p>
-          <p><strong>Code rule:</strong> use the smaller solution correct to 1 decimal place, remove the decimal point, and take the 3-digit code.</p>
-        `,
-        baseCode: "132"
+       title: "Lock 9 – Trig Signal Sweep",
+story: "A rotating signal cuts through the vault sensors. Both alignment angles must be found to stabilise the beam.",
+questionHtml: `
+  <p>Solve the equation</p>
+  <p style="text-align:center;">
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+      <mi>cos</mi><mo>(</mo><mi>&#952;</mi><mo>-</mo><mn>60</mn><mo>&deg;</mo><mo>)</mo>
+      <mo>=</mo>
+      <mn>3</mn><mi>sin</mi><mi>&#952;</mi>
+    </math>
+  </p>
+  <p>for <code>0&deg; &le; &#952; &lt; 360&deg;</code>.</p>
+  <p><strong>Code rule:</strong> find both solutions correct to 1 decimal place, add them, then take the integer part of the total as the 3-digit code.</p>
+`,
+baseCode: "206"
       },
       {
         title: "Lock 10 – Logarithm Hatch",
