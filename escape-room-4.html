@@ -452,43 +452,61 @@ baseCode: "119"
         `,
         baseCode: "338"
       },
-      {
-        title: "Lock 14 – Iteration Vault",
-        story: "The final vault accepts only the converged value of <code>a</code>. Iterate carefully or get yeeted back to the start.",
-        questionHtml: `
-          <p>The constant <code>a</code> satisfies</p>
-          <p style="text-align:center;">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-              <msubsup><mo>&#x222B;</mo><mn>1</mn><mi>a</mi></msubsup>
-              <msup><mi>x</mi><mn>2</mn></msup>
-              <mi>ln</mi><mi>x</mi>
-              <mspace width="0.3em"/>
-              <mi>d</mi><mi>x</mi>
-              <mo>=</mo>
-              <mn>4</mn>
-            </math>
-          </p>
-          <p>Use an iterative formula based on the equation</p>
-          <p style="text-align:center;">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-              <mi>a</mi>
-              <mo>=</mo>
-              <msup>
-                <mrow>
-                  <mo>(</mo>
-                  <mfrac><mn>35</mn><mrow><mn>3</mn><mi>ln</mi><mi>a</mi><mo>-</mo><mn>1</mn></mrow></mfrac>
-                  <mo>)</mo>
-                </mrow>
-                <mrow><mn>1</mn><mo>/</mo><mn>3</mn></mrow>
-              </msup>
-            </math>
-          </p>
-          <p>to determine <code>a</code> correct to 2 decimal places.</p>
-          <p><strong>Code rule:</strong> multiply your final value of <code>a</code> by <code>100</code> and round to the nearest integer.</p>
-        `,
-        baseCode: "264"
-      }
+      
+       {
+  title: "Lock 14 – Integral Vault",
+  story: "The final vault responds in two stages. First verify the transformed equation, then determine the value that stabilises the system.",
+  questionHtml: `
+    <p>The constant <code>a</code> satisfies</p>
+    <p style="text-align:center;">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <msubsup><mo>&#x222B;</mo><mn>1</mn><mi>a</mi></msubsup>
+        <msup><mi>x</mi><mn>2</mn></msup>
+        <mi>ln</mi><mi>x</mi>
+        <mspace width="0.3em"/>
+        <mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mn>4</mn>
+      </math>
+    </p>
+    <p>(i) Show that <code>a</code> satisfies <code>a³(3ln(a) - 1) = k</code>.</p>
+    <p>Enter the value of the constant on the right-hand side to unlock the final input.</p>
+    <div id="part1-area">
+      <input id="part1-input" type="text" maxlength="3" placeholder="Part (i)">
+      <button onclick="checkPart1()">Verify</button>
+      <p id="part1-feedback"></p>
+    </div>
+    <div id="part2-area" style="display:none;">
+      <p>(ii) Hence, by considering values of <code>a</code> between <code>2</code> and <code>3</code>, find <code>a</code> correct to 2 decimal places.</p>
+      <p><strong>Code rule:</strong> multiply your final value of <code>a</code> by <code>100</code> and round to the nearest integer.</p>
+    </div>
+  `,
+  baseCode: "264"
+}
+
+
+      
     ];
+
+
+  function checkPart1() {
+    const input = document.getElementById("part1-input");
+    const feedback = document.getElementById("part1-feedback");
+    const part2 = document.getElementById("part2-area");
+
+    if (!input || !feedback || !part2) return;
+
+    const val = input.value.trim();
+
+    if (val === "35" || val === "035") {
+      feedback.textContent = "Correct. Part (ii) unlocked.";
+      feedback.style.color = "#22c55e";
+      part2.style.display = "block";
+    } else {
+      feedback.textContent = "Not correct yet. Recheck the integral and simplification.";
+      feedback.style.color = "#f87171";
+    }
+  }
 
     const footerMessages = [
       {
