@@ -1,0 +1,593 @@
+import React, { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Activity,
+  CalendarDays,
+  CheckCircle2,
+  Dumbbell,
+  Flame,
+  Heart,
+  LineChart,
+  Moon,
+  RotateCcw,
+  Sparkles,
+  Star,
+  Trophy,
+} from "lucide-react";
+
+const STORAGE_KEY = "glowStrongGymTracker.v1";
+
+const workoutPlan = [
+  {
+    id: "day1",
+    title: "Day 1",
+    name: "Glutes + Legs",
+    vibe: "Build the base",
+    accent: "from-rose-500 to-fuchsia-500",
+    icon: Flame,
+    goal: "Move slowly, keep the reps clean, and leave feeling powerful — not destroyed.",
+    exercises: [
+      { id: "goblet-squat", name: "Goblet Squat", sets: 3, reps: "8–10", note: "Light to moderate. Sit tall, drive through heels." },
+      { id: "hip-thrust", name: "Hip Thrust or Glute Bridge", sets: 3, reps: "10–12", note: "Pause at the top. Squeeze like you mean it." },
+      { id: "reverse-lunge", name: "Reverse Lunge", sets: 2, reps: "8 each leg", note: "Hold rails or dumbbells as needed." },
+      { id: "leg-curl", name: "Seated or Lying Leg Curl", sets: 2, reps: "10–12", note: "Slow lower. No swinging." },
+      { id: "incline-walk", name: "Incline Walk", sets: 1, reps: "10 min", note: "Easy pace. Finish feeling good." },
+    ],
+  },
+  {
+    id: "day2",
+    title: "Day 2",
+    name: "Upper Body Glow",
+    vibe: "Posture, shape, confidence",
+    accent: "from-violet-500 to-indigo-500",
+    icon: Sparkles,
+    goal: "Train the back, shoulders, and arms so everything feels lifted and strong.",
+    exercises: [
+      { id: "lat-pulldown", name: "Lat Pulldown", sets: 3, reps: "8–10", note: "Pull elbows down, chest proud." },
+      { id: "db-press", name: "Dumbbell Bench Press", sets: 3, reps: "8–10", note: "Stop with 2–3 reps left in the tank." },
+      { id: "seated-row", name: "Seated Cable Row", sets: 2, reps: "10–12", note: "Squeeze shoulder blades together." },
+      { id: "shoulder-raise", name: "Lateral Raise", sets: 2, reps: "12–15", note: "Light weights. Smooth reps." },
+      { id: "curl-pressdown", name: "Curl + Triceps Pressdown", sets: 2, reps: "10–12 each", note: "Optional finisher. Cute arms loading." },
+    ],
+  },
+  {
+    id: "day3",
+    title: "Day 3",
+    name: "Lower Body Sculpt",
+    vibe: "Hips, hamstrings, core",
+    accent: "from-orange-500 to-pink-500",
+    icon: Heart,
+    goal: "A second lower day with a little less squat stress and more posterior-chain work.",
+    exercises: [
+      { id: "rdl", name: "Dumbbell Romanian Deadlift", sets: 3, reps: "8–10", note: "Hips back, soft knees, flat back." },
+      { id: "leg-press", name: "Leg Press", sets: 3, reps: "10–12", note: "Controlled depth. Don’t lock knees hard." },
+      { id: "step-up", name: "Step-Up", sets: 2, reps: "8 each leg", note: "Start low. Own the balance." },
+      { id: "cable-kickback", name: "Cable Kickback or Abduction Machine", sets: 2, reps: "12–15", note: "Slow and controlled. Feel the glute." },
+      { id: "dead-bug", name: "Dead Bug or Plank", sets: 2, reps: "30–45 sec", note: "Core tight, breathe calmly." },
+    ],
+  },
+  {
+    id: "day4",
+    title: "Day 4",
+    name: "Full Body + Cardio",
+    vibe: "Sweat, sparkle, reset",
+    accent: "from-cyan-500 to-emerald-500",
+    icon: Activity,
+    goal: "A confidence workout: whole body, moderate effort, and a finish that feels athletic.",
+    exercises: [
+      { id: "kettlebell-deadlift", name: "Kettlebell Deadlift", sets: 3, reps: "10", note: "Practice hinge pattern. Strong and safe." },
+      { id: "incline-pushup", name: "Incline Push-Up", sets: 2, reps: "8–12", note: "Hands on bench if needed." },
+      { id: "cable-row", name: "Cable Row", sets: 2, reps: "10–12", note: "Smooth pull, no jerking." },
+      { id: "farmers-carry", name: "Farmer’s Carry", sets: 3, reps: "30 sec", note: "Tall posture. Walk like the room is yours." },
+      { id: "cardio-choice", name: "Cardio Choice", sets: 1, reps: "12–20 min", note: "Bike, walk, elliptical, or stairs at conversational pace." },
+    ],
+  },
+];
+
+const starterWeeks = [
+  "Week 1: Learn the moves. Use easy weights. Finish every workout feeling like you could do more.",
+  "Week 2: Repeat the same plan. Add 1–2 reps where it feels comfortable.",
+  "Week 3: Add a small amount of weight to 1–2 exercises per workout.",
+  "Week 4: Keep the best lifts, note what feels amazing, and build the next month from those wins.",
+];
+
+function makeInitialData() {
+  const exerciseLogs = {};
+  workoutPlan.forEach((day) => {
+    day.exercises.forEach((exercise) => {
+      exerciseLogs[exercise.id] = {
+        done: false,
+        weight: "",
+        reps: "",
+        notes: "",
+      };
+    });
+  });
+
+  return {
+    weekOf: new Date().toISOString().slice(0, 10),
+    energy: 7,
+    confidence: 7,
+    bodyNote: "",
+    winOfWeek: "",
+    exerciseLogs,
+    completedDays: {},
+    weeklyHistory: [],
+  };
+}
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return makeInitialData();
+    const parsed = JSON.parse(raw);
+    const fresh = makeInitialData();
+    return {
+      ...fresh,
+      ...parsed,
+      exerciseLogs: {
+        ...fresh.exerciseLogs,
+        ...(parsed.exerciseLogs || {}),
+      },
+      completedDays: parsed.completedDays || {},
+      weeklyHistory: parsed.weeklyHistory || [],
+    };
+  } catch {
+    return makeInitialData();
+  }
+}
+
+export default function GlowStrongGymTracker() {
+  const [data, setData] = useState(loadData);
+  const [activeDay, setActiveDay] = useState(workoutPlan[0].id);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }, [data]);
+
+  const activeWorkout = workoutPlan.find((day) => day.id === activeDay) || workoutPlan[0];
+
+  const totalExercises = workoutPlan.reduce((sum, day) => sum + day.exercises.length, 0);
+  const completedExercises = Object.values(data.exerciseLogs).filter((entry) => entry.done).length;
+  const completedDays = workoutPlan.filter((day) => data.completedDays[day.id]).length;
+  const progress = Math.round((completedExercises / totalExercises) * 100);
+
+  const weeklyScore = useMemo(() => {
+    const workoutScore = completedDays * 20;
+    const exerciseScore = Math.round((completedExercises / totalExercises) * 20);
+    const confidenceScore = Number(data.confidence || 0) * 4;
+    return Math.min(100, workoutScore + exerciseScore + confidenceScore);
+  }, [completedDays, completedExercises, data.confidence, totalExercises]);
+
+  function updateExercise(exerciseId, field, value) {
+    setData((current) => ({
+      ...current,
+      exerciseLogs: {
+        ...current.exerciseLogs,
+        [exerciseId]: {
+          ...(current.exerciseLogs[exerciseId] || {}),
+          [field]: value,
+        },
+      },
+    }));
+  }
+
+  function toggleDay(dayId) {
+    setData((current) => ({
+      ...current,
+      completedDays: {
+        ...current.completedDays,
+        [dayId]: !current.completedDays[dayId],
+      },
+    }));
+  }
+
+  function saveWeek() {
+    const summary = {
+      id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+      weekOf: data.weekOf,
+      completedDays,
+      completedExercises,
+      energy: data.energy,
+      confidence: data.confidence,
+      winOfWeek: data.winOfWeek,
+      savedAt: new Date().toISOString(),
+    };
+
+    setData((current) => ({
+      ...makeInitialData(),
+      weeklyHistory: [summary, ...current.weeklyHistory].slice(0, 8),
+    }));
+    setActiveDay(workoutPlan[0].id);
+  }
+
+  function resetCurrentWeek() {
+    setData((current) => ({
+      ...makeInitialData(),
+      weeklyHistory: current.weeklyHistory || [],
+    }));
+    setShowResetConfirm(false);
+    setActiveDay(workoutPlan[0].id);
+  }
+
+  return (
+    <div className="min-h-screen bg-zinc-950 text-white">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-fuchsia-500/25 blur-3xl" />
+        <div className="absolute top-80 -left-24 h-72 w-72 rounded-full bg-rose-500/20 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-violet-500/20 blur-3xl" />
+      </div>
+
+      <main className="relative mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <motion.section
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] shadow-2xl backdrop-blur"
+        >
+          <div className="grid gap-6 p-6 lg:grid-cols-[1.25fr_0.75fr] lg:p-8">
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-zinc-200">
+                <Sparkles className="h-4 w-4 text-rose-300" />
+                Glow Strong: 4-day comeback tracker
+              </div>
+
+              <h1 className="max-w-3xl text-4xl font-black tracking-tight sm:text-6xl">
+                Strong looks good on you.
+              </h1>
+
+              <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-300 sm:text-lg">
+                A playful, confidence-first gym page for rebuilding momentum after time away. Track the lifts, celebrate the wins, and make each week feel a little more unstoppable.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href="#tracker" className="rounded-full bg-white px-5 py-3 text-sm font-bold text-zinc-950 shadow-lg shadow-fuchsia-950/30 transition hover:scale-[1.02]">
+                  Start today
+                </a>
+                <a href="#plan" className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/15">
+                  View 4-day plan
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-[1.5rem] border border-white/10 bg-zinc-950/60 p-5">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-zinc-400">This week’s glow score</p>
+                  <p className="text-5xl font-black">{weeklyScore}</p>
+                </div>
+                <div className="rounded-2xl bg-gradient-to-br from-rose-500 to-fuchsia-600 p-4 shadow-lg shadow-fuchsia-950/40">
+                  <Trophy className="h-8 w-8" />
+                </div>
+              </div>
+
+              <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
+                <div className="h-full rounded-full bg-gradient-to-r from-rose-400 via-fuchsia-400 to-violet-400" style={{ width: `${progress}%` }} />
+              </div>
+
+              <div className="mt-5 grid grid-cols-3 gap-3 text-center">
+                <StatTile label="Days" value={`${completedDays}/4`} />
+                <StatTile label="Moves" value={`${completedExercises}/${totalExercises}`} />
+                <StatTile label="Done" value={`${progress}%`} />
+              </div>
+
+              <div className="mt-5 rounded-2xl bg-white/[0.06] p-4 text-sm leading-6 text-zinc-300">
+                <span className="font-bold text-white">Rule of the comeback:</span> the first month is about consistency, clean form, and leaving enough energy to want the next workout.
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        <section className="mt-6 grid gap-4 md:grid-cols-4" id="plan">
+          {workoutPlan.map((day, index) => {
+            const Icon = day.icon;
+            const isActive = activeDay === day.id;
+            const isComplete = Boolean(data.completedDays[day.id]);
+            return (
+              <motion.button
+                key={day.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                onClick={() => setActiveDay(day.id)}
+                className={`rounded-[1.5rem] border p-4 text-left transition ${
+                  isActive
+                    ? "border-white/30 bg-white/[0.12] shadow-xl shadow-fuchsia-950/20"
+                    : "border-white/10 bg-white/[0.06] hover:bg-white/[0.09]"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className={`rounded-2xl bg-gradient-to-br ${day.accent} p-3`}>
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  {isComplete ? <CheckCircle2 className="h-5 w-5 text-emerald-300" /> : <Star className="h-5 w-5 text-zinc-600" />}
+                </div>
+                <p className="mt-4 text-sm font-bold text-zinc-400">{day.title}</p>
+                <h2 className="mt-1 text-xl font-black">{day.name}</h2>
+                <p className="mt-2 text-sm text-zinc-400">{day.vibe}</p>
+              </motion.button>
+            );
+          })}
+        </section>
+
+        <section className="mt-6 grid gap-6 lg:grid-cols-[0.72fr_0.28fr]" id="tracker">
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.25em] text-rose-300">Today’s workout</p>
+                <h2 className="mt-2 text-3xl font-black">{activeWorkout.name}</h2>
+                <p className="mt-2 max-w-2xl text-zinc-300">{activeWorkout.goal}</p>
+              </div>
+              <button
+                onClick={() => toggleDay(activeWorkout.id)}
+                className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-bold transition ${
+                  data.completedDays[activeWorkout.id]
+                    ? "bg-emerald-400 text-zinc-950"
+                    : "bg-white text-zinc-950 hover:scale-[1.02]"
+                }`}
+              >
+                <CheckCircle2 className="h-4 w-4" />
+                {data.completedDays[activeWorkout.id] ? "Workout complete" : "Mark day complete"}
+              </button>
+            </div>
+
+            <div className="mt-6 space-y-4">
+              {activeWorkout.exercises.map((exercise, index) => {
+                const log = data.exerciseLogs[exercise.id] || {};
+                return (
+                  <motion.div
+                    key={exercise.id}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.04 }}
+                    className="rounded-[1.25rem] border border-white/10 bg-zinc-950/55 p-4"
+                  >
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+                      <label className="flex flex-1 items-start gap-3">
+                        <input
+                          type="checkbox"
+                          checked={Boolean(log.done)}
+                          onChange={(event) => updateExercise(exercise.id, "done", event.target.checked)}
+                          className="mt-1 h-5 w-5 rounded border-white/20 bg-zinc-900 accent-rose-400"
+                        />
+                        <div>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h3 className="text-lg font-black">{exercise.name}</h3>
+                            <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-zinc-300">
+                              {exercise.sets} sets × {exercise.reps}
+                            </span>
+                          </div>
+                          <p className="mt-1 text-sm text-zinc-400">{exercise.note}</p>
+                        </div>
+                      </label>
+
+                      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:w-[28rem]">
+                        <InputBox
+                          label="Weight"
+                          value={log.weight || ""}
+                          placeholder="25 lb"
+                          onChange={(value) => updateExercise(exercise.id, "weight", value)}
+                        />
+                        <InputBox
+                          label="Reps"
+                          value={log.reps || ""}
+                          placeholder="10,10,8"
+                          onChange={(value) => updateExercise(exercise.id, "reps", value)}
+                        />
+                        <InputBox
+                          label="Note"
+                          value={log.notes || ""}
+                          placeholder="felt good"
+                          onChange={(value) => updateExercise(exercise.id, "notes", value)}
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          <aside className="space-y-6">
+            <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur">
+              <div className="flex items-center gap-3">
+                <div className="rounded-2xl bg-white/10 p-3">
+                  <CalendarDays className="h-5 w-5 text-rose-300" />
+                </div>
+                <div>
+                  <p className="text-sm text-zinc-400">Week of</p>
+                  <input
+                    type="date"
+                    value={data.weekOf}
+                    onChange={(event) => setData((current) => ({ ...current, weekOf: event.target.value }))}
+                    className="mt-1 rounded-xl border border-white/10 bg-zinc-950 px-3 py-2 text-sm text-white outline-none focus:border-rose-300"
+                  />
+                </div>
+              </div>
+
+              <Slider
+                icon={Flame}
+                label="Energy"
+                value={data.energy}
+                onChange={(value) => setData((current) => ({ ...current, energy: value }))}
+              />
+              <Slider
+                icon={Sparkles}
+                label="Confidence"
+                value={data.confidence}
+                onChange={(value) => setData((current) => ({ ...current, confidence: value }))}
+              />
+
+              <label className="mt-5 block">
+                <span className="text-sm font-bold text-zinc-300">Body check-in</span>
+                <textarea
+                  value={data.bodyNote}
+                  onChange={(event) => setData((current) => ({ ...current, bodyNote: event.target.value }))}
+                  placeholder="Sore? Strong? Tired? Proud? Write the truth."
+                  className="mt-2 min-h-24 w-full rounded-2xl border border-white/10 bg-zinc-950/80 p-3 text-sm text-white outline-none placeholder:text-zinc-600 focus:border-rose-300"
+                />
+              </label>
+
+              <label className="mt-4 block">
+                <span className="text-sm font-bold text-zinc-300">Win of the week</span>
+                <input
+                  value={data.winOfWeek}
+                  onChange={(event) => setData((current) => ({ ...current, winOfWeek: event.target.value }))}
+                  placeholder="Example: I showed up twice."
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-zinc-950/80 p-3 text-sm text-white outline-none placeholder:text-zinc-600 focus:border-rose-300"
+                />
+              </label>
+
+              <button onClick={saveWeek} className="mt-5 w-full rounded-full bg-gradient-to-r from-rose-400 to-fuchsia-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-fuchsia-950/30 transition hover:scale-[1.01]">
+                Save week + start fresh
+              </button>
+
+              <button onClick={() => setShowResetConfirm(true)} className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold text-zinc-300 transition hover:bg-white/10">
+                <RotateCcw className="h-4 w-4" />
+                Reset current week
+              </button>
+
+              {showResetConfirm && (
+                <div className="mt-3 rounded-2xl border border-rose-300/30 bg-rose-950/30 p-3 text-sm text-rose-100">
+                  Reset this week’s workout entries?
+                  <div className="mt-3 flex gap-2">
+                    <button onClick={resetCurrentWeek} className="rounded-full bg-rose-300 px-4 py-2 font-bold text-zinc-950">Yes, reset</button>
+                    <button onClick={() => setShowResetConfirm(false)} className="rounded-full bg-white/10 px-4 py-2 font-bold">Cancel</button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur">
+              <div className="flex items-center gap-3">
+                <div className="rounded-2xl bg-white/10 p-3">
+                  <LineChart className="h-5 w-5 text-fuchsia-300" />
+                </div>
+                <h3 className="text-xl font-black">Comeback rhythm</h3>
+              </div>
+              <div className="mt-4 space-y-3">
+                {starterWeeks.map((week, index) => (
+                  <div key={week} className="rounded-2xl bg-zinc-950/60 p-3 text-sm leading-6 text-zinc-300">
+                    <span className="mr-2 font-black text-white">{index + 1}</span>
+                    {week}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section className="mt-6 grid gap-6 lg:grid-cols-2">
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur sm:p-6">
+            <div className="flex items-center gap-3">
+              <div className="rounded-2xl bg-white/10 p-3">
+                <Moon className="h-5 w-5 text-violet-300" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-black">Tiny rules that actually work</h2>
+                <p className="text-sm text-zinc-400">Keep the plan simple enough to repeat.</p>
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <RuleCard title="Warm up first" body="5–8 minutes easy cardio, then 1 light set before the first big lift." />
+              <RuleCard title="Stop before failure" body="Most sets should end with 2–3 reps left. This keeps soreness manageable." />
+              <RuleCard title="Progress slowly" body="Add reps first. Add weight only when the movement feels clean and confident." />
+              <RuleCard title="Track the truth" body="Weights, reps, energy, and confidence matter more than perfection." />
+            </div>
+          </div>
+
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur sm:p-6">
+            <div className="flex items-center gap-3">
+              <div className="rounded-2xl bg-white/10 p-3">
+                <Dumbbell className="h-5 w-5 text-rose-300" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-black">Saved weeks</h2>
+                <p className="text-sm text-zinc-400">A simple record of showing up.</p>
+              </div>
+            </div>
+
+            <div className="mt-5 space-y-3">
+              {data.weeklyHistory.length === 0 ? (
+                <div className="rounded-2xl border border-dashed border-white/15 p-5 text-sm leading-6 text-zinc-400">
+                  No saved weeks yet. Finish a week, save it, and this section becomes her little victory wall.
+                </div>
+              ) : (
+                data.weeklyHistory.map((week) => (
+                  <div key={week.id} className="rounded-2xl bg-zinc-950/60 p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="font-black">Week of {week.weekOf}</p>
+                        <p className="mt-1 text-sm text-zinc-400">
+                          {week.completedDays}/4 days · {week.completedExercises}/{totalExercises} moves · Energy {week.energy}/10 · Confidence {week.confidence}/10
+                        </p>
+                      </div>
+                      <Trophy className="h-5 w-5 text-rose-300" />
+                    </div>
+                    {week.winOfWeek && <p className="mt-3 rounded-xl bg-white/5 p-3 text-sm text-zinc-300">“{week.winOfWeek}”</p>}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+function StatTile({ label, value }) {
+  return (
+    <div className="rounded-2xl bg-white/[0.06] p-3">
+      <p className="text-lg font-black">{value}</p>
+      <p className="mt-1 text-xs font-bold uppercase tracking-wider text-zinc-500">{label}</p>
+    </div>
+  );
+}
+
+function InputBox({ label, value, placeholder, onChange }) {
+  return (
+    <label className="block">
+      <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-zinc-500">{label}</span>
+      <input
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder={placeholder}
+        className="w-full rounded-xl border border-white/10 bg-zinc-900 px-3 py-2 text-sm text-white outline-none placeholder:text-zinc-600 focus:border-rose-300"
+      />
+    </label>
+  );
+}
+
+function Slider({ icon: Icon, label, value, onChange }) {
+  return (
+    <label className="mt-5 block">
+      <div className="mb-2 flex items-center justify-between text-sm">
+        <span className="inline-flex items-center gap-2 font-bold text-zinc-300">
+          <Icon className="h-4 w-4 text-rose-300" />
+          {label}
+        </span>
+        <span className="font-black text-white">{value}/10</span>
+      </div>
+      <input
+        type="range"
+        min="1"
+        max="10"
+        value={value}
+        onChange={(event) => onChange(Number(event.target.value))}
+        className="w-full accent-rose-400"
+      />
+    </label>
+  );
+}
+
+function RuleCard({ title, body }) {
+  return (
+    <div className="rounded-2xl bg-zinc-950/60 p-4">
+      <h3 className="font-black">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-zinc-400">{body}</p>
+    </div>
+  );
+}
