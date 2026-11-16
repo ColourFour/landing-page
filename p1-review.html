@@ -1,0 +1,1764 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P1 Topic Vaults · 9709 Review</title><style>
+:root{--ink:#173d35;--muted:#526b63;--green:#25634e;--paper:#f6f8f2;--line:#d5dfd3;--accent:#6e4b96}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}a{color:var(--green)}button,input{font:inherit}button,a.button{cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:11px 17px;background:white;color:var(--ink);font-weight:650;text-decoration:none;display:inline-block}button:hover,a.button:hover{border-color:var(--green);background:#edf3e9}button.primary{background:var(--green);color:white;border-color:var(--green)}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #9a78ba;outline-offset:3px}button:disabled{opacity:.5;cursor:default}header,main,footer{width:min(1100px,100% - 40px);margin:auto}header{padding:30px 0 25px;border-bottom:1px solid var(--line)}.topline,.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.topline{justify-content:space-between}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(32px,6vw,55px);line-height:1.12;letter-spacing:-.045em;margin:16px 0}h2{font-size:29px;line-height:1.25;letter-spacing:-.02em;margin:5px 0 12px}h3{margin:5px 0 12px;font-size:20px}p{margin:10px 0}.muted{color:var(--muted)}.intro{max-width:720px}.pill{border:1px solid var(--line);padding:5px 11px;border-radius:30px;font-size:13px;background:#fff}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:26px 0}.topic{padding:22px;background:white;border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;gap:9px}.topic p{font-size:14px;flex:1}.topic a{margin-top:8px}.topic .number{font-size:13px;color:var(--accent);font-weight:750}.progress{height:7px;background:#e2e8dd;border-radius:8px;overflow:hidden;margin:14px 0 8px}.progress>div{height:100%;background:var(--green);transition:width .2s}.small{font-size:13px}.room{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;padding:30px 0}.side{padding:20px;background:#eaf0e4;border-radius:16px;align-self:start}.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:16px 0}.steps button{padding:7px 0;font-size:14px}.steps .current{outline:2px solid var(--accent);outline-offset:1px}.steps .solved{background:var(--green);color:white}.steps .assisted{background:#e3d4f0;color:#462a61}.question{background:white;border:1px solid var(--line);border-radius:18px;padding:clamp(22px,4vw,38px);min-width:0}.prompt{font-family:Georgia,serif;font-size:23px;line-height:1.7;margin:24px 0;white-space:pre-wrap}.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));gap:14px;margin:18px 0}label{display:block;font-size:14px;font-weight:650}input{width:100%;margin-top:6px;padding:11px;border:1px solid #99afa2;border-radius:8px;background:#fcfdf9;color:var(--ink);min-width:0}input[aria-invalid=true]{border-color:#ae3542}.feedback{min-height:30px;margin:14px 0;font-weight:650}.error{color:#a12d3c}.success{color:var(--green)}details{border-top:1px solid var(--line);padding:14px 0;margin-top:8px}summary{cursor:pointer;font-weight:650}.solution{background:#eff4eb;padding:17px;border-radius:10px}.hidden,[hidden]{display:none!important}.nav{margin-top:26px;justify-content:space-between}.notice{background:#eae1f3;border-radius:12px;padding:16px;margin:20px 0}.keycard{background:white;border:1px solid var(--line);padding:24px;border-radius:12px;margin:20px 0;break-inside:avoid}.keycard .prompt{font-size:20px;margin:15px 0}.reference{font-size:12px;color:var(--muted)}footer{padding:30px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.keytools{position:sticky;top:0;padding:15px;background:var(--paper);z-index:1}.worklines{height:90px;background:repeating-linear-gradient(white,white 29px,#e1e4dc 30px);margin:15px 0}.printonly{display:none}@media(max-width:950px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){header,main,footer{width:calc(100% - 28px)}.grid,.room{grid-template-columns:1fr}.room{gap:16px}.side{padding:15px}.side .steps{grid-template-columns:repeat(10,1fr)}.steps button{padding:9px 0}.prompt{font-size:21px}.grid{gap:12px}.topic{padding:20px}h1{font-size:37px}.topline a{font-size:13px}.keytools{position:static}}@media print{body{background:white;font-size:11pt}header{padding:0 0 12px}header h1{font-size:26pt}main,header,footer{width:100%}.noprint,footer,.keytools{display:none!important}.keycard{border:0;border-bottom:1px solid #aaa;border-radius:0;padding:8px 0;margin:6px 0}.keycard .prompt{font-size:13pt;line-height:1.5}.keycard h3{font-size:13pt}.printonly{display:block}.studentprint .answer,.studentprint .reference{display:none}.studentprint .worklines{display:block}.worklines{display:none}.studentprint h2{break-before:page}.studentprint section:first-child h2{break-before:auto}a{color:black;text-decoration:none}@page{margin:18mm}}
+</style></head><body><header><div class="topline"><span class="eyebrow">Cambridge 9709 · Pure Mathematics 1</span><a href="index.html" class="noprint">← All escape rooms</a></div><h1>P1 Topic Vaults<span style="color:var(--accent)">.</span></h1><p class="intro muted">A little practice. One clear answer. The next door opens.<br>Choose a topic and work through ten short questions on paper.</p><div class="row noprint"><span class="pill">8 topics</span><span class="pill">80 questions</span><span class="pill">No timer</span><span class="pill">No sign-in</span></div></header><main id="app"></main><footer>Original practice questions informed by your exam-bank P1 topic packets. Progress stays in this browser; it is not submitted to a teacher. <a href="#teacher">Worked answers &amp; print copies</a>.</footer>
+<script id="question-data" type="application/json">[
+  {
+    "id": "quadratics",
+    "title": "Quadratics",
+    "description": "Build from factorising to inequalities and tangency.",
+    "questions": [
+      {
+        "skill": "Factorising",
+        "prompt": "Solve x² − 7x + 12 = 0. Enter the smaller root first.",
+        "fields": [
+          {
+            "label": "Smaller root",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Larger root",
+            "answer": 4,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Find two numbers with product 12 and sum −7.",
+        "solution": "(x − 3)(x − 4) = 0, so x = 3 or 4.",
+        "sourceId": "13winter13_q01",
+        "number": 1,
+        "sourceLabel": "2013 November P13 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Completing the square",
+        "prompt": "Write x² − 6x + 5 = (x − a)² + b. Find a and b.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "b",
+            "answer": -4,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Halve the coefficient of x, then compensate for the square.",
+        "solution": "x² − 6x + 5 = (x − 3)² − 4.",
+        "sourceId": "13summer18_q01",
+        "number": 2,
+        "sourceLabel": "2018 June P13 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Minimum value",
+        "prompt": "Find the minimum value of 2x² + 8x + 11 and the x-value where it occurs.",
+        "fields": [
+          {
+            "label": "Minimum value",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "x",
+            "answer": -2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Complete the square and use that a square is non-negative.",
+        "solution": "2x² + 8x + 11 = 2(x + 2)² + 3. Minimum 3 at x = −2.",
+        "sourceId": "12summer23_q03",
+        "number": 3,
+        "sourceLabel": "2023 June P12 Question 3",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Discriminant",
+        "prompt": "For 3x² − 4x + 2 = 0, calculate the discriminant and state the number of real roots.",
+        "fields": [
+          {
+            "label": "Discriminant",
+            "answer": -8,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Number of real roots",
+            "answer": 0,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use b² − 4ac.",
+        "solution": "(−4)² − 4(3)(2) = −8 < 0, so there are no real roots.",
+        "sourceId": "11winter20_q01",
+        "number": 4,
+        "sourceLabel": "2020 November P11 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Repeated root",
+        "prompt": "The equation x² − 8x + k = 0 has a repeated root. Find k and the root.",
+        "fields": [
+          {
+            "label": "k",
+            "answer": 16,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Repeated root",
+            "answer": 4,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "A repeated root means discriminant zero.",
+        "solution": "64 − 4k = 0 gives k = 16; (x − 4)² = 0 gives x = 4.",
+        "sourceId": "12summer21_q01",
+        "number": 5,
+        "sourceLabel": "2021 June P12 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Quadratic inequality",
+        "prompt": "Solve x² − 5x + 6 ≤ 0. Write the solution as a ≤ x ≤ b.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": 2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "b",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Factorise, then identify where the upward-opening parabola is on or below the axis.",
+        "solution": "(x − 2)(x − 3) ≤ 0 holds for 2 ≤ x ≤ 3.",
+        "sourceId": "13winter13_q01",
+        "number": 6,
+        "sourceLabel": "2013 November P13 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "No real roots",
+        "prompt": "Find the boundary value c such that x² + 4x + k = 0 has no real roots precisely when k > c.",
+        "fields": [
+          {
+            "label": "c",
+            "answer": 4,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Require b² − 4ac < 0.",
+        "solution": "16 − 4k < 0, so k > 4.",
+        "sourceId": "12summer23_q03",
+        "number": 7,
+        "sourceLabel": "2023 June P12 Question 3",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Line and curve",
+        "prompt": "Find the x-coordinates where y = x + 1 intersects y = x² − 3x + 4. Enter the smaller first.",
+        "fields": [
+          {
+            "label": "Smaller x",
+            "answer": 1,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Larger x",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Equate the two expressions for y.",
+        "solution": "x² − 4x + 3 = 0 gives x = 1 and 3.",
+        "sourceId": "01summer08_q04",
+        "number": 8,
+        "sourceLabel": "2008 June P01 Question 4",
+        "sourcePage": 3
+      },
+      {
+        "skill": "Rational equation",
+        "prompt": "Solve x + 1 = 6/(x − 1), where x ≠ 1. Enter the negative root first.",
+        "fields": [
+          {
+            "label": "Negative root",
+            "answer": -2.6457513110645907,
+            "example": "Use -sqrt(7)",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Positive root",
+            "answer": 2.6457513110645907,
+            "example": "Use sqrt(7)",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Multiply both sides by x − 1.",
+        "solution": "(x + 1)(x − 1) = 6 gives x² = 7. Both ±√7 satisfy x ≠ 1.",
+        "sourceId": "11winter22_q01",
+        "number": 9,
+        "sourceLabel": "2022 November P11 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Tangency",
+        "prompt": "The line y = 2x + k is tangent to y = x² − 4x + 7. Find k.",
+        "fields": [
+          {
+            "label": "k",
+            "answer": -2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Equate line and curve, then set the discriminant to zero.",
+        "solution": "x² − 6x + 7 − k = 0. Tangency: 36 − 4(7 − k) = 0, giving k = −2.",
+        "sourceId": "12winter16_q03",
+        "number": 10,
+        "sourceLabel": "2016 November P12 Question 3",
+        "sourcePage": 2
+      }
+    ],
+    "packetGeneratedAt": "2026-10-13T05:34:23.135205+00:00"
+  },
+  {
+    "id": "functions",
+    "title": "Functions",
+    "description": "Inputs, inverses, domains, ranges and transformations.",
+    "questions": [
+      {
+        "skill": "Function value",
+        "prompt": "Let f(x) = 2x² − 3. Find f(−2).",
+        "fields": [
+          {
+            "label": "f(−2)",
+            "answer": 5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Substitute −2, including brackets around the negative input.",
+        "solution": "2(−2)² − 3 = 8 − 3 = 5.",
+        "sourceId": "12summer16_q01",
+        "number": 1,
+        "sourceLabel": "2016 June P12 Question 1",
+        "sourcePage": 6
+      },
+      {
+        "skill": "Composition",
+        "prompt": "Let f(x) = 2x + 1 and g(x) = x². Find gf(3), where gf means g(f(x)).",
+        "fields": [
+          {
+            "label": "gf(3)",
+            "answer": 49,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Apply f first, then g.",
+        "solution": "f(3) = 7, so g(f(3)) = 7² = 49.",
+        "sourceId": "12summer16_q01",
+        "number": 2,
+        "sourceLabel": "2016 June P12 Question 1",
+        "sourcePage": 6
+      },
+      {
+        "skill": "Order of composition",
+        "prompt": "With f(x) = 2x + 1 and g(x) = x², find fg(3).",
+        "fields": [
+          {
+            "label": "fg(3)",
+            "answer": 19,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "This time apply g first.",
+        "solution": "g(3) = 9 and f(9) = 19.",
+        "sourceId": "12summer16_q01",
+        "number": 3,
+        "sourceLabel": "2016 June P12 Question 1",
+        "sourcePage": 6
+      },
+      {
+        "skill": "Linear inverse",
+        "prompt": "Let f(x) = 3x − 5. Find f⁻¹(10).",
+        "fields": [
+          {
+            "label": "f⁻¹(10)",
+            "answer": 5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Which input gives output 10?",
+        "solution": "Solve 3x − 5 = 10 to get x = 5.",
+        "sourceId": "12winter15_q01",
+        "number": 4,
+        "sourceLabel": "2015 November P12 Question 1",
+        "sourcePage": 6
+      },
+      {
+        "skill": "Domain",
+        "prompt": "The largest real domain of f(x) = √(x − a) is x ≥ 6. Find a.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": 6,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The quantity inside a square root must be non-negative.",
+        "solution": "x − a ≥ 0 means x ≥ a. Thus a = 6.",
+        "sourceId": "12winter12_q02",
+        "number": 5,
+        "sourceLabel": "2012 November P12 Question 2",
+        "sourcePage": 11
+      },
+      {
+        "skill": "Range",
+        "prompt": "For f(x) = (x − 2)² + 3 with x ∈ ℝ, the range is f(x) ≥ k. Find k.",
+        "fields": [
+          {
+            "label": "k",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The squared term can be zero but cannot be negative.",
+        "solution": "The minimum occurs at x = 2 and is 3; the range is f(x) ≥ 3.",
+        "sourceId": "13winter19_q02",
+        "number": 6,
+        "sourceLabel": "2019 November P13 Question 2",
+        "sourcePage": 7
+      },
+      {
+        "skill": "Inverse with a restriction",
+        "prompt": "Let f(x) = (x − 1)² + 2 for x ≥ 1. Find f⁻¹(11).",
+        "fields": [
+          {
+            "label": "f⁻¹(11)",
+            "answer": 4,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Solve f(x) = 11 and keep the root in x ≥ 1.",
+        "solution": "(x − 1)² = 9 gives x = 4 or −2. The domain keeps x = 4.",
+        "sourceId": "13winter19_q02",
+        "number": 7,
+        "sourceLabel": "2019 November P13 Question 2",
+        "sourcePage": 7
+      },
+      {
+        "skill": "Vertical transformation",
+        "prompt": "The point (2, 5) lies on y = f(x). Find its corresponding point on y = −2f(x) + 3.",
+        "fields": [
+          {
+            "label": "x-coordinate",
+            "answer": 2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "y-coordinate",
+            "answer": -7,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Keep x fixed; multiply the old y-value by −2, then add 3.",
+        "solution": "(2, −2 × 5 + 3) = (2, −7).",
+        "sourceId": "13winter21_q01",
+        "number": 8,
+        "sourceLabel": "2021 November P13 Question 1",
+        "sourcePage": 3
+      },
+      {
+        "skill": "Horizontal transformation",
+        "prompt": "The point (2, 5) lies on y = f(x). Find its corresponding point on y = f(x/3).",
+        "fields": [
+          {
+            "label": "x-coordinate",
+            "answer": 6,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "y-coordinate",
+            "answer": 5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Set the new input x/3 equal to the original input 2.",
+        "solution": "x/3 = 2 gives x = 6; y remains 5.",
+        "sourceId": "12spring20_q02",
+        "number": 9,
+        "sourceLabel": "2020 March P12 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Composite domain",
+        "prompt": "Let f(x) = √x for x ≥ 0 and g(x) = x − 4 for all real x. The largest domain of fg is x ≥ k. Find k.",
+        "fields": [
+          {
+            "label": "k",
+            "answer": 4,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The output of g must be an allowed input for f.",
+        "solution": "fg(x) = √(x − 4). Require x − 4 ≥ 0, so x ≥ 4.",
+        "sourceId": "13winter15_q08",
+        "number": 10,
+        "sourceLabel": "2015 November P13 Question 8",
+        "sourcePage": 49
+      }
+    ],
+    "packetGeneratedAt": "2026-10-13T05:34:09.995040+00:00"
+  },
+  {
+    "id": "coordinate_geometry",
+    "title": "Coordinate geometry",
+    "description": "Straight lines, perpendicular bisectors, circles and tangents.",
+    "questions": [
+      {
+        "skill": "Gradient",
+        "prompt": "Find the gradient of the line joining A(1, 2) to B(5, 10).",
+        "fields": [
+          {
+            "label": "Gradient",
+            "answer": 2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use change in y divided by change in x.",
+        "solution": "(10 − 2)/(5 − 1) = 2.",
+        "sourceId": "13winter10_q02",
+        "number": 1,
+        "sourceLabel": "2010 November P13 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Midpoint",
+        "prompt": "Find the midpoint of A(−2, 7) and B(6, −1).",
+        "fields": [
+          {
+            "label": "x-coordinate",
+            "answer": 2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "y-coordinate",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Average each pair of coordinates.",
+        "solution": "((−2 + 6)/2, (7 − 1)/2) = (2, 3).",
+        "sourceId": "12winter19_q02",
+        "number": 2,
+        "sourceLabel": "2019 November P12 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Distance",
+        "prompt": "Find the distance between A(−1, 2) and B(5, 10).",
+        "fields": [
+          {
+            "label": "Distance",
+            "answer": 10,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use Pythagoras with horizontal and vertical differences.",
+        "solution": "AB = √(6² + 8²) = 10.",
+        "sourceId": "13winter13_q03",
+        "number": 3,
+        "sourceLabel": "2013 November P13 Question 3",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Equation of a line",
+        "prompt": "A line has gradient 3 and passes through (2, 5). Write y = 3x + c. Find c.",
+        "fields": [
+          {
+            "label": "c",
+            "answer": -1,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Substitute the point into y = 3x + c.",
+        "solution": "5 = 3 × 2 + c, so c = −1.",
+        "sourceId": "12winter19_q02",
+        "number": 4,
+        "sourceLabel": "2019 November P12 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Perpendicular gradient",
+        "prompt": "Find the gradient of a line perpendicular to y = −2x + 7.",
+        "fields": [
+          {
+            "label": "Gradient",
+            "answer": 0.5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The two gradients multiply to −1.",
+        "solution": "(−2)m = −1 gives m = 1/2.",
+        "sourceId": "13winter10_q02",
+        "number": 5,
+        "sourceLabel": "2010 November P13 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Perpendicular bisector",
+        "prompt": "A(2, 1) and B(6, 3) are endpoints of a segment. Its perpendicular bisector is y = mx + c. Find m and c.",
+        "fields": [
+          {
+            "label": "m",
+            "answer": -2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "c",
+            "answer": 10,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Find the midpoint and use the negative reciprocal of the segment gradient.",
+        "solution": "Midpoint (4, 2), AB gradient 1/2. Thus y − 2 = −2(x − 4), giving y = −2x + 10.",
+        "sourceId": "12summer14_q01",
+        "number": 6,
+        "sourceLabel": "2014 June P12 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Circle equation",
+        "prompt": "A circle has centre (3, −2) and radius 5. Write (x − a)² + (y − b)² = c. Find a, b and c.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "b",
+            "answer": -2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "c",
+            "answer": 25,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The right-hand side is radius squared.",
+        "solution": "(x − 3)² + (y + 2)² = 25, so a = 3, b = −2, c = 25.",
+        "sourceId": "15winter25_q01",
+        "number": 7,
+        "sourceLabel": "2025 November P15 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Completing squares for a circle",
+        "prompt": "Find the centre and radius of x² + y² − 4x + 6y − 12 = 0.",
+        "fields": [
+          {
+            "label": "Centre x",
+            "answer": 2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Centre y",
+            "answer": -3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Radius",
+            "answer": 5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Complete squares separately in x and y.",
+        "solution": "(x − 2)² + (y + 3)² = 25 gives centre (2, −3), radius 5.",
+        "sourceId": "11winter24_q06",
+        "number": 8,
+        "sourceLabel": "2024 November P11 Question 6",
+        "sourcePage": 3
+      },
+      {
+        "skill": "Circle-axis intersections",
+        "prompt": "The circle (x − 1)² + (y − 2)² = 10 meets the y-axis twice. Find the two y-values, smaller first.",
+        "fields": [
+          {
+            "label": "Smaller y",
+            "answer": -1,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Larger y",
+            "answer": 5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "On the y-axis x = 0.",
+        "solution": "1 + (y − 2)² = 10, so y − 2 = ±3. Thus y = −1 or 5.",
+        "sourceId": "13winter23_q02",
+        "number": 9,
+        "sourceLabel": "2023 November P13 Question 2",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Tangent to a circle",
+        "prompt": "Find m and c for the tangent y = mx + c to x² + y² = 25 at (3, 4).",
+        "fields": [
+          {
+            "label": "m",
+            "answer": -0.75,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "c",
+            "answer": 6.25,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The tangent is perpendicular to the radius from (0, 0).",
+        "solution": "Radius gradient 4/3; tangent gradient −3/4. y − 4 = −3(x − 3)/4, so c = 25/4.",
+        "sourceId": "12spring21_q08",
+        "number": 10,
+        "sourceLabel": "2021 March P12 Question 8",
+        "sourcePage": 5
+      }
+    ],
+    "packetGeneratedAt": "2026-10-13T05:33:53.919527+00:00"
+  },
+  {
+    "id": "circular_measure",
+    "title": "Circular measure",
+    "description": "Radians, arcs, sectors, chords and segments. Use radians throughout.",
+    "questions": [
+      {
+        "skill": "Degrees to radians",
+        "prompt": "Convert 150° to radians. Write your answer as kπ and enter k.",
+        "fields": [
+          {
+            "label": "k",
+            "answer": 0.8333333333333334,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Multiply degrees by π/180.",
+        "solution": "150π/180 = 5π/6, so k = 5/6.",
+        "sourceId": "11summer23_q04",
+        "number": 1,
+        "sourceLabel": "2023 June P11 Question 4",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Radians to degrees",
+        "prompt": "Convert 3π/4 radians to degrees.",
+        "fields": [
+          {
+            "label": "Degrees",
+            "answer": 135,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Multiply radians by 180/π.",
+        "solution": "(3π/4)(180/π) = 135°.",
+        "sourceId": "11summer23_q04",
+        "number": 2,
+        "sourceLabel": "2023 June P11 Question 4",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Arc length",
+        "prompt": "A sector has radius 6 cm and angle 1.2 radians. Find the arc length.",
+        "fields": [
+          {
+            "label": "Arc length (cm)",
+            "answer": 7.2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use s = rθ.",
+        "solution": "s = 6 × 1.2 = 7.2 cm.",
+        "sourceId": "11summer19_q03",
+        "number": 3,
+        "sourceLabel": "2019 June P11 Question 3",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Sector area",
+        "prompt": "A sector has radius 5 cm and angle 0.8 radians. Find its area.",
+        "fields": [
+          {
+            "label": "Area (cm²)",
+            "answer": 10,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use A = r²θ/2.",
+        "solution": "A = 25 × 0.8 / 2 = 10 cm².",
+        "sourceId": "11summer23_q04",
+        "number": 4,
+        "sourceLabel": "2023 June P11 Question 4",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Finding an angle",
+        "prompt": "A sector has radius 8 cm and arc length 10 cm. Find its angle in radians.",
+        "fields": [
+          {
+            "label": "Angle (radians)",
+            "answer": 1.25,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Rearrange s = rθ.",
+        "solution": "θ = 10/8 = 1.25 radians.",
+        "sourceId": "11summer19_q03",
+        "number": 5,
+        "sourceLabel": "2019 June P11 Question 3",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Sector perimeter",
+        "prompt": "A sector has radius 4 cm and angle 1.5 radians. Find its perimeter.",
+        "fields": [
+          {
+            "label": "Perimeter (cm)",
+            "answer": 14,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Include both radii as well as the arc.",
+        "solution": "P = 2r + rθ = 8 + 6 = 14 cm.",
+        "sourceId": "12summer19_q05",
+        "number": 6,
+        "sourceLabel": "2019 June P12 Question 5",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Area to perimeter",
+        "prompt": "A sector of radius 6 cm has area 18 cm². Find its angle and perimeter.",
+        "fields": [
+          {
+            "label": "Angle (radians)",
+            "answer": 1,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Perimeter (cm)",
+            "answer": 18,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "First find θ from the area, then use P = 2r + rθ.",
+        "solution": "18 = 18θ gives θ = 1. Then P = 12 + 6 = 18 cm.",
+        "sourceId": "11summer19_q03",
+        "number": 7,
+        "sourceLabel": "2019 June P11 Question 3",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Chord length",
+        "prompt": "A circle has radius 5 cm. A chord subtends an angle π/3 at the centre. Find the chord length.",
+        "fields": [
+          {
+            "label": "Chord (cm)",
+            "answer": 5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Bisect the isosceles triangle: chord = 2r sin(θ/2).",
+        "solution": "2 × 5 × sin(π/6) = 5 cm.",
+        "sourceId": "11summer23_q04",
+        "number": 8,
+        "sourceLabel": "2023 June P11 Question 4",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Minor segment",
+        "prompt": "A circle has radius 4 cm and a minor segment subtending 1.2 radians. Find the segment area to 3 decimal places.",
+        "fields": [
+          {
+            "label": "Area (cm²)",
+            "answer": 2.1436873122621893,
+            "example": "3 decimal places",
+            "tolerance": 0.000501
+          }
+        ],
+        "hint": "Subtract the triangle area from the sector area.",
+        "solution": "A = ½r²(θ − sin θ) = 8(1.2 − sin 1.2) = 2.144 cm².",
+        "sourceId": "12summer14_q04",
+        "number": 9,
+        "sourceLabel": "2014 June P12 Question 4",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Annular sector",
+        "prompt": "Two concentric arcs have radii 6 cm and 4 cm and share angle 1 radian. Find the area and the complete perimeter of the region between them.",
+        "fields": [
+          {
+            "label": "Area (cm²)",
+            "answer": 10,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Perimeter (cm)",
+            "answer": 14,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Subtract sector areas. The boundary has two arcs and two radial gaps.",
+        "solution": "A = ½(36 − 16) × 1 = 10. P = 6 + 4 + 2(6 − 4) = 14.",
+        "sourceId": "11winter16_q03",
+        "number": 10,
+        "sourceLabel": "2016 November P11 Question 3",
+        "sourcePage": 4
+      }
+    ],
+    "packetGeneratedAt": "2026-10-13T05:33:47.964489+00:00"
+  },
+  {
+    "id": "trigonometry",
+    "title": "Trigonometry",
+    "description": "Exact values, identities, equations, graphs and triangles.",
+    "questions": [
+      {
+        "skill": "Exact value",
+        "prompt": "Find sin 30° + cos 60° without a calculator.",
+        "fields": [
+          {
+            "label": "Value",
+            "answer": 1,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Both angles have a standard exact value of 1/2.",
+        "solution": "1/2 + 1/2 = 1.",
+        "sourceId": "01summer08_q01",
+        "number": 1,
+        "sourceLabel": "2008 June P01 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Pythagorean identity",
+        "prompt": "Angle θ is acute and cos θ = 3/5. Find sin θ and tan θ.",
+        "fields": [
+          {
+            "label": "sin θ",
+            "answer": 0.8,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "tan θ",
+            "answer": 1.3333333333333333,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use sin²θ + cos²θ = 1, then tan θ = sin θ/cos θ.",
+        "solution": "sin θ = √(1 − 9/25) = 4/5; tan θ = 4/3.",
+        "sourceId": "12winter13_q01",
+        "number": 2,
+        "sourceLabel": "2013 November P12 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Sine equation",
+        "prompt": "Solve sin θ = 1/2 for 0° ≤ θ ≤ 360°. Enter the smaller angle first.",
+        "fields": [
+          {
+            "label": "First angle (°)",
+            "answer": 30,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Second angle (°)",
+            "answer": 150,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Sine is positive in quadrants I and II.",
+        "solution": "The reference angle is 30°. The two solutions are 30° and 150°.",
+        "sourceId": "11summer23_q01",
+        "number": 3,
+        "sourceLabel": "2023 June P11 Question 1",
+        "sourcePage": 3
+      },
+      {
+        "skill": "Cosine equation in radians",
+        "prompt": "Solve cos x = −1/2 for 0 ≤ x ≤ 2π. Write the solutions as aπ and bπ, a < b. Enter a and b.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": 0.6666666666666666,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "b",
+            "answer": 1.3333333333333333,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Cosine is negative in quadrants II and III.",
+        "solution": "x = 2π/3 or 4π/3.",
+        "sourceId": "13winter24_q02",
+        "number": 4,
+        "sourceLabel": "2024 November P13 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Double input",
+        "prompt": "Solve tan(2x) = 1 for 0° ≤ x < 180°. Enter the smaller x first.",
+        "fields": [
+          {
+            "label": "First x (°)",
+            "answer": 22.5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Second x (°)",
+            "answer": 112.5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Solve over 0° ≤ 2x < 360°, then halve.",
+        "solution": "2x = 45° or 225°, so x = 22.5° or 112.5°.",
+        "sourceId": "11summer12_q01",
+        "number": 5,
+        "sourceLabel": "2012 June P11 Question 1",
+        "sourcePage": 3
+      },
+      {
+        "skill": "Amplitude and period",
+        "prompt": "For y = 3 sin(2x) − 1, where x is in degrees, state the amplitude and period.",
+        "fields": [
+          {
+            "label": "Amplitude",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Period (°)",
+            "answer": 180,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Amplitude is the magnitude of the multiplier; period is 360° divided by the input multiplier.",
+        "solution": "Amplitude 3; period 360°/2 = 180°.",
+        "sourceId": "13summer22_q02",
+        "number": 6,
+        "sourceLabel": "2022 June P13 Question 2",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Sine rule",
+        "prompt": "In triangle ABC, angle A = 30°, angle B = 90° and side a = 5 cm, opposite A. Find side b, opposite B.",
+        "fields": [
+          {
+            "label": "b (cm)",
+            "answer": 10,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use a/sin A = b/sin B.",
+        "solution": "b = 5 sin 90° / sin 30° = 10 cm.",
+        "sourceId": "01summer08_q01",
+        "number": 7,
+        "sourceLabel": "2008 June P01 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Cosine rule",
+        "prompt": "Two sides of a triangle are 5 cm and 7 cm; their included angle is 60°. Find the opposite side exactly.",
+        "fields": [
+          {
+            "label": "Opposite side (cm)",
+            "answer": 6.244997998398398,
+            "example": "Use sqrt(39)",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use c² = a² + b² − 2ab cos C.",
+        "solution": "c² = 25 + 49 − 70(1/2) = 39, so c = √39 cm.",
+        "sourceId": "01summer08_q01",
+        "number": 8,
+        "sourceLabel": "2008 June P01 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Triangle area",
+        "prompt": "Two sides of a triangle are 8 cm and 6 cm, with included angle 30°. Find its area.",
+        "fields": [
+          {
+            "label": "Area (cm²)",
+            "answer": 12,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use A = ab sin C / 2.",
+        "solution": "A = ½ × 8 × 6 × ½ = 12 cm².",
+        "sourceId": "01summer08_q01",
+        "number": 9,
+        "sourceLabel": "2008 June P01 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Quadratic trig equation",
+        "prompt": "Solve 2 cos²θ − 3 cos θ + 1 = 0 for 0° ≤ θ ≤ 180°. Enter angles in increasing order.",
+        "fields": [
+          {
+            "label": "First θ (°)",
+            "answer": 0,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Second θ (°)",
+            "answer": 60,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Factorise as a quadratic in cos θ.",
+        "solution": "(2 cos θ − 1)(cos θ − 1) = 0. Thus cos θ = 1/2 or 1, giving 60° or 0°.",
+        "sourceId": "13winter12_q03",
+        "number": 10,
+        "sourceLabel": "2012 November P13 Question 3",
+        "sourcePage": 4
+      }
+    ],
+    "packetGeneratedAt": "2026-10-13T05:34:38.564941+00:00"
+  },
+  {
+    "id": "series",
+    "title": "Series",
+    "description": "Arithmetic and geometric progressions, infinite sums and binomial coefficients.",
+    "questions": [
+      {
+        "skill": "AP term",
+        "prompt": "An arithmetic progression has first term 5 and common difference 3. Find the 12th term.",
+        "fields": [
+          {
+            "label": "12th term",
+            "answer": 38,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use uₙ = a + (n − 1)d.",
+        "solution": "u₁₂ = 5 + 11 × 3 = 38.",
+        "sourceId": "13winter24_q01",
+        "number": 1,
+        "sourceLabel": "2024 November P13 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "AP parameters",
+        "prompt": "An arithmetic progression has third term 11 and seventh term 23. Find its first term and common difference.",
+        "fields": [
+          {
+            "label": "First term",
+            "answer": 5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Common difference",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Subtract a + 2d = 11 from a + 6d = 23.",
+        "solution": "4d = 12 gives d = 3; a = 11 − 6 = 5.",
+        "sourceId": "13winter24_q01",
+        "number": 2,
+        "sourceLabel": "2024 November P13 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "AP sum",
+        "prompt": "Find the sum of the first 20 terms of the arithmetic progression 4, 7, 10, …",
+        "fields": [
+          {
+            "label": "Sum",
+            "answer": 650,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use Sₙ = n[2a + (n − 1)d]/2.",
+        "solution": "S₂₀ = 10[8 + 19 × 3] = 650.",
+        "sourceId": "11winter18_q04",
+        "number": 3,
+        "sourceLabel": "2018 November P11 Question 4",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Number of AP terms",
+        "prompt": "An arithmetic progression is 3, 7, 11, … . Its nth term is 79. Find n.",
+        "fields": [
+          {
+            "label": "n",
+            "answer": 20,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Set a + (n − 1)d equal to 79.",
+        "solution": "3 + 4(n − 1) = 79 gives 4n = 80, so n = 20.",
+        "sourceId": "13winter24_q01",
+        "number": 4,
+        "sourceLabel": "2024 November P13 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "GP term",
+        "prompt": "A geometric progression has first term 81 and common ratio 1/3. Find the fifth term.",
+        "fields": [
+          {
+            "label": "Fifth term",
+            "answer": 1,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use uₙ = arⁿ⁻¹.",
+        "solution": "u₅ = 81(1/3)⁴ = 1.",
+        "sourceId": "12summer22_q02",
+        "number": 5,
+        "sourceLabel": "2022 June P12 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Finite GP sum",
+        "prompt": "Find the sum of the first five terms of 2, 6, 18, …",
+        "fields": [
+          {
+            "label": "Sum",
+            "answer": 242,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use Sₙ = a(rⁿ − 1)/(r − 1).",
+        "solution": "S₅ = 2(3⁵ − 1)/(3 − 1) = 242.",
+        "sourceId": "13winter11_q02",
+        "number": 6,
+        "sourceLabel": "2011 November P13 Question 2",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Infinite GP sum",
+        "prompt": "A geometric progression has first term 12 and ratio −1/2. Find its sum to infinity.",
+        "fields": [
+          {
+            "label": "Sum to infinity",
+            "answer": 8,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Check |r| < 1, then use a/(1 − r).",
+        "solution": "|−1/2| < 1 and S∞ = 12/(1 + 1/2) = 8.",
+        "sourceId": "11winter18_q04",
+        "number": 7,
+        "sourceLabel": "2018 November P11 Question 4",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Recovering a GP",
+        "prompt": "The second and third terms of a geometric progression are 6 and 3. Find the first term and sum to infinity.",
+        "fields": [
+          {
+            "label": "First term",
+            "answer": 12,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Sum to infinity",
+            "answer": 24,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Divide consecutive terms to find r.",
+        "solution": "r = 3/6 = 1/2; a = 6/(1/2) = 12; S∞ = 12/(1 − 1/2) = 24.",
+        "sourceId": "12summer22_q02",
+        "number": 8,
+        "sourceLabel": "2022 June P12 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Binomial coefficient",
+        "prompt": "Find the coefficient of x² in (1 + 2x)⁵.",
+        "fields": [
+          {
+            "label": "Coefficient",
+            "answer": 40,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The x² term is ⁵C₂(2x)².",
+        "solution": "⁵C₂ × 2² = 10 × 4 = 40.",
+        "sourceId": "13winter11_q01",
+        "number": 9,
+        "sourceLabel": "2011 November P13 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Binomial parameter",
+        "prompt": "The coefficient of x³ in (1 − px)⁴ is −108. Find p.",
+        "fields": [
+          {
+            "label": "p",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The coefficient is ⁴C₃(−p)³.",
+        "solution": "−4p³ = −108 gives p³ = 27, so p = 3.",
+        "sourceId": "12spring19_q01",
+        "number": 10,
+        "sourceLabel": "2019 March P12 Question 1",
+        "sourcePage": 1
+      }
+    ],
+    "packetGeneratedAt": "2026-10-13T05:34:31.811871+00:00"
+  },
+  {
+    "id": "differentiation",
+    "title": "Differentiation",
+    "description": "Gradients, tangents, stationary points, rates and optimisation.",
+    "questions": [
+      {
+        "skill": "Power rule",
+        "prompt": "For y = 3x⁴ − 5x² + 7, write dy/dx = ax³ + bx. Find a and b.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": 12,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "b",
+            "answer": -10,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Multiply each power by its coefficient, then reduce the power by 1.",
+        "solution": "dy/dx = 12x³ − 10x.",
+        "sourceId": "11winter17_q01",
+        "number": 1,
+        "sourceLabel": "2017 November P11 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Negative and fractional powers",
+        "prompt": "For y = 4√x + 6/x, find dy/dx at x = 4.",
+        "fields": [
+          {
+            "label": "dy/dx at x = 4",
+            "answer": 0.625,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Rewrite y as 4x¹ᐟ² + 6x⁻¹.",
+        "solution": "dy/dx = 2x⁻¹ᐟ² − 6x⁻². At x = 4: 1 − 6/16 = 5/8.",
+        "sourceId": "12summer12_q02",
+        "number": 2,
+        "sourceLabel": "2012 June P12 Question 2",
+        "sourcePage": 5
+      },
+      {
+        "skill": "Chain rule",
+        "prompt": "For y = (2x + 1)³, find dy/dx at x = 1.",
+        "fields": [
+          {
+            "label": "Gradient",
+            "answer": 54,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Differentiate the outer power and multiply by the derivative of 2x + 1.",
+        "solution": "dy/dx = 6(2x + 1)²; at x = 1 it is 54.",
+        "sourceId": "11summer13_q01",
+        "number": 3,
+        "sourceLabel": "2013 June P11 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Tangent equation",
+        "prompt": "For y = x² + 3x, the tangent at x = 1 is y = mx + c. Find m and c.",
+        "fields": [
+          {
+            "label": "m",
+            "answer": 5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "c",
+            "answer": -1,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Find the point and gradient at x = 1.",
+        "solution": "Point (1, 4); dy/dx = 2x + 3 = 5. y − 4 = 5(x − 1), giving y = 5x − 1.",
+        "sourceId": "11winter17_q01",
+        "number": 4,
+        "sourceLabel": "2017 November P11 Question 1",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Normal equation",
+        "prompt": "For y = x² at (1, 1), the normal is y = mx + c. Find m and c.",
+        "fields": [
+          {
+            "label": "m",
+            "answer": -0.5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "c",
+            "answer": 1.5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The normal gradient is the negative reciprocal of the tangent gradient.",
+        "solution": "Tangent gradient 2, normal gradient −1/2. y − 1 = −(x − 1)/2, giving c = 3/2.",
+        "sourceId": "11winter14_q09",
+        "number": 5,
+        "sourceLabel": "2014 November P11 Question 9",
+        "sourcePage": 4
+      },
+      {
+        "skill": "Stationary point",
+        "prompt": "Find the stationary point of y = x² − 6x + 8.",
+        "fields": [
+          {
+            "label": "x-coordinate",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "y-coordinate",
+            "answer": -1,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Set dy/dx = 0, then substitute into y.",
+        "solution": "2x − 6 = 0 gives x = 3; y = 9 − 18 + 8 = −1.",
+        "sourceId": "11winter09_q04",
+        "number": 6,
+        "sourceLabel": "2009 November P11 Question 4",
+        "sourcePage": 3
+      },
+      {
+        "skill": "Classifying stationary points",
+        "prompt": "For y = x³ − 3x, stationary points occur at x = −1 and x = 1. Find d²y/dx² at each. Use the signs to classify them on paper.",
+        "fields": [
+          {
+            "label": "Second derivative at x = −1",
+            "answer": -6,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Second derivative at x = 1",
+            "answer": 6,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Differentiate twice. A negative second derivative means a local maximum.",
+        "solution": "dy/dx = 3x² − 3; d²y/dx² = 6x. At −1: −6, local maximum. At 1: 6, local minimum.",
+        "sourceId": "13winter10_q05",
+        "number": 7,
+        "sourceLabel": "2010 November P13 Question 5",
+        "sourcePage": 6
+      },
+      {
+        "skill": "Increasing interval",
+        "prompt": "For y = x² − 8x + 1, the derivative is positive exactly when x > k. Find k.",
+        "fields": [
+          {
+            "label": "k",
+            "answer": 4,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Solve dy/dx > 0.",
+        "solution": "2x − 8 > 0 gives x > 4.",
+        "sourceId": "13winter12_q02",
+        "number": 8,
+        "sourceLabel": "2012 November P13 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Related rates",
+        "prompt": "A circle has radius r cm increasing at 0.5 cm/s. Find the rate of increase of area when r = 4 cm. Enter k if the rate is kπ cm²/s.",
+        "fields": [
+          {
+            "label": "k",
+            "answer": 4,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use dA/dt = (dA/dr)(dr/dt) with A = πr².",
+        "solution": "dA/dt = 2πr × 0.5 = 4π cm²/s at r = 4, so k = 4.",
+        "sourceId": "11winter12_q03",
+        "number": 9,
+        "sourceLabel": "2012 November P11 Question 3",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Optimisation",
+        "prompt": "A rectangle has perimeter 20 cm. Let its sides be x and 10 − x cm, with 0 < x < 10. Find x for maximum area and the maximum area.",
+        "fields": [
+          {
+            "label": "x (cm)",
+            "answer": 5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "Maximum area (cm²)",
+            "answer": 25,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Write A = x(10 − x), differentiate, and check the second derivative.",
+        "solution": "A = 10x − x²; A′ = 10 − 2x = 0 at x = 5. A″ = −2 < 0; maximum area 25 cm².",
+        "sourceId": "12summer15_q04",
+        "number": 10,
+        "sourceLabel": "2015 June P12 Question 4",
+        "sourcePage": 2
+      }
+    ],
+    "packetGeneratedAt": "2026-10-13T05:34:02.264352+00:00"
+  },
+  {
+    "id": "integration",
+    "title": "Integration",
+    "description": "Antiderivatives, constants, definite integrals, areas and volumes.",
+    "questions": [
+      {
+        "skill": "Power rule",
+        "prompt": "Write ∫(6x² − 4x) dx = ax³ + bx² + C. Find a and b.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": 2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          },
+          {
+            "label": "b",
+            "answer": -2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Increase each power by 1 and divide by the new power.",
+        "solution": "∫(6x² − 4x) dx = 2x³ − 2x² + C.",
+        "sourceId": "12summer11_q01",
+        "number": 1,
+        "sourceLabel": "2011 June P12 Question 1",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Negative powers",
+        "prompt": "Write ∫8x⁻³ dx = ax⁻² + C. Find a.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": -4,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Increase −3 to −2 and divide the coefficient by −2.",
+        "solution": "∫8x⁻³ dx = −4x⁻² + C.",
+        "sourceId": "11winter12_q02",
+        "number": 2,
+        "sourceLabel": "2012 November P11 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Fractional powers",
+        "prompt": "Write ∫3√x dx = ax³ᐟ² + C. Find a.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": 2,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use √x = x¹ᐟ².",
+        "solution": "∫3x¹ᐟ² dx = 3x³ᐟ²/(3/2) + C = 2x³ᐟ² + C.",
+        "sourceId": "12winter18_q02",
+        "number": 3,
+        "sourceLabel": "2018 November P12 Question 2",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Constant of integration",
+        "prompt": "A curve has dy/dx = 4x − 3 and passes through (2, 5). Write y = 2x² − 3x + C. Find C.",
+        "fields": [
+          {
+            "label": "C",
+            "answer": 3,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Substitute the supplied point after integrating.",
+        "solution": "5 = 8 − 6 + C, giving C = 3.",
+        "sourceId": "11winter15_q02",
+        "number": 4,
+        "sourceLabel": "2015 November P11 Question 2",
+        "sourcePage": 1
+      },
+      {
+        "skill": "Reverse chain rule",
+        "prompt": "Write ∫6(3x + 1)² dx = a(3x + 1)³ + C. Find a.",
+        "fields": [
+          {
+            "label": "a",
+            "answer": 0.6666666666666666,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Differentiate the proposed answer to determine a.",
+        "solution": "The derivative is 9a(3x + 1)². Thus 9a = 6 and a = 2/3.",
+        "sourceId": "12summer16_q02",
+        "number": 5,
+        "sourceLabel": "2016 June P12 Question 2",
+        "sourcePage": 5
+      },
+      {
+        "skill": "Definite integral",
+        "prompt": "Evaluate ∫₁³ (2x + 1) dx.",
+        "fields": [
+          {
+            "label": "Value",
+            "answer": 10,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Find an antiderivative and subtract its value at the lower bound.",
+        "solution": "[x² + x]₁³ = (9 + 3) − (1 + 1) = 10.",
+        "sourceId": "12winter18_q02",
+        "number": 6,
+        "sourceLabel": "2018 November P12 Question 2",
+        "sourcePage": 2
+      },
+      {
+        "skill": "Area under a curve",
+        "prompt": "Find the area between y = 4 − x² and the x-axis for 0 ≤ x ≤ 2.",
+        "fields": [
+          {
+            "label": "Area",
+            "answer": 5.333333333333333,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "The curve is non-negative on the interval, so integrate directly.",
+        "solution": "∫₀²(4 − x²) dx = [4x − x³/3]₀² = 8 − 8/3 = 16/3.",
+        "sourceId": "12summer23_q05",
+        "number": 7,
+        "sourceLabel": "2023 June P12 Question 5",
+        "sourcePage": 4
+      },
+      {
+        "skill": "Area between curves",
+        "prompt": "Find the area between y = 2x and y = x² for 0 ≤ x ≤ 2. The line lies above the curve on this interval.",
+        "fields": [
+          {
+            "label": "Area",
+            "answer": 1.3333333333333333,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Integrate upper minus lower.",
+        "solution": "∫₀²(2x − x²) dx = [x² − x³/3]₀² = 4 − 8/3 = 4/3.",
+        "sourceId": "13winter21_q08",
+        "number": 8,
+        "sourceLabel": "2021 November P13 Question 8",
+        "sourcePage": 19
+      },
+      {
+        "skill": "Area versus signed integral",
+        "prompt": "Find the total geometric area between y = x − 1 and the x-axis for 0 ≤ x ≤ 3.",
+        "fields": [
+          {
+            "label": "Total area",
+            "answer": 2.5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Split at x = 1 and make each area positive.",
+        "solution": "Left triangle area ½ × 1 × 1 = 1/2. Right triangle area ½ × 2 × 2 = 2. Total = 5/2.",
+        "sourceId": "12spring17_q10",
+        "number": 9,
+        "sourceLabel": "2017 March P12 Question 10",
+        "sourcePage": 65
+      },
+      {
+        "skill": "Volume of revolution",
+        "prompt": "The region under y = √x from x = 0 to x = 3 is rotated through 360° about the x-axis. Write its volume as kπ. Find k.",
+        "fields": [
+          {
+            "label": "k",
+            "answer": 4.5,
+            "example": "Number or fraction",
+            "tolerance": 1e-08
+          }
+        ],
+        "hint": "Use V = π∫ y² dx, so square √x before integrating.",
+        "solution": "V = π∫₀³ x dx = π[x²/2]₀³ = 9π/2, hence k = 9/2.",
+        "sourceId": "13summer16_q02",
+        "number": 10,
+        "sourceLabel": "2016 June P13 Question 2",
+        "sourcePage": 3
+      }
+    ],
+    "packetGeneratedAt": "2026-10-13T05:34:19.750105+00:00"
+  }
+]</script><script>
+'use strict';
+const TOPICS=JSON.parse(document.getElementById('question-data').textContent);
+const KEY='p1-topic-vaults-v1';let progress={};let storageOK=true;
+try{progress=JSON.parse(localStorage.getItem(KEY)||'{}');if(!progress||typeof progress!=='object'||Array.isArray(progress))progress={}}catch(e){storageOK=false;progress={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(progress))}catch(e){storageOK=false}}
+function status(t,i){return ['solved','assisted'].includes(progress[t.id]?.[i])?progress[t.id][i]:null}
+function tally(t,s){return t.questions.filter((q,i)=>s?status(t,i)===s:status(t,i)).length}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+// A small arithmetic parser: no dynamic code execution, identifiers or property access.
+function numeric(raw){
+ let s=raw.trim().toLowerCase().replaceAll('−','-').replaceAll('×','*').replaceAll('÷','/').replaceAll('π','pi').replace(/\s+/g,'');
+ if(!s||s.length>100)throw Error('Enter a number');
+ let tokens=s.match(/(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?|sqrt|pi|[+\-*/^()]/g)||[];
+ if(tokens.join('')!==s)throw Error('Use numbers, fractions, pi or sqrt(...)');
+ let i=0;const peek=()=>tokens[i];const take=()=>tokens[i++];
+ function atom(){let t=take();if(t==='('){let v=sum();if(take()!==')')throw Error('Close the brackets');return v}if(t==='sqrt'){if(take()!=='(')throw Error('Use sqrt(...)');let v=sum();if(take()!==')')throw Error('Close the brackets');return Math.sqrt(v)}if(t==='pi')return Math.PI;if(t&&/^(\d|\.)/.test(t))return Number(t);throw Error('Check your number')}
+ function power(){let v=atom();if(peek()==='^'){take();v=v**unary()}return v}
+ function unary(){if(peek()==='+'){take();return unary()}if(peek()==='-'){take();return -unary()}return power()}
+ function product(){let v=unary();while(peek()==='*'||peek()==='/'){let op=take(),b=unary();v=op==='*'?v*b:v/b}return v}
+ function sum(){let v=product();while(peek()==='+'||peek()==='-'){let op=take(),b=product();v=op==='+'?v+b:v-b}return v}
+ let v=sum();if(i!==tokens.length||!Number.isFinite(v))throw Error('Check your expression');return v
+}
+const app=document.getElementById('app');let attempts=0;
+function home(){let count=TOPICS.reduce((n,t)=>n+tally(t),0);app.innerHTML=`<div class="row nav"><div><strong>${count} / 80 doors opened</strong><div class="muted small">Work on paper. Check your answer. Use a hint whenever you need one.</div></div><a class="button" href="#teacher">Print &amp; worked answers</a></div>${!storageOK?'<p class="notice">Browser storage is unavailable. You can still practise, but progress may not be saved.</p>':''}<div class="grid">${TOPICS.map((t,n)=>`<article class="topic"><span class="number">VAULT ${String(n+1).padStart(2,'0')}</span><h2 style="font-size:23px">${t.title}</h2><p class="muted">${t.description}</p><div><div class="progress"><div style="width:${tally(t)*10}%"></div></div><span class="small">${tally(t,'solved')} checked · ${tally(t,'assisted')} with solutions</span></div><a class="button" href="#${t.id}">${tally(t)?'Continue topic':'Open topic'} →</a></article>`).join('')}</div>`}
+function mark(t,i,s){if(!progress[t.id]||typeof progress[t.id]!=='object')progress[t.id]={};if(status(t,i)!=='assisted'||s==='assisted')progress[t.id][i]=s;save()}
+function room(t,requested){let first=t.questions.findIndex((q,i)=>!status(t,i));let accessible=first<0?9:first;let idx=Number.isInteger(requested)?Math.max(0,Math.min(requested,accessible)):accessible;let q=t.questions[idx];attempts=0;
+ app.innerHTML=`<div class="room"><aside class="side"><a href="#">← Choose another topic</a><p class="eyebrow" style="margin-top:22px">Topic ${TOPICS.indexOf(t)+1} of 8</p><h2 style="font-size:25px">${t.title}</h2><p class="muted small">${t.description}</p><div class="progress"><div style="width:${tally(t)*10}%"></div></div><p class="small">${tally(t,'solved')} checked · ${tally(t,'assisted')} with solutions</p><nav class="steps" aria-label="Questions">${t.questions.map((_,i)=>`<button class="${status(t,i)||''} ${i===idx?'current':''}" aria-label="Question ${i+1}${status(t,i)?', '+status(t,i):''}" ${i===idx?'aria-current="step"':''} ${i>accessible?'disabled':''} data-step="${i}">${i+1}</button>`).join('')}</nav><p class="small muted">Green = checked correctly<br>Purple = solution used</p><button id="print-topic">Print this topic</button><details><summary>Start again</summary><p class="small">Clear progress for this topic only?</p><button id="reset">Reset this topic</button></details></aside><section class="question"><div class="row"><span class="eyebrow">Door ${idx+1} / 10</span><span class="pill">${esc(q.skill)}</span></div><div class="prompt" id="prompt">${esc(q.prompt)}</div><form id="answer-form"><div class="fields">${q.fields.map((f,i)=>`<label>${esc(f.label)}<input name="a${i}" id="a${i}" aria-describedby="format feedback" autocomplete="off" spellcheck="false" placeholder="${esc(f.example)}" ${status(t,idx)?'disabled':''}></label>`).join('')}</div><p id="format" class="small muted">Enter numbers, fractions (5/6), or expressions such as sqrt(7). Use * for multiplication. Units are already shown above.</p><div class="row"><button class="primary" type="submit" ${status(t,idx)?'disabled':''}>Check answer</button><button type="button" id="hint-button">Show hint</button></div></form><p id="feedback" class="feedback" role="status" aria-live="polite">${status(t,idx)==='solved'?'This door is open — answer checked.':status(t,idx)==='assisted'?'This door is open — worked solution used.':''}</p><div id="hint" class="notice" hidden>${esc(q.hint)}</div><button id="reveal" ${status(t,idx)?'hidden':''}>Show worked solution &amp; open door</button><div id="solution" class="solution" ${status(t,idx)?'':'hidden'}><strong>Worked solution</strong><p>${esc(q.solution)}</p></div><div class="row nav"><span class="small muted">${status(t,idx)?'Review your working before moving on.':'Your answer opens the next door.'}</span><button class="primary" id="next" ${status(t,idx)?'':'hidden'}>${idx===9?'Finish topic →':'Next question →'}</button></div></section></div>`;
+ document.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>location.hash=t.id+'/'+b.dataset.step);
+ document.getElementById('hint-button').onclick=()=>{let h=document.getElementById('hint');h.hidden=!h.hidden;document.getElementById('hint-button').textContent=h.hidden?'Show hint':'Hide hint'};
+ document.getElementById('reset').onclick=()=>{delete progress[t.id];save();location.hash=t.id;room(t,0)};
+ document.getElementById('print-topic').onclick=()=>{teacher(t.id,true);window.print()};
+ const feedback=document.getElementById('feedback');
+ document.getElementById('answer-form').onsubmit=e=>{e.preventDefault();let ok=true,blank=false;q.fields.forEach((f,i)=>{let input=document.getElementById('a'+i),valid=false;try{valid=Math.abs(numeric(input.value)-f.answer)<=f.tolerance}catch(e){blank=true}input.setAttribute('aria-invalid',!valid);ok=ok&&valid});if(ok){mark(t,idx,'solved');room(t,idx);document.getElementById('feedback').textContent='Correct — door opened!';document.getElementById('next').focus()}else{attempts++;feedback.className='feedback error';feedback.textContent=blank?'Check the highlighted entries. Use a number, fraction, or sqrt(...).':'Not quite yet. Check the highlighted entries, or try the hint.'}};
+ document.getElementById('reveal').onclick=()=>{mark(t,idx,'assisted');room(t,idx);document.getElementById('solution').scrollIntoView({block:'nearest'})};
+ document.getElementById('next').onclick=()=>{if(idx===9){location.hash=t.id+'/complete'}else location.hash=t.id+'/'+(idx+1)};
+}
+function complete(t){app.innerHTML=`<section class="question" style="margin:30px 0"><span class="eyebrow">Topic complete</span><h2 style="margin-top:15px">${t.title}: vault open.</h2><p>You worked through all ten questions.</p><p><strong>${tally(t,'solved')} answers checked · ${tally(t,'assisted')} worked solutions used</strong></p><p class="muted">Revisit any questions where you needed a solution, then try them again on paper.</p><div class="row"><a href="#${t.id}/0" class="button">Review this topic</a><a href="#" class="button">Choose another topic →</a></div></section>`}
+function teacher(id,student=false){const chosen=id?TOPICS.filter(t=>t.id===id):TOPICS;document.body.classList.toggle('studentprint',student);app.innerHTML=`<div class="keytools row noprint"><a href="#" class="button">← Topic menu</a><button id="student-print">Print questions</button><button id="key-print">Print answer key</button><label>Topic <select id="filter"><option value="">All topics</option>${TOPICS.map(t=>`<option value="${t.id}" ${t.id===id?'selected':''}>${t.title}</option>`).join('')}</select></label></div><div class="notice noprint">Questions are original, simplified practice. References below identify a packet question illustrating the related skill; they do not claim these are copied exam questions. Worked solutions are openly available for review.</div>${chosen.map(t=>`<section><h2>${t.title}</h2><p class="muted small">10 questions · Show your working. Give exact answers unless rounding is requested.</p><p class="printonly">Name: _________________________ &nbsp; Class: __________ &nbsp; Date: __________</p>${t.questions.map(q=>`<article class="keycard"><h3>${q.number}. ${q.skill}</h3><p class="prompt">${esc(q.prompt)}</p><div class="worklines"></div><div class="answer"><strong>Worked answer</strong><p>${esc(q.solution)}</p><p class="small">Hint: ${esc(q.hint)}</p></div><p class="reference">Skill reference: P1 ${t.title} packet · ${q.sourceLabel} · packet question page ${q.sourcePage}. Source ID: ${q.sourceId}.</p></article>`).join('')}</section>`).join('')}`;
+ document.getElementById('filter').onchange=e=>location.hash='teacher/'+e.target.value;
+ document.getElementById('student-print').onclick=()=>{document.body.classList.add('studentprint');window.print()};
+ document.getElementById('key-print').onclick=()=>{document.body.classList.remove('studentprint');window.print()};
+}
+function render(){document.body.classList.remove('studentprint');let [id,step]=location.hash.slice(1).split('/');if(id==='teacher'){teacher(step);return}let t=TOPICS.find(t=>t.id===id);if(!t){home();return}if(step==='complete'&&tally(t)===10){complete(t);return}room(t,step!==undefined&&/^\d+$/.test(step)?Number(step):undefined)}
+window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0)});render();
+</script></body></html>
